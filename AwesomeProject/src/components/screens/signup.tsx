@@ -10,12 +10,14 @@ import {
   Image,
   ScrollView,
 } from 'react-native';
-
+import { validateEmail } from '../../utils/email-validation';
+import { validatePassword } from '../../utils/password-validation';
+import { validatePhoneNumber } from '../../utils/phone-validation';
+import { validateEmptyField } from '../../utils/empty-field-validation';
+import { showAlert } from '../../utils/show-alert';
 const Signup = () => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
-  const [emailError, setEmailError] = useState('');
-  const [passwordError, setPasswordError] = useState('');
   const [firstName, setFirstName] = useState('');
   const [lastName, setLastName] = useState('');
   const [phone, setPhone] = useState('');
@@ -24,36 +26,30 @@ const Signup = () => {
   const [house, setHouse] = useState('');
   const [zipcode, setZipcode] = useState('');
   const [username, setUsername] = useState('');
-  const validateEmail = (text: string) => {
-    const emailRegex = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{3})+$/;
-    setEmail(text);
-
-    if (emailRegex.test(text)) {
-      setEmailError('');
-    } else {
-      setEmailError('Please enter valid email address');
-    }
-  };
-  const validatePassword = (text: string) => {
-    const passwordRegex =
-      /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@.])[A-Za-z\d@.]{8,}$/;
-    setPassword(text);
-
-    if (passwordRegex.test(text)) {
-      setPasswordError('');
-    } else {
-      setPasswordError(
-        'Password must contain at least 8 characters, 1 uppercase letter, 1 lowercase letter, and 1 special character.',
-      );
-    }
-  };
+  const [isEmailValid, setIsEmailValid] = useState(true);
+  const [isPasswordValid, setIsPasswordValid] = useState(true);
+  const [isPhoneValid, setIsPhoneValid] = useState(true);
   const dismissKeyboard = () => {
     Keyboard.dismiss();
   };
 
   const onSubmit = () => {
-    validateEmail(email);
-    validatePassword(password);
+    setIsEmailValid(validateEmail(email));
+    setIsPasswordValid(validatePassword(password));
+    setIsPhoneValid(validatePhoneNumber(phone));
+    if (!validateEmptyField(firstName) || !validateEmptyField(lastName) || !validateEmptyField(city) || !validateEmptyField(street) || !validateEmptyField(house) || !validateEmptyField(zipcode) || !validateEmptyField(username)){
+      showAlert("", "All fields are necessary");
+    }
+    else{
+      if(isEmailValid && isPasswordValid && isPhoneValid){
+        showAlert("", "pass")
+        //create user object, pass to hook and add call service
+      }
+      else{
+        showAlert("", "fail");
+
+      }
+    }
     //api call hook for service
   };
 
@@ -72,14 +68,14 @@ const Signup = () => {
             <Text style={styles.text}>Signup</Text>
             <View style={styles.TextBoxContainer}>
               <TextInput
-                style={[styles.input, styles.firstBoxInput]}
+                style={[styles.input, styles.firstBoxInput, !isEmailValid && styles.errorInput]}
                 onChangeText={setEmail}
                 value={email}
                 placeholder="Email"
                 keyboardType="email-address"
               />
               <TextInput
-                style={[styles.input, styles.firstBoxInput]}
+                style={[styles.input, styles.firstBoxInput, !isPasswordValid && styles.errorInput]}
                 placeholder="Password"
                 onChangeText={setPassword}
                 value={password}
@@ -108,11 +104,11 @@ const Signup = () => {
                 placeholder="Username"
               />
               <TextInput
-                style={[styles.input, styles.lastBoxInput]}
+                style={[styles.input, styles.lastBoxInput, !isPhoneValid && styles.errorInput]}
                 onChangeText={setPhone}
                 value={phone}
                 placeholder="Phone"
-                keyboardType="phone-pad"
+                keyboardType="numeric"
               />
             </View>
             <View style={styles.TextBoxContainer}>
@@ -141,6 +137,7 @@ const Signup = () => {
                 onChangeText={setZipcode}
                 value={zipcode}
                 placeholder="Zipcode"
+                keyboardType="numeric"
               />
             </View>
 
@@ -202,6 +199,9 @@ const styles = StyleSheet.create({
     marginVertical: 8,
     borderWidth: 1,
     padding: 10,
+  },
+  errorInput: {
+    borderColor: 'red',
   },
   errorText: {
     color: 'red',
