@@ -10,13 +10,13 @@ import {
   Image,
   ScrollView,
 } from 'react-native';
-import {validateEmail} from '../../utils/email-validation';
 import {validatePassword} from '../../utils/password-validation';
+import {validateEmptyField} from '../../utils/empty-field-validation';
 import {showAlert} from '../../utils/show-alert';
 const Login = () => {
-  const [email, setEmail] = React.useState('');
-  const [password, setPassword] = React.useState('');
-  const [isEmailValid, setIsEmailValid] = useState(true);
+  const [username, setUsername] = useState('');
+  const [password, setPassword] = useState('');
+  const [isUsernameValid, setIsUsernameValid] = useState(true);
   const [isPasswordValid, setIsPasswordValid] = useState(true);
 
   const dismissKeyboard = () => {
@@ -24,24 +24,19 @@ const Login = () => {
   };
 
   const onSubmit = () => {
-    setIsEmailValid(validateEmail(email));
     setIsPasswordValid(validatePassword(password));
-    console.log(isEmailValid);
-    console.log(isPasswordValid);
-    if (validateEmail(email) && validatePassword(password)) {
+    setIsUsernameValid(validateEmptyField(username));
+    if (validatePassword(password) && validateEmptyField(username)) {
       showAlert('', 'pass');
-
-      //create user object, pass to hook and add call service
     } else {
-      showAlert('', 'Invalid email or password!');
+      showAlert('', 'Invalid username or password!');
     }
-    //api call hook for service
   };
 
   return (
-    <ScrollView contentContainerStyle={styles.scrollViewContent}>
+    <ScrollView contentContainerStyle={styles.container}>
       <TouchableWithoutFeedback onPress={dismissKeyboard}>
-        <View style={styles.container}>
+        <View>
           <View style={styles.upperTriangle}>
             <Image
               style={styles.logo}
@@ -52,11 +47,10 @@ const Login = () => {
           <View style={styles.content}>
             <Text style={styles.text}>Login</Text>
             <TextInput
-              style={[styles.input, !isEmailValid && styles.errorInput]}
-              onChangeText={setEmail}
-              value={email}
-              placeholder="Email"
-              keyboardType="email-address"
+              style={[styles.input, !isUsernameValid && styles.errorInput]}
+              onChangeText={setUsername}
+              value={username}
+              placeholder="Username"
             />
             <TextInput
               style={[styles.input, !isPasswordValid && styles.errorInput]}
@@ -67,7 +61,7 @@ const Login = () => {
             />
             <Button title="Submit" onPress={onSubmit} />
             <Text style={styles.createAccountText}>
-              Not a user? Create account!
+              New user? Create account!
             </Text>
           </View>
         </View>
@@ -78,24 +72,21 @@ const Login = () => {
 
 const styles = StyleSheet.create({
   container: {
-    flex: 1,
-    backgroundColor: '#fff',
-  },
-  scrollViewContent: {
     flexGrow: 1,
+    backgroundColor: '#fff',
   },
   upperTriangle: {
     position: 'absolute',
     top: 0,
     left: 0,
     right: 0,
-    bottom: '70%',
+    height: '40%',
     backgroundColor: '#ace4ea',
-    borderBottomRightRadius: 200,
+    borderBottomRightRadius: 500,
   },
   lowerTriangle: {
     position: 'absolute',
-    top: '50%',
+    top: '60%',
     left: 0,
     right: 0,
     bottom: 0,
@@ -105,16 +96,14 @@ const styles = StyleSheet.create({
   logo: {
     width: 150,
     height: 150,
-    alignContent: 'center',
-    justifyContent: 'center',
+    alignSelf: 'center',
     marginTop: '20%',
-    marginLeft: '30%',
   },
   content: {
     flex: 1,
     justifyContent: 'center',
     paddingHorizontal: 16,
-    marginTop: '10%',
+    marginTop: '60%',
   },
   text: {
     color: 'black',
@@ -139,8 +128,8 @@ const styles = StyleSheet.create({
     marginBottom: 8,
   },
   createAccountText: {
-    alignSelf: 'center',
-    padding: 10,
+    marginTop: 16,
+    textAlign: 'center',
   },
 });
 

@@ -10,11 +10,11 @@ import {
   Image,
   ScrollView,
 } from 'react-native';
-import { validateEmail } from '../../utils/email-validation';
-import { validatePassword } from '../../utils/password-validation';
-import { validatePhoneNumber } from '../../utils/phone-validation';
-import { validateEmptyField } from '../../utils/empty-field-validation';
-import { showAlert } from '../../utils/show-alert';
+import {validateEmail} from '../../utils/email-validation';
+import {validatePassword} from '../../utils/password-validation';
+import {validatePhoneNumber} from '../../utils/phone-validation';
+import {validateEmptyField} from '../../utils/empty-field-validation';
+import {showAlert} from '../../utils/show-alert';
 const Signup = () => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
@@ -37,17 +37,22 @@ const Signup = () => {
     setIsEmailValid(validateEmail(email));
     setIsPasswordValid(validatePassword(password));
     setIsPhoneValid(validatePhoneNumber(phone));
-    if (!validateEmptyField(firstName) || !validateEmptyField(lastName) || !validateEmptyField(city) || !validateEmptyField(street) || !validateEmptyField(house) || !validateEmptyField(zipcode) || !validateEmptyField(username)){
-      showAlert("", "All fields are necessary");
-    }
-    else{
-      if(isEmailValid && isPasswordValid && isPhoneValid){
-        showAlert("", "pass")
+    if (
+      !validateEmptyField(firstName) ||
+      !validateEmptyField(lastName) ||
+      !validateEmptyField(city) ||
+      !validateEmptyField(street) ||
+      !validateEmptyField(house) ||
+      !validateEmptyField(zipcode) ||
+      !validateEmptyField(username)
+    ) {
+      showAlert('', 'All fields are necessary');
+    } else {
+      if (isEmailValid && isPasswordValid && isPhoneValid) {
+        showAlert('', 'pass');
         //create user object, pass to hook and add call service
-      }
-      else{
-        showAlert("", "fail");
-
+      } else {
+        showAlert('', 'fail');
       }
     }
     //api call hook for service
@@ -68,14 +73,22 @@ const Signup = () => {
             <Text style={styles.text}>Signup</Text>
             <View style={styles.TextBoxContainer}>
               <TextInput
-                style={[styles.input, styles.firstBoxInput, !isEmailValid && styles.errorInput]}
+                style={[
+                  styles.input,
+                  styles.firstBoxInput,
+                  !isEmailValid && styles.errorInput,
+                ]}
                 onChangeText={setEmail}
                 value={email}
                 placeholder="Email"
                 keyboardType="email-address"
               />
               <TextInput
-                style={[styles.input, styles.firstBoxInput, !isPasswordValid && styles.errorInput]}
+                style={[
+                  styles.input,
+                  styles.firstBoxInput,
+                  !isPasswordValid && styles.errorInput,
+                ]}
                 placeholder="Password"
                 onChangeText={setPassword}
                 value={password}
@@ -104,7 +117,11 @@ const Signup = () => {
                 placeholder="Username"
               />
               <TextInput
-                style={[styles.input, styles.lastBoxInput, !isPhoneValid && styles.errorInput]}
+                style={[
+                  styles.input,
+                  styles.lastBoxInput,
+                  !isPhoneValid && styles.errorInput,
+                ]}
                 onChangeText={setPhone}
                 value={phone}
                 placeholder="Phone"
