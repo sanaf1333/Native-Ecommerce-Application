@@ -7,20 +7,20 @@
 
 import React from 'react';
 import {SafeAreaView, StyleSheet, Text} from 'react-native';
-import { QueryClient, QueryClientProvider, useQuery } from 'react-query'
+import {QueryClient, QueryClientProvider, useQuery} from 'react-query';
 import Login from './src/components/screens/login';
 import Signup from './src/components/screens/signup';
 import CartCard from './src/components/cart-card';
 import Tryplease from './src/components/product-card';
 import Cart from './src/components/screens/cart';
-const queryClient = new QueryClient()
+const queryClient = new QueryClient();
 function App(): JSX.Element {
   return (
     <QueryClientProvider client={queryClient}>
-    <SafeAreaView style={styles.container}>
-      <Text>sana</Text>
-      <Cart cartId="5"/>
-    </SafeAreaView>
+      <SafeAreaView style={styles.container}>
+        <Text>sana</Text>
+        <Cart cartId="5" />
+      </SafeAreaView>
     </QueryClientProvider>
   );
 }
