@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useState} from 'react';
 import {
   StyleSheet,
   Text,
@@ -8,86 +8,71 @@ import {
   Keyboard,
   Button,
   Image,
+  ScrollView,
 } from 'react-native';
-
+import {validateEmail} from '../../utils/email-validation';
+import {validatePassword} from '../../utils/password-validation';
+import {showAlert} from '../../utils/show-alert';
 const Login = () => {
   const [email, setEmail] = React.useState('');
   const [password, setPassword] = React.useState('');
-  const [emailError, setEmailError] = React.useState('');
-  const [passwordError, setPasswordError] = React.useState('');
+  const [isEmailValid, setIsEmailValid] = useState(true);
+  const [isPasswordValid, setIsPasswordValid] = useState(true);
 
-  const validateEmail = (text: string) => {
-    const emailRegex = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{3})+$/;
-    setEmail(text);
-
-    if (emailRegex.test(text)) {
-      setEmailError('');
-    } else {
-      setEmailError('Please enter valid email address');
-    }
-  };
-  const validatePassword = (text: string) => {
-    const passwordRegex =
-      /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@.])[A-Za-z\d@.]{8,}$/;
-    setPassword(text);
-
-    if (passwordRegex.test(text)) {
-      setPasswordError('');
-    } else {
-      setPasswordError(
-        'Password must contain at least 8 characters, 1 uppercase letter, 1 lowercase letter, and 1 special character.',
-      );
-    }
-  };
   const dismissKeyboard = () => {
     Keyboard.dismiss();
   };
 
   const onSubmit = () => {
-    validateEmail(email);
-    validatePassword(password);
+    setIsEmailValid(validateEmail(email));
+    setIsPasswordValid(validatePassword(password));
+    console.log(isEmailValid);
+    console.log(isPasswordValid);
+    if (validateEmail(email) && validatePassword(password)) {
+      showAlert('', 'pass');
+
+      //create user object, pass to hook and add call service
+    } else {
+      showAlert('', 'Invalid email or password!');
+    }
     //api call hook for service
   };
 
   return (
-    <TouchableWithoutFeedback onPress={dismissKeyboard}>
-      <View style={styles.container}>
-        <View style={styles.upperTriangle}>
-          <Image
-            style={styles.logo}
-            source={require('../../../public/images/cintyre-logo.png')}
-          />
+    <ScrollView contentContainerStyle={styles.scrollViewContent}>
+      <TouchableWithoutFeedback onPress={dismissKeyboard}>
+        <View style={styles.container}>
+          <View style={styles.upperTriangle}>
+            <Image
+              style={styles.logo}
+              source={require('../../../public/images/cintyre-logo.png')}
+            />
+          </View>
+          <View style={styles.lowerTriangle} />
+          <View style={styles.content}>
+            <Text style={styles.text}>Login</Text>
+            <TextInput
+              style={[styles.input, !isEmailValid && styles.errorInput]}
+              onChangeText={setEmail}
+              value={email}
+              placeholder="Email"
+              keyboardType="email-address"
+            />
+            <TextInput
+              style={[styles.input, !isPasswordValid && styles.errorInput]}
+              placeholder="Password"
+              onChangeText={setPassword}
+              value={password}
+              secureTextEntry
+            />
+            <Button title="Submit" onPress={onSubmit} />
+            <Text style={styles.createAccountText}>
+              Not a user? Create account!
+            </Text>
+          </View>
         </View>
-        <View style={styles.lowerTriangle} />
-        <View style={styles.content}>
-          <Text style={styles.text}>Login</Text>
-          <TextInput
-            style={styles.input}
-            onChangeText={setEmail}
-            value={email}
-            placeholder="Email"
-            keyboardType="email-address"
-          />
-          {emailError ? (
-            <Text style={styles.errorText}>{emailError}</Text>
-          ) : null}
-          <TextInput
-            style={styles.input}
-            placeholder="Password"
-            onChangeText={setPassword}
-            value={password}
-            secureTextEntry
-          />
-          {passwordError ? (
-            <Text style={styles.errorText}>{passwordError}</Text>
-          ) : null}
-          <Button title="Submit" onPress={onSubmit} />
-          <Text style={styles.createAccountText}>
-            Not a user? Create account!
-          </Text>
-        </View>
-      </View>
-    </TouchableWithoutFeedback>
+      </TouchableWithoutFeedback>
+    </ScrollView>
   );
 };
 
@@ -96,6 +81,9 @@ const styles = StyleSheet.create({
     flex: 1,
     backgroundColor: '#fff',
   },
+  scrollViewContent: {
+    flexGrow: 1,
+  },
   upperTriangle: {
     position: 'absolute',
     top: 0,
@@ -103,7 +91,7 @@ const styles = StyleSheet.create({
     right: 0,
     bottom: '70%',
     backgroundColor: '#ace4ea',
-    borderBottomRightRadius: 500,
+    borderBottomRightRadius: 200,
   },
   lowerTriangle: {
     position: 'absolute',
@@ -126,6 +114,7 @@ const styles = StyleSheet.create({
     flex: 1,
     justifyContent: 'center',
     paddingHorizontal: 16,
+    marginTop: '10%',
   },
   text: {
     color: 'black',
@@ -140,6 +129,9 @@ const styles = StyleSheet.create({
     marginVertical: 8,
     borderWidth: 1,
     padding: 10,
+  },
+  errorInput: {
+    borderColor: 'red',
   },
   errorText: {
     color: 'red',

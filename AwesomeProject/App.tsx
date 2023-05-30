@@ -14,7 +14,7 @@ function App(): JSX.Element {
   return (
     <SafeAreaView style={styles.container}>
       <Text>sana</Text>
-      <Signup />
+      <Login />
     </SafeAreaView>
   );
 }
