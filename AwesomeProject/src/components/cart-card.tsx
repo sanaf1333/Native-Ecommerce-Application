@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useMemo } from 'react';
 import {productModal} from '../modals/product-modal';
 import {Image, Text, View, StyleSheet} from 'react-native';
 import {getCartByID} from '../services/get-cart-data';
@@ -10,16 +10,15 @@ interface cartCardProps {
 }
 const CartCard: React.FC<cartCardProps> = ({productId, quantity}) => {
   const productData = useDataService(getProductByID, productId);
-  if (productData.isLoading) {
+  const memoizedProductData = useMemo(() => productData, [productData]);
+  if (memoizedProductData.isLoading) {
     return <Text>Loading...</Text>;
   }
 
-  if (productData.error) {
+  if (memoizedProductData.error) {
     return <Text>Error</Text>;
   }
-  useEffect(() => {
-    console.log("heh")
-  }, []);
+  
 
   return (
     <>
@@ -27,15 +26,15 @@ const CartCard: React.FC<cartCardProps> = ({productId, quantity}) => {
         <Image
           style={{width: 100, height: 100}}
           source={{
-            uri: productData.data && productData.data.image,
+            uri: memoizedProductData.data && memoizedProductData.data.image,
           }}
         />
         <View style={styles.productDescription}>
           <View style={styles.productTitle}>
-            <Text>{productData && productData.data.title}</Text>
+            <Text>{memoizedProductData && memoizedProductData.data.title}</Text>
           </View>
           <View style={styles.productQuantity}>
-          <Text style={styles.productPrice}>${productData && productData.data.price}</Text>
+          <Text style={styles.productPrice}>${memoizedProductData && memoizedProductData.data.price}</Text>
           <Text>x{quantity}</Text>
           </View>
         </View>
