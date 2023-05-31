@@ -60,12 +60,9 @@ const styles = StyleSheet.create({
   
   productCardContainer: {
     padding: 10,
-    borderColor: 'black',
+    borderColor: '#b1b5b2',
     borderWidth: 1,
-    shadowColor: 'black',
-    shadowRadius: 5,
-    shadowOpacity: 5,
-    borderRadius: 5,
+    borderRadius: 10,
     margin: 10,
   },
   productImage: {

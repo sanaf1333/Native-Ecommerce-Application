@@ -20,13 +20,14 @@ import { getAllProducts } from './src/services/get-product-data';
 import { sortProductsAsc } from './src/services/get-product-data';
 import { sortProductsDesc } from './src/services/get-product-data';
 import { getProductsByCategory } from './src/services/get-categories';
+import { NavigationContainer } from '@react-navigation/native';
 const queryClient = new QueryClient();
 function App(): JSX.Element {
   return (
     <QueryClientProvider client={queryClient}>
       <SafeAreaView style={styles.container}>
         <Text>sana</Text>
-        <ViewAllProducts service={getAllProducts} />
+        <ViewAllProducts service={getAllProducts} title="All Products" />
       </SafeAreaView>
     </QueryClientProvider>
   );

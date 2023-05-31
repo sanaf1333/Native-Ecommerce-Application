@@ -1,20 +1,23 @@
 import React, {useMemo} from 'react';
 import {useDataService} from '../hooks/use-service';
 import ProductCard from './product-card';
-import { ScrollView } from 'react-native';
+import { ScrollView, Text, StyleSheet } from 'react-native';
 interface ViewAllProductsProps<T, P> {
   service: (params?: P) => Promise<T>;
   params?: P;
+  title: string;
 }
 
 const ViewAllProducts: React.FC<ViewAllProductsProps<any, any>> = ({
   service,
   params,
+  title,
 }) => {
   const productsData = useDataService(service, params);
 
   return(
 <>
+<Text style={styles.title}>{title}</Text>
   <ScrollView>
     {productsData.data?.map((product: any) => (
         <ProductCard productId={product.id} />
@@ -25,3 +28,12 @@ const ViewAllProducts: React.FC<ViewAllProductsProps<any, any>> = ({
 };
 
 export default ViewAllProducts;
+
+const styles = StyleSheet.create({
+    title: {
+        fontWeight: 'bold',
+        fontSize: 20,
+        padding: 10,
+    }
+
+})
