@@ -26,8 +26,7 @@ const ProductCard: React.FC<{productId: string}> = ({productId}) => {
   return (
     <>
       <TouchableOpacity onPress={onPressViewProduct}>
-      <View style={styles.productContainer}>
-        <Text style={styles.title}>{memoizedProductData.data.title}</Text>
+      <View style={styles.productCardContainer}>
         <Image
           style={styles.productImage}
           resizeMode="contain"
@@ -35,8 +34,8 @@ const ProductCard: React.FC<{productId: string}> = ({productId}) => {
             uri: memoizedProductData.data && memoizedProductData.data.image,
           }}
         />
-        <Text style={styles.detailsHeading}>Product Details</Text>
-        <View>
+        <Text style={styles.title}>{memoizedProductData.data.title}</Text>
+        <View style={styles.productDetails}>
           <View style={styles.textStyle}>
             <Text style={styles.boldText}>Price: </Text>
             <Text>{memoizedProductData.data.price}</Text>
@@ -46,16 +45,6 @@ const ProductCard: React.FC<{productId: string}> = ({productId}) => {
             <Text>
               {memoizedProductData.data.rating.rate}/5 (
               {memoizedProductData.data.rating.count})
-            </Text>
-          </View>
-          <View style={styles.textStyle}>
-            <Text style={styles.boldText}>Category: </Text>
-            <Text>{memoizedProductData.data.category}</Text>
-          </View>
-          <View style={styles.textStyle}>
-            <Text style={styles.boldText}>Description: </Text>
-            <Text style={styles.description}>
-              {memoizedProductData.data.description}
             </Text>
           </View>
         </View>
@@ -68,28 +57,26 @@ const ProductCard: React.FC<{productId: string}> = ({productId}) => {
 export default ProductCard;
 
 const styles = StyleSheet.create({
-  button: {
-    alignItems: 'flex-start',
+  
+  productCardContainer: {
     padding: 10,
+    borderColor: 'black',
+    borderWidth: 1,
+    shadowColor: 'black',
+    shadowRadius: 5,
+    shadowOpacity: 5,
+    borderRadius: 5,
     margin: 10,
-    width: '30%'
-  },
-  buttonText: {
-    color: '#ace4ea',
-    fontWeight: 'bold',
-  },
-  productContainer: {
-    padding: 10,
   },
   productImage: {
     width: '100%',
-    height: 300,
+    height: 200,
   },
   title: {
     fontWeight: 'bold',
-    fontSize: 30,
-    alignSelf: 'center',
-    paddingBottom: 20,
+    fontSize: 20,
+    alignSelf: 'flex-start',
+    paddingBottom: 10,
   },
   detailsHeading: {
     fontWeight: 'bold',
@@ -98,7 +85,8 @@ const styles = StyleSheet.create({
     paddingTop: 20,
   },
   productDetails: {
-    paddingBottom: 20,
+    flexDirection: 'row',
+    justifyContent: 'space-between',
   },
   priceRating: {
     flexDirection: 'row',

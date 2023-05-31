@@ -14,13 +14,19 @@ import CartCard from './src/components/cart-card';
 import Tryplease from './src/components/product-card';
 import Cart from './src/components/screens/cart';
 import ProductDetails from './src/components/screens/product-details';
+import ProductCard from './src/components/product-card';
+import ViewAllProducts from './src/components/view-all-products';
+import { getAllProducts } from './src/services/get-product-data';
+import { sortProductsAsc } from './src/services/get-product-data';
+import { sortProductsDesc } from './src/services/get-product-data';
+import { getProductsByCategory } from './src/services/get-categories';
 const queryClient = new QueryClient();
 function App(): JSX.Element {
   return (
     <QueryClientProvider client={queryClient}>
       <SafeAreaView style={styles.container}>
         <Text>sana</Text>
-        <ProductDetails productId='7' />
+        <ViewAllProducts service={getAllProducts} />
       </SafeAreaView>
     </QueryClientProvider>
   );
