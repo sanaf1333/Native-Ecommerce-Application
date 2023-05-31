@@ -1,5 +1,5 @@
-import React, {useState, useEffect} from 'react';
-import {Text} from 'react-native';
+import React, {useState} from 'react';
+import {Text, StyleSheet, ScrollView} from 'react-native';
 import {getCartByID} from '../../services/get-cart-data';
 import {useDataService} from '../../hooks/use-service';
 import CartCard from '../cart-card';
@@ -7,7 +7,9 @@ import CartCard from '../cart-card';
 const Cart: React.FC<{cartId: string}> = ({cartId}) => {
   const [totalPrice, setTotalPrice] = useState(0);
   const cartByIDQuery = useDataService(getCartByID, cartId);
-
+  const handleSetTotalPrice = (price: number) => {
+    setTotalPrice(totalPrice + price);
+  };
   if (cartByIDQuery.isLoading) {
     return <Text>Loading...</Text>;
   }
@@ -16,7 +18,7 @@ const Cart: React.FC<{cartId: string}> = ({cartId}) => {
     return <Text>Error</Text>;
   }
   return (
-    <>
+    <ScrollView>
       <Text>Cart</Text>
       <Text>{cartByIDQuery.data && cartByIDQuery.data.userId}</Text>
       <Text>{cartByIDQuery.data && cartByIDQuery.data.date}</Text>
@@ -26,11 +28,20 @@ const Cart: React.FC<{cartId: string}> = ({cartId}) => {
             key={product.productId}
             productId={product.productId}
             quantity={product.quantity}
+            handleSetTotalPrice={handleSetTotalPrice}
           />
         ))}
-      <Text>Total: {totalPrice}</Text>
-    </>
+      <Text style={styles.totalPrice}>Total: {totalPrice}</Text>
+    </ScrollView>
   );
 };
 
 export default Cart;
+
+const styles = StyleSheet.create({
+  totalPrice: {
+    alignSelf: 'flex-end',
+    padding: 10,
+    fontWeight: 'bold',
+  },
+});

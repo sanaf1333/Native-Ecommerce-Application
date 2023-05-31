@@ -1,4 +1,4 @@
-import React, { useEffect, useMemo } from 'react';
+import React, {useEffect, useMemo} from 'react';
 import {productModal} from '../modals/product-modal';
 import {Image, Text, View, StyleSheet} from 'react-native';
 import {getCartByID} from '../services/get-cart-data';
@@ -6,10 +6,21 @@ import {useDataService} from '../hooks/use-service';
 import {getProductByID} from '../services/get-product-data';
 interface cartCardProps {
   productId: string;
-  quantity: string;
+  quantity: number;
+  handleSetTotalPrice: (price: number) => void;
 }
-const CartCard: React.FC<cartCardProps> = ({productId, quantity}) => {
+const CartCard: React.FC<cartCardProps> = ({
+  productId,
+  quantity,
+  handleSetTotalPrice,
+}) => {
   const productData = useDataService(getProductByID, productId);
+  useEffect(() => {
+    if (productData.data) {
+      handleSetTotalPrice(productData.data.price * quantity);
+    }
+  }, [productData.data]);
+
   const memoizedProductData = useMemo(() => productData, [productData]);
   if (memoizedProductData.isLoading) {
     return <Text>Loading...</Text>;
@@ -18,7 +29,6 @@ const CartCard: React.FC<cartCardProps> = ({productId, quantity}) => {
   if (memoizedProductData.error) {
     return <Text>Error</Text>;
   }
-  
 
   return (
     <>
@@ -34,8 +44,10 @@ const CartCard: React.FC<cartCardProps> = ({productId, quantity}) => {
             <Text>{memoizedProductData && memoizedProductData.data.title}</Text>
           </View>
           <View style={styles.productQuantity}>
-          <Text style={styles.productPrice}>${memoizedProductData && memoizedProductData.data.price}</Text>
-          <Text>x{quantity}</Text>
+            <Text style={styles.productPrice}>
+              ${memoizedProductData && memoizedProductData.data.price}
+            </Text>
+            <Text>x{quantity}</Text>
           </View>
         </View>
       </View>
@@ -63,14 +75,13 @@ const styles = StyleSheet.create({
   productDescription: {
     flexDirection: 'column',
     paddingLeft: 10,
-    justifyContent: 'space-between'
+    justifyContent: 'space-between',
   },
   productQuantity: {
     flexDirection: 'row',
     justifyContent: 'space-between',
-    
   },
   productPrice: {
     fontWeight: 'bold',
-  }
+  },
 });

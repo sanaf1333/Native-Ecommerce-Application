@@ -13,13 +13,14 @@ import Signup from './src/components/screens/signup';
 import CartCard from './src/components/cart-card';
 import Tryplease from './src/components/product-card';
 import Cart from './src/components/screens/cart';
+import ProductDetails from './src/components/screens/product-details';
 const queryClient = new QueryClient();
 function App(): JSX.Element {
   return (
     <QueryClientProvider client={queryClient}>
       <SafeAreaView style={styles.container}>
         <Text>sana</Text>
-        <Cart cartId="5" />
+        <ProductDetails productId='7' />
       </SafeAreaView>
     </QueryClientProvider>
   );
