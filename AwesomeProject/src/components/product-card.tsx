@@ -11,10 +11,17 @@ import {
 import {useDataService} from '../hooks/use-service';
 import {getProductByID} from '../services/get-product-data';
 import {productModal} from '../modals/product-modal';
+import { NavigationProp } from '@react-navigation/native';
+import {ParamListBase, useNavigation} from '@react-navigation/native';
+import {NativeStackNavigationProp} from '@react-navigation/native-stack';
 
-const ProductCard: React.FC<{productId: string}> = ({productId}) => {
+interface ProductCardProps {
+  productId: string;
+}
+const ProductCard: React.FC<ProductCardProps> = ({ productId }) => {
   const productData = useDataService(getProductByID, productId);
   const memoizedProductData = useMemo(() => productData, [productData]);
+  const navigation = useNavigation<NativeStackNavigationProp<ParamListBase>>();
   if (memoizedProductData.isLoading) {
     return <Text>Loading...</Text>;
   }
@@ -22,7 +29,9 @@ const ProductCard: React.FC<{productId: string}> = ({productId}) => {
   if (memoizedProductData.error) {
     return <Text>Error</Text>;
   }
-  const onPressViewProduct = () => {};
+  const onPressViewProduct = () => {
+    navigation.navigate('ProductDetails', { productId: memoizedProductData.data.id });
+  };
   return (
     <>
       <TouchableOpacity onPress={onPressViewProduct}>

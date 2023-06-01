@@ -4,7 +4,7 @@ import {getCartByID} from '../../services/get-cart-data';
 import {useDataService} from '../../hooks/use-service';
 import CartCard from '../cart-card';
 
-const Cart: React.FC<{cartId: string}> = ({cartId}) => {
+const Cart: React.FC<{cartId?: string}> = ({cartId}) => {
   const [totalPrice, setTotalPrice] = useState(0);
   const cartByIDQuery = useDataService(getCartByID, cartId);
   const handleSetTotalPrice = (price: number) => {
@@ -23,7 +23,7 @@ const Cart: React.FC<{cartId: string}> = ({cartId}) => {
       <Text>{cartByIDQuery.data && cartByIDQuery.data.userId}</Text>
       <Text>{cartByIDQuery.data && cartByIDQuery.data.date}</Text>
       {cartByIDQuery.data &&
-        cartByIDQuery.data.products.map(product => (
+        cartByIDQuery.data.products.map((product: { productId: string; quantity: number; }) => (
           <CartCard
             key={product.productId}
             productId={product.productId}

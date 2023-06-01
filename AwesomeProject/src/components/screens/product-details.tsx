@@ -11,7 +11,12 @@ import {
 import {useDataService} from '../../hooks/use-service';
 import {getProductByID} from '../../services/get-product-data';
 import {productModal} from '../../modals/product-modal';
-
+import { NavigationProp } from '@react-navigation/native';
+import {ParamListBase, useNavigation} from '@react-navigation/native';
+import {NativeStackNavigationProp} from '@react-navigation/native-stack';
+export interface ProductDetailsProps {
+  productId?: string;
+}
 interface CustomButtonProps {
     title: string;
     onPress: () => void;
@@ -22,9 +27,10 @@ interface CustomButtonProps {
     <Text style={styles.buttonText}>{title}</Text>
   </TouchableOpacity>
 );
-const ProductDetails: React.FC<{productId: string}> = ({productId}) => {
+const ProductDetails: React.FC<ProductDetailsProps> = ({ productId }) => {
   const productData = useDataService(getProductByID, productId);
   const memoizedProductData = useMemo(() => productData, [productData]);
+  const navigation = useNavigation<NativeStackNavigationProp<ParamListBase>>();
   if (memoizedProductData.isLoading) {
     return <Text>Loading...</Text>;
   }
@@ -32,10 +38,10 @@ const ProductDetails: React.FC<{productId: string}> = ({productId}) => {
   if (memoizedProductData.error) {
     return <Text>Error</Text>;
   }
-  const onPressGoBack = () => {};
+ 
   return (
     <>
-      <CustomButton title="< Go Back" onPress={onPressGoBack} />
+      <CustomButton title="< Go Back" onPress={() => navigation.goBack()} />
       <ScrollView style={styles.productContainer}>
         <Text style={styles.title}>{memoizedProductData.data.title}</Text>
         <Image

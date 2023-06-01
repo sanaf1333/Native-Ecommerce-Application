@@ -13,12 +13,15 @@ import {
 import {validatePassword} from '../../utils/password-validation';
 import {validateEmptyField} from '../../utils/empty-field-validation';
 import {showAlert} from '../../utils/show-alert';
+import {ParamListBase, useNavigation} from '@react-navigation/native';
+import {NativeStackNavigationProp} from '@react-navigation/native-stack';
+import { getAllProducts } from '../../services/get-product-data';
 const Login = () => {
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
   const [isUsernameValid, setIsUsernameValid] = useState(true);
   const [isPasswordValid, setIsPasswordValid] = useState(true);
-
+  const navigation = useNavigation<NativeStackNavigationProp<ParamListBase>>();
   const dismissKeyboard = () => {
     Keyboard.dismiss();
   };
@@ -28,6 +31,7 @@ const Login = () => {
     setIsUsernameValid(validateEmptyField(username));
     if (validatePassword(password) && validateEmptyField(username)) {
       showAlert('', 'pass');
+      navigation.navigate('HomePage', { service: getAllProducts, title: "All Products" })
     } else {
       showAlert('', 'Invalid username or password!');
     }

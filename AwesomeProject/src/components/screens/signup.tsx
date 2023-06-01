@@ -15,6 +15,8 @@ import {validatePassword} from '../../utils/password-validation';
 import {validatePhoneNumber} from '../../utils/phone-validation';
 import {validateEmptyField} from '../../utils/empty-field-validation';
 import {showAlert} from '../../utils/show-alert';
+import {ParamListBase, useNavigation} from '@react-navigation/native';
+import {NativeStackNavigationProp} from '@react-navigation/native-stack';
 const Signup = () => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
@@ -29,6 +31,7 @@ const Signup = () => {
   const [isEmailValid, setIsEmailValid] = useState(true);
   const [isPasswordValid, setIsPasswordValid] = useState(true);
   const [isPhoneValid, setIsPhoneValid] = useState(true);
+  const navigation = useNavigation<NativeStackNavigationProp<ParamListBase>>();
   const dismissKeyboard = () => {
     Keyboard.dismiss();
   };
@@ -50,6 +53,7 @@ const Signup = () => {
     } else {
       if (isEmailValid && isPasswordValid && isPhoneValid) {
         showAlert('', 'pass');
+        navigation.navigate('Login')
         //create user object, pass to hook and add call service
       } else {
         showAlert('', 'fail');
