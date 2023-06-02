@@ -33,7 +33,7 @@ function App(): JSX.Element {
     <QueryClientProvider client={queryClient}>
       <NavigationContainer>
         <SafeAreaView style={styles.container}>
-          <Stack.Navigator initialRouteName="Login">
+          <Stack.Navigator initialRouteName="HomePage">
             <Stack.Screen name="Login" component={Login} />
             <Stack.Screen name="Signup" component={Signup} />
             <Stack.Screen
@@ -44,7 +44,12 @@ function App(): JSX.Element {
             <Stack.Screen
               name="Cart"
               component={Cart}
-              initialParams={{productId: '1'}}
+              initialParams={{productId: '2'}}
+            />
+            <Stack.Screen
+              name="Home"
+              component={ProductsDisplay}
+              initialParams={{service: getAllProducts, title: "All products"}}
             />
             <Stack.Screen
               name="HomePage"

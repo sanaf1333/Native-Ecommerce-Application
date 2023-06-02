@@ -5,7 +5,7 @@ import { ScrollView, Text, StyleSheet } from 'react-native';
 interface ViewAllProductsProps<T, P> {
   service: (params?: P) => Promise<T>;
   params?: P;
-  title: string;
+  title?: string;
 }
 
 const ViewAllProducts: React.FC<ViewAllProductsProps<any, any>> = ({
@@ -14,12 +14,12 @@ const ViewAllProducts: React.FC<ViewAllProductsProps<any, any>> = ({
   title,
 }) => {
   const productsData = useDataService(service, params);
-
+  const memoizedProductsData = useMemo(() => productsData, [productsData]);
   return(
 <>
 <Text style={styles.title}>{title}</Text>
   <ScrollView>
-    {productsData.data?.map((product: any) => (
+    {memoizedProductsData.data?.map((product: any) => (
         <ProductCard productId={product.id} />
       ))}
       </ScrollView>

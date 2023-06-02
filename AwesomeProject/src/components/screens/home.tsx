@@ -27,9 +27,12 @@ interface HomePageProps<T, P>{
 
 const Drawer = createDrawerNavigator();
 const HomePage: React.FC<HomePageProps<any, any>> = ({service=getAllProducts, params, title}) => {
+    const Data = useDataService(service, params);
+    const memoizedData = useMemo(() => Data, [Data]);
     return(
     
-    <Drawer.Navigator initialRouteName="All products">
+    <Drawer.Navigator initialRouteName="Home">
+        
         <Drawer.Screen name="All products" component={ProductsDisplay} />
         <Drawer.Screen name="Jewelry" component={() => <ProductsDisplay service={getProductsByCategory} params={'jewelery'} title={'Jewellery'} />} />
         <Drawer.Screen name="Electronics" component={() => <ProductsDisplay service={getProductsByCategory} params={'electronics'} title={'Electronics'} />} />

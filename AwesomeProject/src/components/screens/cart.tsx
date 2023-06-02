@@ -4,7 +4,8 @@ import {getCartByID} from '../../services/get-cart-data';
 import {useDataService} from '../../hooks/use-service';
 import CartCard from '../cart-card';
 
-const Cart: React.FC<{cartId?: string}> = ({cartId}) => {
+const Cart: React.FC<{cartId?: string}> = ({cartId=1}) => {
+  console.log(cartId)
   const [totalPrice, setTotalPrice] = useState(0);
   const cartByIDQuery = useDataService(getCartByID, cartId);
   const handleSetTotalPrice = (price: number) => {
@@ -17,6 +18,7 @@ const Cart: React.FC<{cartId?: string}> = ({cartId}) => {
   if (cartByIDQuery.error) {
     return <Text>Error</Text>;
   }
+  console.log(cartByIDQuery.data)
   return (
     <ScrollView>
       <Text>Cart</Text>
