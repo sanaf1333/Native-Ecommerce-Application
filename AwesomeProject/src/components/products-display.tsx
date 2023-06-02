@@ -10,7 +10,7 @@ import {
     Image,
     ScrollView,
   } from 'react-native';
-import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
+//import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import { getProductsByCategory } from '../services/get-categories';
 import { getAllProducts } from '../services/get-product-data';
 import { useDataService } from '../hooks/use-service';
@@ -20,16 +20,14 @@ interface HomePageProps<T, P>{
         params?: P;
         title?: string;
 }
-const Tab = createBottomTabNavigator();
+
 const ProductsDisplay: React.FC<HomePageProps<any, any>> = ({service=getAllProducts, params, title}) => {
+    console.log(service)
     const Data = useDataService(service, params);
     const memoizedData = useMemo(() => Data, [Data]);
     return(<>
     <View>
-    <Text>Sana</Text>
-    <Text>Sana</Text>
-    <Text>{title}</Text>
-    <Text>{<ViewAllProducts service={service} params={params} title='hehe'/>}</Text>
+    <ViewAllProducts service={service} params={params} title={title? title: ''}/>
     </View>
     </>);
 }

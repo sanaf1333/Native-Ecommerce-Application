@@ -4,7 +4,7 @@
  *
  * @format
  */
-//import 'react-native-gesture-handler';
+import 'react-native-gesture-handler';
 import React from 'react';
 import {SafeAreaView, StyleSheet, Text} from 'react-native';
 import {QueryClient, QueryClientProvider, useQuery} from 'react-query';
@@ -39,7 +39,7 @@ function App(): JSX.Element {
             <Stack.Screen
               name="ProductDetails"
               component={ProductDetails}
-              initialParams={{productId: '1'}}
+              initialParams={{productId: 1}}
             />
             <Stack.Screen
               name="Cart"

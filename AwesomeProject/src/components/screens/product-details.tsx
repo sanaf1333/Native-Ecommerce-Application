@@ -14,8 +14,16 @@ import {productModal} from '../../modals/product-modal';
 import { NavigationProp } from '@react-navigation/native';
 import {ParamListBase, useNavigation} from '@react-navigation/native';
 import {NativeStackNavigationProp} from '@react-navigation/native-stack';
+import { RouteProp, useRoute } from '@react-navigation/native';
+
+// Define the type for route params
+type RootStackParamList = {
+  ProductDetails: { productId?: number };
+};
+// Inside the ProductDetails component
+
 export interface ProductDetailsProps {
-  productId?: string;
+  productId?: number;
 }
 interface CustomButtonProps {
     title: string;
@@ -27,12 +35,15 @@ interface CustomButtonProps {
     <Text style={styles.buttonText}>{title}</Text>
   </TouchableOpacity>
 );
-const ProductDetails: React.FC<ProductDetailsProps> = ({ productId }) => {
+const ProductDetails: React.FC = () => {
+  const route = useRoute<RouteProp<RootStackParamList, 'ProductDetails'>>();
+  const productId = route.params?.productId;
   const productData = useDataService(getProductByID, productId);
   const memoizedProductData = useMemo(() => productData, [productData]);
   const navigation = useNavigation<NativeStackNavigationProp<ParamListBase>>();
   if (memoizedProductData.isLoading) {
-    return <Text>Loading...</Text>;
+    return ( 
+    <Text>Loading...</Text>);
   }
 
   if (memoizedProductData.error) {
@@ -41,7 +52,6 @@ const ProductDetails: React.FC<ProductDetailsProps> = ({ productId }) => {
  
   return (
     <>
-      <CustomButton title="< Go Back" onPress={() => navigation.goBack()} />
       <ScrollView style={styles.productContainer}>
         <Text style={styles.title}>{memoizedProductData.data.title}</Text>
         <Image

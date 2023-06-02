@@ -29,12 +29,12 @@ const ProductCard: React.FC<ProductCardProps> = ({ productId }) => {
   if (memoizedProductData.error) {
     return <Text>Error</Text>;
   }
-  const onPressViewProduct = () => {
-    navigation.navigate('ProductDetails', { productId: memoizedProductData.data.id });
+  const onPressViewProduct = (productId: number) => {
+    navigation.navigate('ProductDetails', { productId: productId });
   };
   return (
     <>
-      <TouchableOpacity onPress={onPressViewProduct}>
+      <TouchableOpacity onPress={() => onPressViewProduct(memoizedProductData.data.id)}>
       <View style={styles.productCardContainer}>
         <Image
           style={styles.productImage}
