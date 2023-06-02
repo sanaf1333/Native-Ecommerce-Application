@@ -13,14 +13,26 @@ const ViewAllProducts: React.FC<ViewAllProductsProps<any, any>> = ({
   params,
   title,
 }) => {
+  console.log("view all products rendered")
   const productsData = useDataService(service, params);
+  const memoizedData = useMemo(() => productsData, [productsData]);
+  if (memoizedData.isLoading) {
+    return (
+      <Text style={styles.title}>loading</Text>
+    );
+  }
 
+  if (memoizedData.isError) {
+    return (
+      <Text style={styles.title}>Error loading data</Text>
+    );
+  }
   return(
 <>
 <Text style={styles.title}>{title}</Text>
   <ScrollView>
-    {productsData.data?.map((product: any) => (
-        <ProductCard productId={product.id} />
+    {memoizedData.data?.map((product: any) => (
+        <ProductCard key={product.id} productId={product.id} />
       ))}
       </ScrollView>
   </>

@@ -22,9 +22,10 @@ interface HomePageProps<T, P>{
 }
 
 const ProductsDisplay: React.FC<HomePageProps<any, any>> = ({service=getAllProducts, params, title}) => {
-    console.log(service)
-    const Data = useDataService(service, params);
-    const memoizedData = useMemo(() => Data, [Data]);
+    console.log("products dsiplay rendered")
+  console.log("home", service)
+  console.log("home", params)
+  console.log("home", title)
     return(<>
     <View>
     <ViewAllProducts service={service} params={params} title={title? title: ''}/>

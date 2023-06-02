@@ -26,17 +26,22 @@ interface HomePageProps<T, P>{
 }
 
 const Drawer = createDrawerNavigator();
-const HomePage: React.FC<HomePageProps<any, any>> = ({service=getAllProducts, params, title}) => {
+const HomePage: React.FC = () => {
+    console.log("home rendered")
     return(
     
     <Drawer.Navigator initialRouteName="All products">
-        <Drawer.Screen name="All products" component={ProductsDisplay} />
-        <Drawer.Screen name="Jewelry" component={() => <ProductsDisplay service={getProductsByCategory} params={'jewelery'} title={'Jewellery'} />} />
+        <Drawer.Screen name="All products" component={ProductsDisplay} initialParams={{service: getAllProducts}} />
+        <Drawer.Screen name="Jewlery" component={ProductsDisplay} initialParams={{service: getProductsByCategory, params: 'jewelery'}} />
+        <Drawer.Screen name="electronics" component={ProductsDisplay} initialParams={{service: getProductsByCategory, params: 'electronics'}} />
+        <Drawer.Screen name="Men's Clothing" component={ProductsDisplay} initialParams={{service: getProductsByCategory, params: `men's clothing`}} />
+        <Drawer.Screen name="Women's Clothing" component={ProductsDisplay} initialParams={{service: getProductsByCategory, params: `women's clothing`}} />
+        {/* <Drawer.Screen name="Jewelry" component={() => <ProductsDisplay service={getProductsByCategory} params={'jewelery'} title={'Jewellery'} />} />
         <Drawer.Screen name="Electronics" component={() => <ProductsDisplay service={getProductsByCategory} params={'electronics'} title={'Electronics'} />} />
         <Drawer.Screen name="Men's Clothing" 
         component={() => <ProductsDisplay service={getProductsByCategory} params={`men's clothing`} title={`men's clothing`} />} />
         <Drawer.Screen name="Women's Clothing" 
-        component={() => <ProductsDisplay service={getProductsByCategory} params={`women's clothing`} title={`women's clothing`} />} />
+        component={() => <ProductsDisplay service={getProductsByCategory} params={`women's clothing`} title={`women's clothing`} />} /> */}
       </Drawer.Navigator>
     
     );

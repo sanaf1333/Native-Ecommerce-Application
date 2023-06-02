@@ -19,6 +19,7 @@ interface ProductCardProps {
   productId: string;
 }
 const ProductCard: React.FC<ProductCardProps> = ({ productId }) => {
+  console.log("in product card")
   const productData = useDataService(getProductByID, productId);
   const memoizedProductData = useMemo(() => productData, [productData]);
   const navigation = useNavigation<NativeStackNavigationProp<ParamListBase>>();
