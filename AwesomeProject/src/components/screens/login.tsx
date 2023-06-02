@@ -31,7 +31,7 @@ const Login = () => {
     setIsUsernameValid(validateEmptyField(username));
     if (validatePassword(password) && validateEmptyField(username)) {
       showAlert('', 'pass');
-      navigation.navigate('Home', { service: getAllProducts, title: "All Products" })
+      navigation.navigate('HomePage', { service: getAllProducts, title: "All Products" })
     } else {
       showAlert('', 'Invalid username or password!');
     }
