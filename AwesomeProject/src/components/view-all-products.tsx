@@ -1,7 +1,7 @@
-import React, {useMemo} from 'react';
+import React, {useMemo, useCallback} from 'react';
 import {useDataService} from '../hooks/use-service';
 import ProductCard from './product-card';
-import { ScrollView, Text, StyleSheet } from 'react-native';
+import { ScrollView, Text, StyleSheet, FlatList } from 'react-native';
 interface ViewAllProductsProps<T, P> {
   service: (params?: P) => Promise<T>;
   params?: P;
@@ -15,14 +15,19 @@ const ViewAllProducts: React.FC<ViewAllProductsProps<any, any>> = ({
 }) => {
   const productsData = useDataService(service, params);
   const memoizedProductsData = useMemo(() => productsData, [productsData]);
+  const handleEndReached = useCallback(() => {
+    // Load more data here
+  }, []);
   return(
 <>
 <Text style={styles.title}>{title}</Text>
-  <ScrollView>
-    {memoizedProductsData.data?.map((product: any) => (
-        <ProductCard productId={product.id} />
-      ))}
-      </ScrollView>
+<FlatList
+        data={memoizedProductsData.data}
+        keyExtractor={(item: any) => item.id.toString()}
+        renderItem={({ item }) => <ProductCard productId={item.id} />}
+        onEndReached={handleEndReached}
+        onEndReachedThreshold={0.5}
+      />
   </>
   );
 };

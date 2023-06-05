@@ -1,5 +1,5 @@
 import 'react-native-gesture-handler';
-import React from 'react';
+import React, {useEffect} from 'react';
 import { SafeAreaView, StyleSheet } from 'react-native';
 import { QueryClient, QueryClientProvider } from 'react-query';
 import Login from './src/components/screens/login';
@@ -20,13 +20,17 @@ import { NavigationContainer } from '@react-navigation/native';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import HomePage from './src/components/screens/home';
 import ProductsDisplay from './src/components/products-display';
+import EditProduct from './src/components/screens/edit-product';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
-
+import SplashScreen from 'react-native-splash-screen';
 const queryClient = new QueryClient();
 const Stack = createNativeStackNavigator();
 const Tab = createBottomTabNavigator();
 
 function App(): JSX.Element {
+  useEffect(() => {
+    SplashScreen.hide();
+  }, []);
   return (
     <QueryClientProvider client={queryClient}>
       <NavigationContainer>
@@ -52,6 +56,10 @@ function App(): JSX.Element {
             name="ProductsDisplay"
             component={ProductsDisplay}
             initialParams={{ service: getAllProducts, title: "All products" }}
+          />
+          <Stack.Screen
+            name="EditProduct"
+            component={EditProduct}
           />
         </Stack.Navigator>
       </NavigationContainer>

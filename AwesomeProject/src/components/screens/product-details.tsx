@@ -50,6 +50,9 @@ const ProductDetails: React.FC = () => {
     return <Text>Error</Text>;
   }
  
+  const onPressEdit = () =>{
+    navigation.navigate('EditProduct');
+  }
   return (
     <>
       <ScrollView style={styles.productContainer}>
@@ -85,6 +88,12 @@ const ProductDetails: React.FC = () => {
             </Text>
           </View>
         </View>
+        <Button
+  onPress={onPressEdit}
+  title="Edit"
+  color="#841584"
+  accessibilityLabel="Learn more about this purple button"
+/>
       </ScrollView>
     </>
   );
