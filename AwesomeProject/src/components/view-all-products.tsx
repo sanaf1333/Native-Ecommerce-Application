@@ -13,7 +13,10 @@ const ViewAllProducts: React.FC<ViewAllProductsProps<any, any>> = ({
   params,
   title,
 }) => {
-  const productsData = useDataService(service, params);
+  console.log(params, "view")
+  const { category, order } = params;
+  console.log("!", category, order)
+  const productsData = useDataService(service, { category, order });
   const memoizedProductsData = useMemo(() => productsData, [productsData]);
   const handleEndReached = useCallback(() => {
     // Load more data here

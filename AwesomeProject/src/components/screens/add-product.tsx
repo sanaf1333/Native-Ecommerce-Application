@@ -16,10 +16,10 @@ import {ParamListBase, useNavigation} from '@react-navigation/native';
 import {NativeStackNavigationProp} from '@react-navigation/native-stack';
 import {RouteProp, useRoute} from '@react-navigation/native';
 import { addNewProduct } from '../../services/add-update-product';
-
+import ImagePicker, {ImageLibraryOptions, Asset, launchImageLibrary} from 'react-native-image-picker';
 
 const AddProduct = () => {
-  
+    const [selectedImage, setSelectedImage] = React.useState<string | null>(null);
   const [title, setTitle] = useState('');
   const [price, setPrice] = useState('');
   const [description, setDescription] = useState('');
@@ -62,6 +62,27 @@ const AddProduct = () => {
       </TouchableOpacity>
     ));
   };
+
+  const handleImageSelect = () => {
+   launchImageLibrary(
+      {
+        mediaType: 'photo',
+        quality: 1,
+        includeBase64: true,
+      },
+      (response) => {
+        if (response.didCancel) {
+          console.log('User cancelled image picker');
+        } else if (response.errorCode) {
+          console.log('ImagePicker Error: ', response.errorCode);
+        } else if (response.assets && response.assets.length > 0) {
+            const selectedAsset: Asset = response.assets[0];
+            const uri = selectedAsset.uri ? selectedAsset.uri : null;
+            setSelectedImage(uri);
+          }
+      }
+    );
+  };
   return (
     <>
       <ScrollView>
@@ -70,14 +91,14 @@ const AddProduct = () => {
           onChangeText={text => setTitle(text)}
           value={title}
           placeholder="Title"
-          style={styles.button}
+          style={styles.inputBox}
         />
         <Text style={styles.text}>Price</Text>
         <TextInput
           onChangeText={handlePriceChange}
           value={price}
           placeholder="Price"
-          style={styles.button}
+          style={styles.inputBox}
           keyboardType="numeric"
         />
         <View>
@@ -93,6 +114,11 @@ const AddProduct = () => {
             </View>
           </Modal>
         </View>
+        <Text style={styles.text}>Image</Text>
+        <View style={styles.imageButton}>
+      <Button title="Select Image" onPress={handleImageSelect} />
+      {selectedImage && <Image source={{ uri: selectedImage }} style={{ width: 100, height: 100 }} />}
+    </View>
         <Text style={styles.text}>Description</Text>
         <TextInput
           onChangeText={description => setDescription(description)}
@@ -100,7 +126,7 @@ const AddProduct = () => {
           multiline
           numberOfLines={6}
           placeholder="Description"
-          style={styles.button}
+          style={styles.inputBox}
         />
         <View style={styles.submitButton}>
           <Button
@@ -118,7 +144,12 @@ const AddProduct = () => {
 export default AddProduct;
 
 const styles = StyleSheet.create({
-  button: {
+  imageButton: {
+    alignItems: 'flex-start',
+    margin: 10,
+    width: '50%',
+  },
+  inputBox: {
     alignItems: 'flex-start',
     padding: 10,
     margin: 10,

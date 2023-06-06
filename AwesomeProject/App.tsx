@@ -15,7 +15,7 @@ import ViewAllProducts from './src/components/view-all-products';
 import { getAllProducts } from './src/services/get-product-data';
 import { sortProductsAsc } from './src/services/get-product-data';
 import { sortProductsDesc } from './src/services/get-product-data';
-import { getProductsByCategory } from './src/services/get-categories';
+
 import { NavigationContainer } from '@react-navigation/native';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import HomePage from './src/components/screens/home';
