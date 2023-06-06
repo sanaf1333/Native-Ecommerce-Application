@@ -51,7 +51,7 @@ const ProductDetails: React.FC = () => {
   }
  
   const onPressEdit = () =>{
-    navigation.navigate('EditProduct');
+    navigation.navigate('EditProduct', {productId: productId});
   }
   return (
     <>
@@ -88,12 +88,14 @@ const ProductDetails: React.FC = () => {
             </Text>
           </View>
         </View>
+        <View style={styles.editButton}>
         <Button
   onPress={onPressEdit}
   title="Edit"
-  color="#841584"
+  color="#ace4ea"
   accessibilityLabel="Learn more about this purple button"
 />
+</View>
       </ScrollView>
     </>
   );
@@ -111,6 +113,9 @@ const styles = StyleSheet.create({
   buttonText: {
     color: '#ace4ea',
     fontWeight: 'bold',
+  },
+  editButton: {
+    marginBottom: 20,
   },
   productContainer: {
     padding: 10,
