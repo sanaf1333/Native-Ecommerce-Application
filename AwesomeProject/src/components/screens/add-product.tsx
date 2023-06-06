@@ -15,14 +15,11 @@ import {getProductByID} from '../../services/get-product-data';
 import {ParamListBase, useNavigation} from '@react-navigation/native';
 import {NativeStackNavigationProp} from '@react-navigation/native-stack';
 import {RouteProp, useRoute} from '@react-navigation/native';
+import { addNewProduct } from '../../services/add-update-product';
 
-type RootStackParamList = {
-  EditProduct: {productId?: number};
-};
 
-const EditProduct = () => {
-  const route = useRoute<RouteProp<RootStackParamList, 'EditProduct'>>();
-  const productId = route.params?.productId;
+const AddProduct = () => {
+  
   const [title, setTitle] = useState('');
   const [price, setPrice] = useState('');
   const [description, setDescription] = useState('');
@@ -34,18 +31,13 @@ const EditProduct = () => {
     {label: `women's clothing`, value: `women's clothing`},
     {label: 'electronics', value: 'electronics'},
   ];
-  const productData = useDataService(getProductByID, productId);
-  const memoizedProductData = useMemo(() => productData, [productData]);
+  //const productData = useDataService(addNewProduct);
+  
   const navigation = useNavigation<NativeStackNavigationProp<ParamListBase>>();
-  useEffect(() => {
-    setTitle(memoizedProductData.data.title);
-    setPrice(memoizedProductData.data.price.toString());
-    setDescription(memoizedProductData.data.description);
-    setValue(memoizedProductData.data.category);
-  }, []);
+  
 
   const onPressSubmit = () => {
-    navigation.navigate('ProductDetails', {productId: productId});
+    navigation.goBack();
   };
 
   const handlePriceChange = (text: string) => {
@@ -72,7 +64,7 @@ const EditProduct = () => {
   };
   return (
     <>
-      <View>
+      <ScrollView>
         <Text style={styles.text}>Title</Text>
         <TextInput
           onChangeText={text => setTitle(text)}
@@ -113,17 +105,17 @@ const EditProduct = () => {
         <View style={styles.submitButton}>
           <Button
             onPress={onPressSubmit}
-            title="Submit Changes"
+            title="Add product"
             color="#ace4ea"
             accessibilityLabel="Learn more about this purple button"
           />
         </View>
-      </View>
+      </ ScrollView>
     </>
   );
 };
 
-export default EditProduct;
+export default AddProduct;
 
 const styles = StyleSheet.create({
   button: {

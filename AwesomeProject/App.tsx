@@ -23,6 +23,7 @@ import ProductsDisplay from './src/components/products-display';
 import EditProduct from './src/components/screens/edit-product';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import SplashScreen from 'react-native-splash-screen';
+import AddProduct from './src/components/screens/add-product';
 const queryClient = new QueryClient();
 const Stack = createNativeStackNavigator();
 const Tab = createBottomTabNavigator();
@@ -60,6 +61,10 @@ function App(): JSX.Element {
           <Stack.Screen
             name="EditProduct"
             component={EditProduct}
+          />
+          <Stack.Screen
+            name="AddProduct"
+            component={AddProduct}
           />
         </Stack.Navigator>
       </NavigationContainer>

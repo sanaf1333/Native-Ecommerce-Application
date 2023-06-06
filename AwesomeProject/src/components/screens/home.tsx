@@ -20,6 +20,7 @@ import { NavigationContainer } from '@react-navigation/native';
 import Signup from './signup';
 import { getCartByID } from '../../services/get-cart-data';
 import Cart from './cart';
+import AddProduct from './add-product';
 interface HomePageProps<T, P>{
         service?: (params?: P) => Promise<T>;
         params?: P;
@@ -41,6 +42,7 @@ const HomePage: React.FC<HomePageProps<any, any>> = ({service=getAllProducts, pa
         component={() => <ProductsDisplay service={getProductsByCategory} params={`men's clothing`} title={`men's clothing`} />} />
         <Drawer.Screen name="Women's Clothing" 
         component={() => <ProductsDisplay service={getProductsByCategory} params={`women's clothing`} title={`women's clothing`} />} />
+        <Drawer.Screen name="Add products" component={AddProduct} />
         <Drawer.Screen name="Cart" 
         component={() => <Cart cartId='1' />} />
       </Drawer.Navigator>
