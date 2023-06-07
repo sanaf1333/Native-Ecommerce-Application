@@ -22,6 +22,13 @@ const CartCard: React.FC<cartCardProps> = ({
   }, [productData.data]);
 
   const memoizedProductData = useMemo(() => productData, [productData]);
+  if (memoizedProductData.isLoading) {
+    return <Text>Loading...</Text>;
+  }
+
+  if (memoizedProductData.error) {
+    return <Text>Error</Text>;
+  }
 
   return (
     <>
