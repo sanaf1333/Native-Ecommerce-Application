@@ -1,6 +1,6 @@
 import 'react-native-gesture-handler';
 import React, {useEffect} from 'react';
-import { SafeAreaView, StyleSheet } from 'react-native';
+import { SafeAreaView, StyleSheet, Image } from 'react-native';
 import { QueryClient, QueryClientProvider } from 'react-query';
 import Login from './src/components/screens/login';
 import Signup from './src/components/screens/signup';
@@ -39,7 +39,7 @@ function App(): JSX.Element {
           <Stack.Screen name="Login" component={Login} />
           <Stack.Screen name="Signup" component={Signup} />
           <Stack.Screen
-            name="ProductDetails"
+            name="Product Details"
             component={ProductDetails}
             initialParams={{ productId: 1 }}
           />
@@ -75,8 +75,22 @@ function App(): JSX.Element {
 function HomeTabNavigator(): JSX.Element {
   return (
     <Tab.Navigator>
-      <Tab.Screen name="Home" component={HomePage} />
-      <Tab.Screen name="Cart" component={Cart} />
+      <Tab.Screen name="Home" component={HomePage} options={{
+          tabBarIcon: ({ color }) => (
+            <Image
+              source={require('./public/images/icons8-home-24.png')}
+              style={{ tintColor: color }}
+            />
+          ),
+        }} />
+      <Tab.Screen name="Cart" component={Cart} options={{
+          tabBarIcon: ({ color }) => (
+            <Image
+              source={require('./public/images/icons8-cart-24.png')}
+              style={{ tintColor: color }}
+            />
+          ),
+        }} />
     </Tab.Navigator>
   );
 }

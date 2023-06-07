@@ -115,7 +115,7 @@ const styles = StyleSheet.create({
     fontWeight: 'bold',
   },
   editButton: {
-    marginBottom: 10,
+    marginBottom: 20,
   },
   productContainer: {
     padding: 10,
@@ -127,7 +127,7 @@ const styles = StyleSheet.create({
   title: {
     fontWeight: 'bold',
     fontSize: 30,
-    alignSelf: 'center',
+    alignSelf: 'flex-start',
     paddingBottom: 20,
   },
   detailsHeading: {

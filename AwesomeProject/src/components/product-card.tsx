@@ -30,7 +30,7 @@ const ProductCard: React.FC<ProductCardProps> = ({ productId }) => {
     return <Text>Error</Text>;
   }
   const onPressViewProduct = (productId: number) => {
-    navigation.navigate('ProductDetails', { productId: productId });
+    navigation.navigate('Product Details', { productId: productId });
   };
   return (
     <>

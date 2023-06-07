@@ -45,7 +45,7 @@ const EditProduct = () => {
   }, []);
 
   const onPressSubmit = () => {
-    navigation.navigate('ProductDetails', {productId: productId});
+    navigation.navigate('Product Details', {productId: productId});
   };
 
   const handlePriceChange = (text: string) => {
