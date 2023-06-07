@@ -5,10 +5,10 @@ import {useDataService} from '../../hooks/use-service';
 import CartCard from '../cart-card';
 
 const Cart: React.FC<{cartId?: string}> = ({cartId=1}) => {
-  console.log(cartId)
   const [totalPrice, setTotalPrice] = useState(0);
   const cartByIDQuery = useDataService(getCartByID, cartId);
   const handleSetTotalPrice = (price: number) => {
+    console.log(totalPrice, price)
     setTotalPrice(totalPrice + price);
   };
   if (cartByIDQuery.isLoading) {
@@ -18,12 +18,10 @@ const Cart: React.FC<{cartId?: string}> = ({cartId=1}) => {
   if (cartByIDQuery.error) {
     return <Text>Error</Text>;
   }
-  console.log(cartByIDQuery.data)
+
   return (
     <ScrollView>
-      <Text>Cart</Text>
-      <Text>{cartByIDQuery.data && cartByIDQuery.data.userId}</Text>
-      <Text>{cartByIDQuery.data && cartByIDQuery.data.date}</Text>
+      <Text style={styles.text}>Happy shopping!</Text>
       {cartByIDQuery.data &&
         cartByIDQuery.data.products.map((product: { productId: string; quantity: number; }) => (
           <CartCard
@@ -45,5 +43,10 @@ const styles = StyleSheet.create({
     alignSelf: 'flex-end',
     padding: 10,
     fontWeight: 'bold',
+  },
+  text: {
+    fontWeight: 'bold',
+    padding: 10,
+    fontSize: 20,
   },
 });

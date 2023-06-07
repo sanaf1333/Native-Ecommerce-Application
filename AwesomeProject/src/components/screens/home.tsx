@@ -36,15 +36,14 @@ const HomePage: React.FC<HomePageProps<any, any>> = ({service=getAllProducts, pa
     <Drawer.Navigator initialRouteName="Home">
         
         <Drawer.Screen name="All products" component={ProductsDisplay} />
-        <Drawer.Screen name="Jewelry" component={() => <ProductsDisplay service={getProductsByCategory} params={'jewelery'} title={'Jewellery'} />} />
-        <Drawer.Screen name="Electronics" component={() => <ProductsDisplay service={getProductsByCategory} params={'electronics'} title={'Electronics'} />} />
+        <Drawer.Screen name="Jewellery" component={() => <ProductsDisplay service={getProductsByCategory} params={'jewelery'} />} />
+        <Drawer.Screen name="Electronics" component={() => <ProductsDisplay service={getProductsByCategory} params={'electronics'} />} />
         <Drawer.Screen name="Men's Clothing" 
-        component={() => <ProductsDisplay service={getProductsByCategory} params={`men's clothing`} title={`men's clothing`} />} />
+        component={() => <ProductsDisplay service={getProductsByCategory} params={`men's clothing`} />} />
         <Drawer.Screen name="Women's Clothing" 
-        component={() => <ProductsDisplay service={getProductsByCategory} params={`women's clothing`} title={`women's clothing`} />} />
+        component={() => <ProductsDisplay service={getProductsByCategory} params={`women's clothing`} />} />
         <Drawer.Screen name="Add products" component={AddProduct} />
-        <Drawer.Screen name="Cart" 
-        component={() => <Cart cartId='1' />} />
+
       </Drawer.Navigator>
     
     );

@@ -1,12 +1,13 @@
 
 const API_URL = 'https://fakestoreapi.com';
 
-export const getAllProducts = async (order ='asc') => {
-  console.log(order, "fff")
+export const getAllProducts = async (params: { order: string } = { order: 'asc' }) => {
+  const { order } = params;
   const response = await fetch(`${API_URL}/products?sort=${order}`);
   const data = await response.json();
   return data;
 };
+
 
 export const getProductByID = async (productID: number) => {
   const response = await fetch(`${API_URL}/products/${productID}`);

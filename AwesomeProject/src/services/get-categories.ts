@@ -8,7 +8,6 @@ export const getAllCategories = async () => {
 };
 
 export const getProductsByCategory = async ({ category, order }: { category: string; order: string }) => {
-  console.log(category, order, "aaa")
   const response = await fetch(`${API_URL}/products/category/${category}?sort=${order}`);
   const data = await response.json();
   return data;

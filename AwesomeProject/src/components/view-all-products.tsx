@@ -13,22 +13,17 @@ const ViewAllProducts: React.FC<ViewAllProductsProps<any, any>> = ({
   params,
   title,
 }) => {
-  console.log(params, "view")
   const { category, order } = params;
-  console.log("!", category, order)
-  const productsData = useDataService(service, { category, order });
+  const paramsToSend = category ? { category, order } : { order };
+  const productsData = useDataService(service, paramsToSend);
   const memoizedProductsData = useMemo(() => productsData, [productsData]);
-  const handleEndReached = useCallback(() => {
-    // Load more data here
-  }, []);
   return(
 <>
-<Text style={styles.title}>{title}</Text>
+{ title && <Text style={styles.title}>{title}</Text>}
 <FlatList
         data={memoizedProductsData.data}
         keyExtractor={(item: any) => item.id.toString()}
         renderItem={({ item }) => <ProductCard productId={item.id} />}
-        onEndReached={handleEndReached}
         onEndReachedThreshold={0.5}
       />
   </>
