@@ -23,7 +23,7 @@ const ProductCard: React.FC<ProductCardProps> = ({ productId }) => {
   const memoizedProductData = useMemo(() => productData, [productData]);
   const navigation = useNavigation<NativeStackNavigationProp<ParamListBase>>();
   if (memoizedProductData.isLoading) {
-    return <Text>Loading...</Text>;
+    return null;
   }
 
   if (memoizedProductData.error) {

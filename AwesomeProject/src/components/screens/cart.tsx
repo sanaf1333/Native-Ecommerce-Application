@@ -4,12 +4,14 @@ import {getCartByID} from '../../services/get-cart-data';
 import {useDataService} from '../../hooks/use-service';
 import CartCard from '../cart-card';
 
-const Cart: React.FC<{cartId?: string}> = ({cartId=1}) => {
-  const [totalPrice, setTotalPrice] = useState(0);
+const Cart: React.FC<{cartId?: string}> = ({cartId = 1}) => {
+  const [totalPrices, setTotalPrices] = useState<number[]>([]);
   const cartByIDQuery = useDataService(getCartByID, cartId);
   const handleSetTotalPrice = (price: number) => {
-    console.log(totalPrice, price)
-    setTotalPrice(totalPrice + price);
+    setTotalPrices(prevTotalPrices => [...prevTotalPrices, price]);
+  };
+  const calculateTotalPrice = (): number => {
+    return totalPrices.reduce((acc, curr) => acc + curr, 0);
   };
   if (cartByIDQuery.isLoading) {
     return <Text>Loading...</Text>;
@@ -23,15 +25,17 @@ const Cart: React.FC<{cartId?: string}> = ({cartId=1}) => {
     <ScrollView>
       <Text style={styles.text}>Happy shopping!</Text>
       {cartByIDQuery.data &&
-        cartByIDQuery.data.products.map((product: { productId: string; quantity: number; }) => (
-          <CartCard
-            key={product.productId}
-            productId={product.productId}
-            quantity={product.quantity}
-            handleSetTotalPrice={handleSetTotalPrice}
-          />
-        ))}
-      <Text style={styles.totalPrice}>Total: {totalPrice}</Text>
+        cartByIDQuery.data.products.map(
+          (product: {productId: string; quantity: number}) => (
+            <CartCard
+              key={product.productId}
+              productId={product.productId}
+              quantity={product.quantity}
+              handleSetTotalPrice={handleSetTotalPrice}
+            />
+          ),
+        )}
+      <Text style={styles.totalPrice}>Total: ${calculateTotalPrice()} </Text>
     </ScrollView>
   );
 };

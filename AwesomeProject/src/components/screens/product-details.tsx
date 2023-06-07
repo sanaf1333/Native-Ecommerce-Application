@@ -115,7 +115,7 @@ const styles = StyleSheet.create({
     fontWeight: 'bold',
   },
   editButton: {
-    marginBottom: 20,
+    marginBottom: 10,
   },
   productContainer: {
     padding: 10,
