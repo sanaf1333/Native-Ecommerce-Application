@@ -34,10 +34,8 @@ const PhoneSignIn: React.FC = () => {
   }
 
   async function confirmCode() {
-    console.log("in confirm")
     try {
         if (confirm) {
-            console.log("if")
           await confirm.confirm(code);
           navigation.navigate('HomePage')
         }
