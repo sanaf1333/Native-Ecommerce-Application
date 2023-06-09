@@ -25,11 +25,14 @@ const ProductsDisplay: React.FC<HomePageProps<any, any>> = ({
   title,
 }) => {
   const [order, setOrder] = useState('asc');
+  const [key, setKey] = useState(0); 
   const onPressAsc = () => {
     setOrder('asc');
+    setKey((prevKey) => prevKey + 1);
   };
   const onPressDesc = () => {
     setOrder('desc');
+    setKey((prevKey) => prevKey + 1); 
   };
   return (
     <>
@@ -38,25 +41,27 @@ const ProductsDisplay: React.FC<HomePageProps<any, any>> = ({
           onPress={onPressAsc}
           title="Sort Asc"
           color="#ace4ea"
-          accessibilityLabel="Learn more about this purple button"
+          accessibilityLabel="Sort products in ascending"
         />
         <Button
           onPress={onPressDesc}
           title="Sort Desc"
           color="#ace4ea"
-          accessibilityLabel="Learn more about this purple button"
+          accessibilityLabel="Sort products in descending"
         />
       </View>
       <View>
         <ViewAllProducts
+          key={key}
           service={service}
-          params={params ? {category: params, order} : {order}}
+          params={params ? { category: params, order } : { order }}
           title={title}
         />
       </View>
     </>
   );
 };
+
 
 export default ProductsDisplay;
 
