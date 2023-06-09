@@ -91,6 +91,7 @@ const AddProduct = () => {
           onChangeText={text => setTitle(text)}
           value={title}
           placeholder="Title"
+          placeholderTextColor="gray"
           style={styles.inputBox}
         />
         <Text style={styles.text}>Price</Text>
@@ -98,6 +99,7 @@ const AddProduct = () => {
           onChangeText={handlePriceChange}
           value={price}
           placeholder="Price"
+          placeholderTextColor="gray"
           style={styles.inputBox}
           keyboardType="numeric"
         />
@@ -117,7 +119,7 @@ const AddProduct = () => {
         <Text style={styles.text}>Image</Text>
         <View style={styles.imageButton}>
       <Button title="Select Image" onPress={handleImageSelect} />
-      {selectedImage && <Image source={{ uri: selectedImage }} style={{ width: 100, height: 100 }} />}
+      {selectedImage && <Image source={{ uri: selectedImage }} style={{ width: 100, height: 100, marginTop: 10 }} />}
     </View>
         <Text style={styles.text}>Description</Text>
         <TextInput
@@ -126,6 +128,7 @@ const AddProduct = () => {
           multiline
           numberOfLines={6}
           placeholder="Description"
+          placeholderTextColor="gray"
           style={styles.inputBox}
         />
         <View style={styles.submitButton}>

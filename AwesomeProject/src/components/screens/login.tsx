@@ -30,7 +30,6 @@ const Login = () => {
     setIsPasswordValid(validatePassword(password));
     setIsUsernameValid(validateEmptyField(username));
     if (validatePassword(password) && validateEmptyField(username)) {
-      showAlert('', 'pass');
       navigation.navigate('HomePage', { service: getAllProducts, title: "All Products" })
     } else {
       showAlert('', 'Invalid username or password!');
@@ -57,10 +56,12 @@ const Login = () => {
               onChangeText={setUsername}
               value={username}
               placeholder="Username"
+              placeholderTextColor="gray"
             />
             <TextInput
               style={[styles.input, !isPasswordValid && styles.errorInput]}
               placeholder="Password"
+              placeholderTextColor="gray"
               onChangeText={setPassword}
               value={password}
               secureTextEntry
@@ -126,6 +127,7 @@ const styles = StyleSheet.create({
     marginVertical: 8,
     borderWidth: 1,
     padding: 10,
+    color: 'black',
   },
   errorInput: {
     borderColor: 'red',

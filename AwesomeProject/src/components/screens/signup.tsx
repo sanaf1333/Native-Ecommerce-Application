@@ -37,6 +37,7 @@ const Signup = () => {
   };
 
   const onSubmit = () => {
+    navigation.navigate('PhoneSignIn')
     setIsEmailValid(validateEmail(email));
     setIsPasswordValid(validatePassword(password));
     setIsPhoneValid(validatePhoneNumber(phone));
@@ -53,7 +54,7 @@ const Signup = () => {
     } else {
       if (isEmailValid && isPasswordValid && isPhoneValid) {
         showAlert('', 'pass');
-        navigation.navigate('Login')
+        navigation.navigate('PhoneSignIn')
         //create user object, pass to hook and add call service
       } else {
         showAlert('', 'fail');
@@ -85,6 +86,7 @@ const Signup = () => {
                 onChangeText={setEmail}
                 value={email}
                 placeholder="Email"
+                placeholderTextColor="gray"
                 keyboardType="email-address"
               />
               <TextInput
@@ -94,6 +96,7 @@ const Signup = () => {
                   !isPasswordValid && styles.errorInput,
                 ]}
                 placeholder="Password"
+                placeholderTextColor="gray"
                 onChangeText={setPassword}
                 value={password}
                 secureTextEntry
@@ -105,12 +108,14 @@ const Signup = () => {
                 onChangeText={setFirstName}
                 value={firstName}
                 placeholder="First Name"
+                placeholderTextColor="gray"
               />
               <TextInput
                 style={[styles.input, styles.lastBoxInput]}
                 onChangeText={setLastName}
                 value={lastName}
                 placeholder="Last Name"
+                placeholderTextColor="gray"
               />
             </View>
             <View style={styles.TextBoxContainer}>
@@ -119,6 +124,7 @@ const Signup = () => {
                 onChangeText={setUsername}
                 value={username}
                 placeholder="Username"
+                placeholderTextColor="gray"
               />
               <TextInput
                 style={[
@@ -129,6 +135,7 @@ const Signup = () => {
                 onChangeText={setPhone}
                 value={phone}
                 placeholder="Phone"
+                placeholderTextColor="gray"
                 keyboardType="numeric"
               />
             </View>
@@ -138,12 +145,14 @@ const Signup = () => {
                 onChangeText={setCity}
                 value={city}
                 placeholder="City"
+                placeholderTextColor="gray"
               />
               <TextInput
                 style={[styles.input, styles.lastBoxInput]}
                 onChangeText={setStreet}
                 value={street}
                 placeholder="Street"
+                placeholderTextColor="gray"
               />
             </View>
             <View style={styles.TextBoxContainer}>
@@ -152,12 +161,14 @@ const Signup = () => {
                 onChangeText={setHouse}
                 value={house}
                 placeholder="House no."
+                placeholderTextColor="gray"
               />
               <TextInput
                 style={[styles.input, styles.lastBoxInput]}
                 onChangeText={setZipcode}
                 value={zipcode}
                 placeholder="Zipcode"
+                placeholderTextColor="gray"
                 keyboardType="numeric"
               />
             </View>
@@ -220,6 +231,7 @@ const styles = StyleSheet.create({
     marginVertical: 8,
     borderWidth: 1,
     padding: 10,
+    color: 'black',
   },
   errorInput: {
     borderColor: 'red',

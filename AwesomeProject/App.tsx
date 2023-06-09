@@ -24,6 +24,9 @@ import EditProduct from './src/components/screens/edit-product';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import SplashScreen from 'react-native-splash-screen';
 import AddProduct from './src/components/screens/add-product';
+import PhoneNumberVerification from './src/components/screens/phone-number';
+import OTPVerification from './src/components/screens/otp';
+import PhoneSignIn from './src/components/verify-phone';
 const queryClient = new QueryClient();
 const Stack = createNativeStackNavigator();
 const Tab = createBottomTabNavigator();
@@ -65,6 +68,18 @@ function App(): JSX.Element {
           <Stack.Screen
             name="AddProduct"
             component={AddProduct}
+          />
+          <Stack.Screen
+          name="PhoneNumberVerification"
+          component={PhoneNumberVerification}
+          />
+          <Stack.Screen
+          name="OTP"
+          component={OTPVerification}
+          />
+          <Stack.Screen
+          name="PhoneSignIn"
+          component={PhoneSignIn}
           />
         </Stack.Navigator>
       </NavigationContainer>
