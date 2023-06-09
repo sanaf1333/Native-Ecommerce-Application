@@ -10,6 +10,7 @@ import {
   Image,
   ScrollView,
 } from 'react-native';
+import FastImage from 'react-native-fast-image'
 import {validatePassword} from '../../utils/password-validation';
 import {validateEmptyField} from '../../utils/empty-field-validation';
 import {showAlert} from '../../utils/show-alert';

@@ -13,7 +13,7 @@ import ViewAllProducts from './src/components/view-all-products';
 import { getAllProducts } from './src/services/get-product-data';
 import { sortProductsAsc } from './src/services/get-product-data';
 import { sortProductsDesc } from './src/services/get-product-data';
-
+import FastImage from 'react-native-fast-image'
 import { NavigationContainer } from '@react-navigation/native';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import HomePage from './src/components/screens/home';
@@ -66,14 +66,6 @@ function App(): JSX.Element {
           <Stack.Screen
             name="AddProduct"
             component={AddProduct}
-          />
-          <Stack.Screen
-          name="PhoneNumberVerification"
-          component={PhoneNumberVerification}
-          />
-          <Stack.Screen
-          name="OTP"
-          component={OTPVerification}
           />
           <Stack.Screen
           name="PhoneSignIn"

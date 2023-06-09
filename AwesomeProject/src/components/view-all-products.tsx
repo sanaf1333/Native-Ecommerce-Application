@@ -1,4 +1,4 @@
-import React, {useMemo, useCallback, useState, useEffect} from 'react';
+import React, {useMemo, useCallback, useState, useEffect, memo} from 'react';
 import {useDataService} from '../hooks/use-service';
 import ProductCard from './product-card';
 import {
@@ -15,7 +15,7 @@ interface ViewAllProductsProps<T, P> {
   title?: string;
   itemsPerPage?: number;
 }
-
+const MemoizedProductCard = memo(ProductCard);
 const ViewAllProducts: React.FC<ViewAllProductsProps<any, any>> = ({
   service,
   params,
@@ -68,7 +68,7 @@ const ViewAllProducts: React.FC<ViewAllProductsProps<any, any>> = ({
         data={visibleItems}
         keyExtractor={(item: any) => item.id.toString()}
         renderItem={({item, index}) => (
-          <ProductCard productId={item.id} key={index} />
+          <MemoizedProductCard productId={item.id} key={index} />
         )}
         onEndReached={handleEndReached}
         onEndReachedThreshold={0.5}

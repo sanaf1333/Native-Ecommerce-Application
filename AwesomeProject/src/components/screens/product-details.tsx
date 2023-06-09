@@ -15,7 +15,7 @@ import { NavigationProp } from '@react-navigation/native';
 import {ParamListBase, useNavigation} from '@react-navigation/native';
 import {NativeStackNavigationProp} from '@react-navigation/native-stack';
 import { RouteProp, useRoute } from '@react-navigation/native';
-
+import FastImage from 'react-native-fast-image'
 // Define the type for route params
 type RootStackParamList = {
   ProductDetails: { productId?: number };
@@ -57,11 +57,12 @@ const ProductDetails: React.FC = () => {
     <>
       <ScrollView style={styles.productContainer}>
         <Text style={styles.title}>{memoizedProductData.data.title}</Text>
-        <Image
+        <FastImage
           style={styles.productImage}
-          resizeMode="contain"
+          resizeMode={FastImage.resizeMode.contain}
           source={{
             uri: memoizedProductData.data && memoizedProductData.data.image,
+            priority: FastImage.priority.normal,
           }}
         />
         <Text style={styles.detailsHeading}>Product Details</Text>

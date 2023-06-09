@@ -1,6 +1,7 @@
 import React, {useEffect, useMemo} from 'react';
 import {productModal} from '../modals/product-modal';
 import {Image, Text, View, StyleSheet} from 'react-native';
+import FastImage from 'react-native-fast-image'
 import {getCartByID} from '../services/get-cart-data';
 import {useDataService} from '../hooks/use-service';
 import {getProductByID} from '../services/get-product-data';
@@ -33,10 +34,11 @@ const CartCard: React.FC<cartCardProps> = ({
   return (
     <>
       <View style={styles.productContainer}>
-        <Image
+        <FastImage
           style={{width: 100, height: 100}}
           source={{
             uri: memoizedProductData.data && memoizedProductData.data.image,
+            priority: FastImage.priority.normal,
           }}
         />
         <View style={styles.productDescription}>
