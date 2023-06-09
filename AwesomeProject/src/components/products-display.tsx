@@ -25,14 +25,14 @@ const ProductsDisplay: React.FC<HomePageProps<any, any>> = ({
   title,
 }) => {
   const [order, setOrder] = useState('asc');
-  const [key, setKey] = useState(0); 
+  const [key, setKey] = useState(0);
   const onPressAsc = () => {
     setOrder('asc');
-    setKey((prevKey) => prevKey + 1);
+    setKey(prevKey => prevKey + 1);
   };
   const onPressDesc = () => {
     setOrder('desc');
-    setKey((prevKey) => prevKey + 1); 
+    setKey(prevKey => prevKey + 1);
   };
   return (
     <>
@@ -54,14 +54,13 @@ const ProductsDisplay: React.FC<HomePageProps<any, any>> = ({
         <ViewAllProducts
           key={key}
           service={service}
-          params={params ? { category: params, order } : { order }}
+          params={params ? {category: params, order} : {order}}
           title={title}
         />
       </View>
     </>
   );
 };
-
 
 export default ProductsDisplay;
 

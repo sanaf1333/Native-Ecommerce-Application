@@ -7,9 +7,7 @@ import Signup from './src/components/screens/signup';
 import CartCard from './src/components/cart-card';
 import Tryplease from './src/components/product-card';
 import Cart from './src/components/screens/cart';
-import ProductDetails, {
-  ProductDetailsProps,
-} from './src/components/screens/product-details';
+import ProductDetails from './src/components/screens/product-details';
 import ProductCard from './src/components/product-card';
 import ViewAllProducts from './src/components/view-all-products';
 import { getAllProducts } from './src/services/get-product-data';

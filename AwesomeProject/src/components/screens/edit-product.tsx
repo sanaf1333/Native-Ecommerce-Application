@@ -20,7 +20,7 @@ type RootStackParamList = {
   EditProduct: {productId?: number};
 };
 
-const EditProduct = () => {
+const EditProduct: React.FC = () => {
   const route = useRoute<RouteProp<RootStackParamList, 'EditProduct'>>();
   const productId = route.params?.productId;
   const [title, setTitle] = useState('');

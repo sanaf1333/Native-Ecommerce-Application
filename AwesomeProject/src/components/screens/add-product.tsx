@@ -18,7 +18,7 @@ import {RouteProp, useRoute} from '@react-navigation/native';
 import { addNewProduct } from '../../services/add-update-product';
 import ImagePicker, {ImageLibraryOptions, Asset, launchImageLibrary} from 'react-native-image-picker';
 
-const AddProduct = () => {
+const AddProduct: React.FC = () => {
     const [selectedImage, setSelectedImage] = React.useState<string | null>(null);
   const [title, setTitle] = useState('');
   const [price, setPrice] = useState('');

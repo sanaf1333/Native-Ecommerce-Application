@@ -17,7 +17,7 @@ import {validateEmptyField} from '../../utils/empty-field-validation';
 import {showAlert} from '../../utils/show-alert';
 import {ParamListBase, useNavigation} from '@react-navigation/native';
 import {NativeStackNavigationProp} from '@react-navigation/native-stack';
-const Signup = () => {
+const Signup: React.FC = () => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [firstName, setFirstName] = useState('');

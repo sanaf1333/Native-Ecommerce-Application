@@ -4,7 +4,7 @@ import auth, { FirebaseAuthTypes } from '@react-native-firebase/auth';
 import {ParamListBase, useNavigation} from '@react-navigation/native';
 import {NativeStackNavigationProp} from '@react-navigation/native-stack';
 
-const PhoneSignIn= () => {
+const PhoneSignIn: React.FC = () => {
   // If null, no SMS has been sent
   const [confirm, setConfirm] = useState<FirebaseAuthTypes.ConfirmationResult | null>(null);
 

@@ -14,7 +14,7 @@ import {productModal} from '../modals/product-modal';
 import { NavigationProp } from '@react-navigation/native';
 import {ParamListBase, useNavigation} from '@react-navigation/native';
 import {NativeStackNavigationProp} from '@react-navigation/native-stack';
-
+import FastImage from 'react-native-fast-image'
 interface ProductCardProps {
   productId: string;
 }
@@ -36,11 +36,12 @@ const ProductCard: React.FC<ProductCardProps> = ({ productId }) => {
     <>
       <TouchableOpacity onPress={() => onPressViewProduct(memoizedProductData.data.id)}>
       <View style={styles.productCardContainer}>
-        <Image
+        <FastImage
           style={styles.productImage}
-          resizeMode="contain"
+          resizeMode={FastImage.resizeMode.contain}
           source={{
             uri: memoizedProductData.data && memoizedProductData.data.image,
+            priority: FastImage.priority.normal,
           }}
         />
         <Text style={styles.title}>{memoizedProductData.data.title}</Text>

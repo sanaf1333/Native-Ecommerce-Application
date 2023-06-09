@@ -1,23 +1,29 @@
-import React, { useMemo, useCallback, useState, useEffect } from 'react';
-import { useDataService } from '../hooks/use-service';
+import React, {useMemo, useCallback, useState, useEffect} from 'react';
+import {useDataService} from '../hooks/use-service';
 import ProductCard from './product-card';
-import { ScrollView, Text, StyleSheet, FlatList, ActivityIndicator } from 'react-native';
+import {
+  ScrollView,
+  Text,
+  StyleSheet,
+  FlatList,
+  ActivityIndicator,
+} from 'react-native';
 
 interface ViewAllProductsProps<T, P> {
   service: (params?: P) => Promise<T>;
   params?: P;
   title?: string;
-  itemsPerPage?: number; 
+  itemsPerPage?: number;
 }
 
 const ViewAllProducts: React.FC<ViewAllProductsProps<any, any>> = ({
   service,
   params,
   title,
-  itemsPerPage=4,
+  itemsPerPage = 4,
 }) => {
-  const { category, order } = params;
-  const paramsToSend = category ? { category, order } : { order };
+  const {category, order} = params;
+  const paramsToSend = category ? {category, order} : {order};
   const productsData = useDataService(service, paramsToSend);
   const memoizedProductsData = useMemo(() => productsData, [productsData]);
 
@@ -33,24 +39,27 @@ const ViewAllProducts: React.FC<ViewAllProductsProps<any, any>> = ({
       !loadingMore
     ) {
       setLoadingMore(true);
-      setCurrentPage((prevPage) => prevPage + 1);
+      setCurrentPage(prevPage => prevPage + 1);
     }
-    
   }, [memoizedProductsData.data, totalItems, visibleItems, loadingMore]);
 
   useEffect(() => {
-    if(totalItems > visibleItems.length || visibleItems.length===0){
-  setTotalItems(memoizedProductsData.data ? memoizedProductsData.data.length : 0);
-  const start = (currentPage - 1) * itemsPerPage;
-  const end = currentPage * itemsPerPage;
-  const visible = memoizedProductsData.data ? memoizedProductsData.data.slice(start, end) : [];
-  setVisibleItems((prevVisibleItems) => [...prevVisibleItems, ...visible]);
-}
-}, [memoizedProductsData.data, currentPage, itemsPerPage]);
+    if (totalItems > visibleItems.length || visibleItems.length === 0) {
+      setTotalItems(
+        memoizedProductsData.data ? memoizedProductsData.data.length : 0,
+      );
+      const start = (currentPage - 1) * itemsPerPage;
+      const end = currentPage * itemsPerPage;
+      const visible = memoizedProductsData.data
+        ? memoizedProductsData.data.slice(start, end)
+        : [];
+      setVisibleItems(prevVisibleItems => [...prevVisibleItems, ...visible]);
+    }
+  }, [memoizedProductsData.data, currentPage, itemsPerPage]);
 
-useEffect(() => {
-  setLoadingMore(false);
-}, [visibleItems]);
+  useEffect(() => {
+    setLoadingMore(false);
+  }, [visibleItems]);
 
   return (
     <>
@@ -58,10 +67,12 @@ useEffect(() => {
       <FlatList
         data={visibleItems}
         keyExtractor={(item: any) => item.id.toString()}
-        renderItem={({ item, index }) => <ProductCard productId={item.id} key={index} />}
+        renderItem={({item, index}) => (
+          <ProductCard productId={item.id} key={index} />
+        )}
         onEndReached={handleEndReached}
         onEndReachedThreshold={0.5}
-        ListFooterComponent={loadingMore && <ActivityIndicator /> || null}
+        ListFooterComponent={(loadingMore && <ActivityIndicator />) || null}
       />
     </>
   );

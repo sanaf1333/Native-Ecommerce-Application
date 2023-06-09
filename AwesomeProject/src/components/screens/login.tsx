@@ -16,7 +16,7 @@ import {showAlert} from '../../utils/show-alert';
 import {ParamListBase, useNavigation} from '@react-navigation/native';
 import {NativeStackNavigationProp} from '@react-navigation/native-stack';
 import { getAllProducts } from '../../services/get-product-data';
-const Login = () => {
+const Login: React.FC = () => {
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
   const [isUsernameValid, setIsUsernameValid] = useState(true);
