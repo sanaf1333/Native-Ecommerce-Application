@@ -36,7 +36,9 @@ const Login = () => {
       showAlert('', 'Invalid username or password!');
     }
   };
-
+  const onPressCreateAccount = () => {
+    navigation.navigate('Signup');
+  };
   return (
     <ScrollView contentContainerStyle={styles.container}>
       <TouchableWithoutFeedback onPress={dismissKeyboard}>
@@ -64,9 +66,11 @@ const Login = () => {
               secureTextEntry
             />
             <Button title="Submit" onPress={onSubmit} />
-            <Text style={styles.createAccountText}>
-              New user? Create account!
-            </Text>
+            <TouchableWithoutFeedback onPress={onPressCreateAccount}>
+              <Text style={styles.createAccountText}>
+                New user? Create account!
+              </Text>
+            </TouchableWithoutFeedback>
           </View>
         </View>
       </TouchableWithoutFeedback>
@@ -135,6 +139,7 @@ const styles = StyleSheet.create({
     marginTop: 16,
     textAlign: 'center',
   },
+  
 });
 
 export default Login;
