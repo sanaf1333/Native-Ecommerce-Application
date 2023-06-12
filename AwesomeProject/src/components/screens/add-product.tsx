@@ -15,78 +15,38 @@ import {getProductByID} from '../../services/get-product-data';
 import {ParamListBase, useNavigation} from '@react-navigation/native';
 import {NativeStackNavigationProp} from '@react-navigation/native-stack';
 import {RouteProp, useRoute} from '@react-navigation/native';
-import { addNewProduct } from '../../services/add-update-product';
-import ImagePicker, {ImageLibraryOptions, Asset, launchImageLibrary} from 'react-native-image-picker';
+import {addNewProduct} from '../../services/add-update-product';
+import ImagePicker, {
+  ImageLibraryOptions,
+  Asset,
+  launchImageLibrary,
+} from 'react-native-image-picker';
 
-const AddProduct: React.FC = () => {
-    const [selectedImage, setSelectedImage] = React.useState<string | null>(null);
-  const [title, setTitle] = useState('');
-  const [price, setPrice] = useState('');
-  const [description, setDescription] = useState('');
-  const [isDropdownOpen, setIsDropdownOpen] = useState(false);
-  const [value, setValue] = useState('');
-  const items = [
-    {label: 'Jewelery', value: 'jewelery'},
-    {label: `men's clothing`, value: `men's clothing`},
-    {label: `women's clothing`, value: `women's clothing`},
-    {label: 'electronics', value: 'electronics'},
-  ];
-  //const productData = useDataService(addNewProduct);
-  
-  const navigation = useNavigation<NativeStackNavigationProp<ParamListBase>>();
-  
+interface addProductModal{
+  title: string;
+  setTitle: (text: string) => void;
+  price: string;
+  setPrice:(text: string) => void;
+  description: string;
+  setDescription: (text: string) => void;
+  isDropdownOpen: boolean;
+  setIsDropdownOpen: (value: boolean) => void;
+  value: string;
+  setValue: (text: string) => void;
+  selectedImage: string | null;
+  setSelectedImage: (text: string) => void;
+  handleImageSelect: () => void;
+  onPressSubmit: () => void;
+  items: {label: string, value: string}[];
+  handlePriceChange: (text: string) => void;
+  renderDropdownItems: () => JSX.Element[];
+}
+const AddProduct: React.FC<addProductModal> = ({title, setTitle, price, setPrice, value, setValue, description, setDescription, isDropdownOpen, setIsDropdownOpen, selectedImage, setSelectedImage, handleImageSelect, handlePriceChange, onPressSubmit, renderDropdownItems, items}) => {
 
-  const onPressSubmit = () => {
-    navigation.goBack();
-  };
-
-  const handlePriceChange = (text: string) => {
-    const numericValue = text.replace(/[^0-9.]/g, '');
-    const parts = numericValue.split('.');
-    let formattedValue = parts[0];
-    if (parts.length > 1) {
-      formattedValue += '.' + parts[1];
-    }
-    setPrice(formattedValue);
-  };
-  const renderDropdownItems = () => {
-    return items.map(item => (
-      <TouchableOpacity
-        key={item.value}
-        style={styles.dropdownItem}
-        onPress={() => {
-          setValue(item.value);
-          setIsDropdownOpen(false);
-        }}>
-        <Text>{item.label}</Text>
-      </TouchableOpacity>
-    ));
-  };
-
-  const handleImageSelect = () => {
-   launchImageLibrary(
-      {
-        mediaType: 'photo',
-        quality: 1,
-        includeBase64: true,
-      },
-      (response) => {
-        if (response.didCancel) {
-          console.log('User cancelled image picker');
-        } else if (response.errorCode) {
-          console.log('ImagePicker Error: ', response.errorCode);
-        } else if (response.assets && response.assets.length > 0) {
-            const selectedAsset: Asset = response.assets[0];
-            const uri = selectedAsset.uri ? selectedAsset.uri : null;
-            setSelectedImage(uri);
-          }
-      }
-    );
-  };
   return (
     <>
       <ScrollView>
-        <Text style={styles.text}>Title</Text>
+      <Text style={styles.text}>Title</Text>
         <TextInput
           onChangeText={text => setTitle(text)}
           value={title}
@@ -118,9 +78,14 @@ const AddProduct: React.FC = () => {
         </View>
         <Text style={styles.text}>Image</Text>
         <View style={styles.imageButton}>
-      <Button title="Select Image" onPress={handleImageSelect} />
-      {selectedImage && <Image source={{ uri: selectedImage }} style={{ width: 100, height: 100, marginTop: 10 }} />}
-    </View>
+          <Button title="Select Image" onPress={handleImageSelect} />
+          {selectedImage && (
+            <Image
+              source={{uri: selectedImage}}
+              style={{width: 100, height: 100, marginTop: 10}}
+            />
+          )}
+        </View>
         <Text style={styles.text}>Description</Text>
         <TextInput
           onChangeText={description => setDescription(description)}
@@ -139,7 +104,7 @@ const AddProduct: React.FC = () => {
             accessibilityLabel="Learn more about this purple button"
           />
         </View>
-      </ ScrollView>
+      </ScrollView>
     </>
   );
 };
@@ -158,6 +123,7 @@ const styles = StyleSheet.create({
     margin: 10,
     borderColor: 'gray',
     borderWidth: 1,
+    color: 'gray',
   },
   text: {
     alignItems: 'flex-start',

@@ -6,7 +6,6 @@ import Login from './src/components/screens/login';
 import Signup from './src/components/screens/signup';
 import CartCard from './src/components/cart-card';
 import Tryplease from './src/components/product-card';
-import Cart from './src/components/screens/cart';
 import ProductDetails from './src/components/screens/product-details';
 import ProductCard from './src/components/product-card';
 import ViewAllProducts from './src/components/view-all-products';
@@ -21,8 +20,10 @@ import ProductsDisplay from './src/components/products-display';
 import EditProduct from './src/components/screens/edit-product';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import SplashScreen from 'react-native-splash-screen';
-import AddProduct from './src/components/screens/add-product';
-import PhoneSignIn from './src/components/phone-signin';
+import AddProductContainer from './src/containers/screens/add-product';
+import PhoneSignIn from './src/components/verify-phone';
+import CartContainer from './src/containers/screens/cart';
+import EditProductContainer from './src/containers/screens/edit-product';
 const queryClient = new QueryClient();
 const Stack = createNativeStackNavigator();
 const Tab = createBottomTabNavigator();
@@ -44,7 +45,7 @@ function App(): JSX.Element {
           />
           <Stack.Screen
             name="Cart"
-            component={Cart}
+            component={CartContainer}
             initialParams={{ productId: '2' }}
           />
           <Stack.Screen
@@ -59,14 +60,14 @@ function App(): JSX.Element {
           />
           <Stack.Screen
             name="EditProduct"
-            component={EditProduct}
+            component={EditProductContainer}
           />
           <Stack.Screen
             name="AddProduct"
-            component={AddProduct}
+            component={AddProductContainer}
           />
           <Stack.Screen
-          name="PhoneSignIn"
+          name="Verify Phone"
           component={PhoneSignIn}
           />
         </Stack.Navigator>
@@ -86,7 +87,7 @@ function HomeTabNavigator(): JSX.Element {
             />
           ),
         }} />
-      <Tab.Screen name="Cart" component={Cart} options={{
+      <Tab.Screen name="Cart" component={CartContainer} options={{
           tabBarIcon: ({ color }) => (
             <Image
               source={require('./public/images/icons8-cart-24.png')}

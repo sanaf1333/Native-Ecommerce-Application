@@ -14,6 +14,7 @@ export const getUserByID = async (userID: string) => {
 };
 
 export const userLogin= async (username: string, password: string) => {
+  console.log(username, password)
   const response = await fetch(`${API_URL}/auth/login`, {
     method: 'POST',
     headers: {
@@ -24,6 +25,16 @@ export const userLogin= async (username: string, password: string) => {
       password: password,
     }),
   });
-  const data = await response.json();
-  return data;
+  if (response.ok) {
+    const data = await response.json();
+    console.log(data);
+    if (data.token) {
+      return true;
+    }
+  } else {
+    const errorText = await response.text();
+    console.log("Error:", errorText);
+  }
+
+  return false;
 };

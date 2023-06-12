@@ -3,6 +3,7 @@ import {userModal} from '../modals/user-modal/user-modal';
 const API_URL = 'https://fakestoreapi.com';
 
 export const addUser = async (userDetails: userModal) => {
+  console.log(userDetails);
   const {email, username, password, name, address, phone} = userDetails;
   const response = await fetch(`${API_URL}/users`, {
     method: 'POST',
@@ -31,6 +32,7 @@ export const addUser = async (userDetails: userModal) => {
     }),
   });
   const data = await response.json();
+  console.log(data);
   return data;
   
 };

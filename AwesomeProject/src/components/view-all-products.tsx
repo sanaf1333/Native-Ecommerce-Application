@@ -9,58 +9,17 @@ import {
   ActivityIndicator,
 } from 'react-native';
 
-interface ViewAllProductsProps<T, P> {
-  service: (params?: P) => Promise<T>;
-  params?: P;
+interface ViewAllProductsProps {
   title?: string;
-  itemsPerPage?: number;
+  visibleItems: any[];
+  handleEndReached: () => void;
+  loadingMore: boolean;
 }
 const MemoizedProductCard = memo(ProductCard);
-const ViewAllProducts: React.FC<ViewAllProductsProps<any, any>> = ({
-  service,
-  params,
-  title,
-  itemsPerPage = 4,
+const ViewAllProducts: React.FC<ViewAllProductsProps> = ({
+  title, visibleItems, handleEndReached, loadingMore
 }) => {
-  const {category, order} = params;
-  const paramsToSend = category ? {category, order} : {order};
-  const productsData = useDataService(service, paramsToSend);
-  const memoizedProductsData = useMemo(() => productsData, [productsData]);
-
-  const [loadingMore, setLoadingMore] = useState(false);
-  const [currentPage, setCurrentPage] = useState(1);
-  const [totalItems, setTotalItems] = useState(0);
-  const [visibleItems, setVisibleItems] = useState<any[]>([]);
-
-  const handleEndReached = useCallback(() => {
-    if (
-      memoizedProductsData.data &&
-      totalItems > visibleItems.length &&
-      !loadingMore
-    ) {
-      setLoadingMore(true);
-      setCurrentPage(prevPage => prevPage + 1);
-    }
-  }, [memoizedProductsData.data, totalItems, visibleItems, loadingMore]);
-
-  useEffect(() => {
-    if (totalItems > visibleItems.length || visibleItems.length === 0) {
-      setTotalItems(
-        memoizedProductsData.data ? memoizedProductsData.data.length : 0,
-      );
-      const start = (currentPage - 1) * itemsPerPage;
-      const end = currentPage * itemsPerPage;
-      const visible = memoizedProductsData.data
-        ? memoizedProductsData.data.slice(start, end)
-        : [];
-      setVisibleItems(prevVisibleItems => [...prevVisibleItems, ...visible]);
-    }
-  }, [memoizedProductsData.data, currentPage, itemsPerPage]);
-
-  useEffect(() => {
-    setLoadingMore(false);
-  }, [visibleItems]);
-
+  
   return (
     <>
       {title && <Text style={styles.title}>{title}</Text>}

@@ -1,8 +1,8 @@
 import {ratingModal} from './rating-modal';
 export interface productModal {
-  id?: string;
+  id?: number;
   title: string;
-  price: number;
+  price: string;
   description: string;
   category: string;
   image: string;

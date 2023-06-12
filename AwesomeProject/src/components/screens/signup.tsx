@@ -17,7 +17,7 @@ import {validateEmptyField} from '../../utils/empty-field-validation';
 import {showAlert} from '../../utils/show-alert';
 import {ParamListBase, useNavigation} from '@react-navigation/native';
 import {NativeStackNavigationProp} from '@react-navigation/native-stack';
-
+import { addUser } from '../../services/add-user';
 const Signup: React.FC = () => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
@@ -29,22 +29,25 @@ const Signup: React.FC = () => {
   const [house, setHouse] = useState('');
   const [zipcode, setZipcode] = useState('');
   const [username, setUsername] = useState('');
-  const [isEmailValid, setIsEmailValid] = useState(true);
-  const [isPasswordValid, setIsPasswordValid] = useState(true);
-  const [isPhoneValid, setIsPhoneValid] = useState(true);
+  const [isEmailValid, setIsEmailValid] = useState(false);
+  const [isPasswordValid, setIsPasswordValid] = useState(false);
+  const [isPhoneValid, setIsPhoneValid] = useState(false);
   const navigation = useNavigation<NativeStackNavigationProp<ParamListBase>>();
   const dismissKeyboard = () => {
     Keyboard.dismiss();
   };
 
-  const onSubmit = () => {
-    navigation.navigate('PhoneSignIn')
+  const onSubmit = async () => {
     setIsEmailValid(validateEmail(email));
     setIsPasswordValid(validatePassword(password));
     setIsPhoneValid(validatePhoneNumber(phone));
+  
     if (
+      !validateEmptyField(email) ||
+      !validateEmptyField(password) ||
       !validateEmptyField(firstName) ||
       !validateEmptyField(lastName) ||
+      !validateEmptyField(phone) ||
       !validateEmptyField(city) ||
       !validateEmptyField(street) ||
       !validateEmptyField(house) ||
@@ -52,18 +55,32 @@ const Signup: React.FC = () => {
       !validateEmptyField(username)
     ) {
       showAlert('', 'All fields are necessary');
+    } else if (!validateEmail(email) || !validatePassword(password) || !validatePhoneNumber(phone)) {
+      showAlert('', 'Invalid email, password, or phone number');
     } else {
-      if (isEmailValid && isPasswordValid && isPhoneValid) {
-        showAlert('', 'pass');
-        navigation.navigate('PhoneSignIn')
-        //create user object, pass to hook and add call service
+      const isValidSign = await addUser({
+        email: email,
+        username: username,
+        password: password,
+        phone: phone,
+        name: { firstName: firstName, lastName: lastName },
+        address: {
+          city: city,
+          street: street,
+          number: house,
+          zipcode: zipcode,
+          geolocation: { lat: '-37.3159', long: '81.1496' },
+        },
+      });
+  
+      if (isValidSign.id) {
+        navigation.navigate('Verify Phone');
       } else {
-        showAlert('', 'fail');
+        showAlert('', 'Sign up failed');
       }
     }
-    //api call hook for service
   };
-
+  
   return (
     <ScrollView>
       <TouchableWithoutFeedback onPress={dismissKeyboard}>

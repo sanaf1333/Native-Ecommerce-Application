@@ -20,13 +20,7 @@ import {NavigationContainer} from '@react-navigation/native';
 import Signup from './signup';
 import {getCartByID} from '../../services/get-cart-data';
 import Cart from './cart';
-import AddProduct from './add-product';
-
-interface HomePageProps<T, P> {
-  service?: (params?: P) => Promise<T>;
-  params?: P;
-  title?: string;
-}
+import AddProductContainer from '../../containers/screens/add-product';
 
 const WomensClothingScreen: React.FC = () => (
   <ProductsDisplay
@@ -55,7 +49,7 @@ const HomePage: React.FC = () => {
       <Drawer.Screen name="Electronics" component={ElectronicsScreen} />
       <Drawer.Screen name="Men's Clothing" component={MensClothingScreen} />
       <Drawer.Screen name="Women's Clothing" component={WomensClothingScreen} />
-      <Drawer.Screen name="Add products" component={AddProduct} />
+      <Drawer.Screen name="Add products" component={AddProductContainer} />
     </Drawer.Navigator>
   );
 };

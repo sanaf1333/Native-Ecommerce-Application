@@ -20,56 +20,27 @@ type RootStackParamList = {
   EditProduct: {productId?: number};
 };
 
-const EditProduct: React.FC = () => {
-  const route = useRoute<RouteProp<RootStackParamList, 'EditProduct'>>();
-  const productId = route.params?.productId;
-  const [title, setTitle] = useState('');
-  const [price, setPrice] = useState('');
-  const [description, setDescription] = useState('');
-  const [isDropdownOpen, setIsDropdownOpen] = useState(false);
-  const [value, setValue] = useState('');
-  const items = [
-    {label: 'Jewelery', value: 'jewelery'},
-    {label: `men's clothing`, value: `men's clothing`},
-    {label: `women's clothing`, value: `women's clothing`},
-    {label: 'electronics', value: 'electronics'},
-  ];
-  const productData = useDataService(getProductByID, productId);
-  const memoizedProductData = useMemo(() => productData, [productData]);
-  const navigation = useNavigation<NativeStackNavigationProp<ParamListBase>>();
-  useEffect(() => {
-    setTitle(memoizedProductData.data.title);
-    setPrice(memoizedProductData.data.price.toString());
-    setDescription(memoizedProductData.data.description);
-    setValue(memoizedProductData.data.category);
-  }, []);
+interface editProductModal{
+  title: string;
+  setTitle: (text: string) => void;
+  price: string;
+  setPrice:(text: string) => void;
+  description: string;
+  setDescription: (text: string) => void;
+  isDropdownOpen: boolean;
+  setIsDropdownOpen: (value: boolean) => void;
+  value: string;
+  setValue: (text: string) => void;
+  onPressSubmit: () => void;
+  items: {label: string, value: string}[];
+  handlePriceChange: (text: string) => void;
+  renderDropdownItems: () => JSX.Element[];
+  image: string;
+  setImage: (text: string) => void;
+}
 
-  const onPressSubmit = () => {
-    navigation.navigate('Product Details', {productId: productId});
-  };
-
-  const handlePriceChange = (text: string) => {
-    const numericValue = text.replace(/[^0-9.]/g, '');
-    const parts = numericValue.split('.');
-    let formattedValue = parts[0];
-    if (parts.length > 1) {
-      formattedValue += '.' + parts[1];
-    }
-    setPrice(formattedValue);
-  };
-  const renderDropdownItems = () => {
-    return items.map(item => (
-      <TouchableOpacity
-        key={item.value}
-        style={styles.dropdownItem}
-        onPress={() => {
-          setValue(item.value);
-          setIsDropdownOpen(false);
-        }}>
-        <Text>{item.label}</Text>
-      </TouchableOpacity>
-    ));
-  };
+const EditProduct: React.FC<editProductModal> = ({title, setTitle, price, setPrice, description, setDescription, isDropdownOpen, setIsDropdownOpen, value, setValue, onPressSubmit, items, handlePriceChange, renderDropdownItems, image, setImage}) => {
+ 
   return (
     <>
       <View>
@@ -78,6 +49,7 @@ const EditProduct: React.FC = () => {
           onChangeText={text => setTitle(text)}
           value={title}
           placeholder="Title"
+          placeholderTextColor='gray'
           style={styles.button}
         />
         <Text style={styles.text}>Price</Text>
@@ -85,8 +57,17 @@ const EditProduct: React.FC = () => {
           onChangeText={handlePriceChange}
           value={price}
           placeholder="Price"
+          placeholderTextColor='gray'
           style={styles.button}
           keyboardType="numeric"
+        />
+        <Text style={styles.text}>Image Link: </Text>
+        <TextInput
+          onChangeText={setImage}
+          value={image}
+          placeholder="https://i.pravatar.cc"
+          placeholderTextColor='gray'
+          style={styles.button}
         />
         <View>
           <Text style={styles.text}>Category</Text>
@@ -108,6 +89,7 @@ const EditProduct: React.FC = () => {
           multiline
           numberOfLines={6}
           placeholder="Description"
+          placeholderTextColor='gray'
           style={styles.button}
         />
         <View style={styles.submitButton}>
@@ -132,6 +114,7 @@ const styles = StyleSheet.create({
     margin: 10,
     borderColor: 'gray',
     borderWidth: 1,
+    color: 'gray',
   },
   text: {
     alignItems: 'flex-start',

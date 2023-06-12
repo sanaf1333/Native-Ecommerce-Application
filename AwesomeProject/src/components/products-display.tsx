@@ -13,6 +13,7 @@ import {
 
 import {getAllProducts} from '../services/get-product-data';
 import ViewAllProducts from './view-all-products';
+import ViewAllProductsContainer from '../containers/view-all-products';
 interface HomePageProps<T, P> {
   service?: (params?: P) => Promise<T>;
   params?: P;
@@ -51,7 +52,7 @@ const ProductsDisplay: React.FC<HomePageProps<any, any>> = ({
         />
       </View>
       <View>
-        <ViewAllProducts
+        <ViewAllProductsContainer
           key={key}
           service={service}
           params={params ? {category: params, order} : {order}}

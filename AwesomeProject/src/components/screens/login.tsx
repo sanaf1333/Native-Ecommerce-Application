@@ -17,6 +17,8 @@ import {showAlert} from '../../utils/show-alert';
 import {ParamListBase, useNavigation} from '@react-navigation/native';
 import {NativeStackNavigationProp} from '@react-navigation/native-stack';
 import { getAllProducts } from '../../services/get-product-data';
+import { useDataService } from '../../hooks/use-service';
+import { userLogin } from '../../services/get-user-data';
 const Login: React.FC = () => {
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
@@ -26,13 +28,21 @@ const Login: React.FC = () => {
   const dismissKeyboard = () => {
     Keyboard.dismiss();
   };
-
-  const onSubmit = () => {
+  const onSubmit = async () => {
     setIsPasswordValid(validatePassword(password));
     setIsUsernameValid(validateEmptyField(username));
     if (validatePassword(password) && validateEmptyField(username)) {
-      navigation.navigate('HomePage', { service: getAllProducts, title: "All Products" })
-    } else {
+      
+        const isValidUser= await userLogin(username,password);
+        if(isValidUser){
+          navigation.navigate('HomePage', { service: getAllProducts, title: "All Products" });
+        }
+        else{
+          showAlert('', 'User not registered!');
+        }
+        
+    }
+       else {
       showAlert('', 'Invalid username or password!');
     }
   };

@@ -4,15 +4,14 @@ import {getCartByID} from '../../services/get-cart-data';
 import {useDataService} from '../../hooks/use-service';
 import CartCard from '../cart-card';
 
-const Cart: React.FC<{cartId?: string}> = ({cartId = 1}) => {
-  const [totalPrices, setTotalPrices] = useState<number[]>([]);
-  const cartByIDQuery = useDataService(getCartByID, cartId);
-  const handleSetTotalPrice = (price: number) => {
-    setTotalPrices(prevTotalPrices => [...prevTotalPrices, price]);
-  };
-  const calculateTotalPrice = (): number => {
-    return totalPrices.reduce((acc, curr) => acc + curr, 0);
-  };
+interface cartModal{
+  cartByIDQuery: any,
+  handleSetTotalPrice: (price: number) => void;
+  calculateTotalPrice: () => number;
+}
+
+const Cart: React.FC<cartModal> = ({cartByIDQuery, handleSetTotalPrice, calculateTotalPrice}) => {
+ 
   if (cartByIDQuery.isLoading) {
     return <Text>Loading...</Text>;
   }
