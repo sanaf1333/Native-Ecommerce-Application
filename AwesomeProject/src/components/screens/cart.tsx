@@ -1,7 +1,5 @@
-import React, {useState} from 'react';
+import React from 'react';
 import {Text, StyleSheet, ScrollView} from 'react-native';
-import {getCartByID} from '../../services/get-cart-data';
-import {useDataService} from '../../hooks/use-service';
 import CartCard from '../cart-card';
 
 interface cartModal{

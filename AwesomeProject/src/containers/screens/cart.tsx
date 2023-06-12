@@ -1,8 +1,7 @@
 import React, {useState} from 'react';
-import {Text, StyleSheet, ScrollView} from 'react-native';
+import {Text} from 'react-native';
 import {getCartByID} from '../../services/get-cart-data';
 import {useDataService} from '../../hooks/use-service';
-import CartCard from '../../components/cart-card';
 import Cart from '../../components/screens/cart';
 
 const CartContainer: React.FC<{cartId?: string}> = ({cartId = 1}) => {
@@ -24,23 +23,13 @@ const CartContainer: React.FC<{cartId?: string}> = ({cartId = 1}) => {
 
   return (
     <>
-    <Cart cartByIDQuery={cartByIDQuery} calculateTotalPrice={calculateTotalPrice} handleSetTotalPrice={handleSetTotalPrice} />
-    
+      <Cart
+        cartByIDQuery={cartByIDQuery}
+        calculateTotalPrice={calculateTotalPrice}
+        handleSetTotalPrice={handleSetTotalPrice}
+      />
     </>
   );
 };
 
 export default CartContainer;
-
-const styles = StyleSheet.create({
-  totalPrice: {
-    alignSelf: 'flex-end',
-    padding: 10,
-    fontWeight: 'bold',
-  },
-  text: {
-    fontWeight: 'bold',
-    padding: 10,
-    fontSize: 20,
-  },
-});

@@ -1,18 +1,11 @@
-import React, {useMemo, useState} from 'react';
+import React, { useState} from 'react';
 import {
   StyleSheet,
-  Text,
   View,
-  TextInput,
-  TouchableWithoutFeedback,
-  Keyboard,
   Button,
-  Image,
-  ScrollView,
 } from 'react-native';
 
 import {getAllProducts} from '../services/get-product-data';
-import ViewAllProducts from './view-all-products';
 import ViewAllProductsContainer from '../containers/view-all-products';
 interface HomePageProps<T, P> {
   service?: (params?: P) => Promise<T>;

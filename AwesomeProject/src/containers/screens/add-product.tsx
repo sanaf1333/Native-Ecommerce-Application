@@ -1,26 +1,12 @@
-import React, {useEffect, useMemo, useState} from 'react';
-import {
-  Image,
-  Text,
-  View,
-  StyleSheet,
-  TextInput,
-  ScrollView,
-  Button,
-  TouchableOpacity,
-  Modal,
-} from 'react-native';
+import React, {useState} from 'react';
+import {Text, StyleSheet, TouchableOpacity} from 'react-native';
 import {showAlert} from '../../utils/show-alert';
 import {ParamListBase, useNavigation} from '@react-navigation/native';
 import {NativeStackNavigationProp} from '@react-navigation/native-stack';
-import ImagePicker, {
-  ImageLibraryOptions,
-  Asset,
-  launchImageLibrary,
-} from 'react-native-image-picker';
+import {Asset, launchImageLibrary} from 'react-native-image-picker';
 import AddProduct from '../../components/screens/add-product';
-import { validateEmptyField } from '../../utils/empty-field-validation';
-import { addNewProduct } from '../../services/add-update-product';
+import {validateEmptyField} from '../../utils/empty-field-validation';
+import {addNewProduct} from '../../services/add-update-product';
 const AddProductContainer: React.FC = () => {
   const [selectedImage, setSelectedImage] = React.useState<string | null>(null);
   const [title, setTitle] = useState('');
@@ -39,27 +25,28 @@ const AddProductContainer: React.FC = () => {
 
   const onPressSubmit = async () => {
     if (
-        validateEmptyField(title) &&
-        validateEmptyField(price) &&
-        validateEmptyField(description) &&
-        validateEmptyField(selectedImage? selectedImage: 'https://i.pravatar.cc')
-      ) {
-        const productAdded = await addNewProduct({
-          title: title,
-          price: price,
-          category: value,
-          description: description,
-          image: selectedImage? selectedImage: 'https://i.pravatar.cc',
-        });
-        if (productAdded) {
-            navigation.goBack();
-        } else {
-          showAlert('', 'Error adding product!');
-        }
+      validateEmptyField(title) &&
+      validateEmptyField(price) &&
+      validateEmptyField(description) &&
+      validateEmptyField(
+        selectedImage ? selectedImage : 'https://i.pravatar.cc',
+      )
+    ) {
+      const productAdded = await addNewProduct({
+        title: title,
+        price: price,
+        category: value,
+        description: description,
+        image: selectedImage ? selectedImage : 'https://i.pravatar.cc',
+      });
+      if (productAdded) {
+        navigation.goBack();
       } else {
-        showAlert('', 'Please enter all details.');
+        showAlert('', 'Error adding product!');
       }
-    
+    } else {
+      showAlert('', 'Please enter all details.');
+    }
   };
 
   const handlePriceChange = (text: string) => {
@@ -133,53 +120,9 @@ const AddProductContainer: React.FC = () => {
 export default AddProductContainer;
 
 const styles = StyleSheet.create({
-  imageButton: {
-    alignItems: 'flex-start',
-    margin: 10,
-    width: '50%',
-  },
-  inputBox: {
-    alignItems: 'flex-start',
-    padding: 10,
-    margin: 10,
-    borderColor: 'gray',
-    borderWidth: 1,
-  },
-  text: {
-    alignItems: 'flex-start',
-    paddingLeft: 10,
-    marginTop: 10,
-    fontWeight: 'bold',
-    fontSize: 18,
-  },
-  dropdownPlaceholder: {
-    marginTop: 10,
-    padding: 10,
-    borderColor: 'gray',
-    borderWidth: 1,
-  },
   dropdownItem: {
     padding: 10,
     borderBottomWidth: 1,
     borderBottomColor: 'gray',
-  },
-  dropdownButton: {
-    margin: 10,
-    padding: 10,
-    borderColor: 'gray',
-    borderWidth: 1,
-  },
-  dropdownContainer: {
-    flex: 1,
-    marginTop: 10,
-    backgroundColor: 'white',
-    padding: 10,
-  },
-  buttonText: {
-    color: '#ace4ea',
-    fontWeight: 'bold',
-  },
-  submitButton: {
-    padding: 10,
   },
 });

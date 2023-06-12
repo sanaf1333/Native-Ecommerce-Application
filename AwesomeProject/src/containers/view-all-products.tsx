@@ -16,7 +16,7 @@ interface ViewAllProductsProps<T, P> {
   title?: string;
   itemsPerPage?: number;
 }
-const MemoizedProductCard = memo(ProductCard);
+
 const ViewAllProductsContainer: React.FC<ViewAllProductsProps<any, any>> = ({
   service,
   params,
@@ -65,27 +65,9 @@ const ViewAllProductsContainer: React.FC<ViewAllProductsProps<any, any>> = ({
   return (
     <>
     <ViewAllProducts title={title} visibleItems={visibleItems} handleEndReached={handleEndReached} loadingMore={loadingMore} />
-      {title && <Text style={styles.title}>{title}</Text>}
-      <FlatList
-        data={visibleItems}
-        keyExtractor={(item: any) => item.id.toString()}
-        renderItem={({item, index}) => (
-          <MemoizedProductCard productId={item.id} key={index} />
-        )}
-        onEndReached={handleEndReached}
-        onEndReachedThreshold={0.5}
-        ListFooterComponent={(loadingMore && <ActivityIndicator />) || null}
-      />
     </>
   );
 };
 
 export default ViewAllProductsContainer;
 
-const styles = StyleSheet.create({
-  title: {
-    fontWeight: 'bold',
-    fontSize: 20,
-    padding: 10,
-  },
-});

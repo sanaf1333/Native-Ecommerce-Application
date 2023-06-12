@@ -1,25 +1,7 @@
-import React, {useMemo} from 'react';
-import {
-  StyleSheet,
-  Text,
-  View,
-  TextInput,
-  TouchableWithoutFeedback,
-  Keyboard,
-  Button,
-  Image,
-  ScrollView,
-} from 'react-native';
-//import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
+import React from 'react';
 import {getProductsByCategory} from '../../services/get-categories';
-import {getAllProducts} from '../../services/get-product-data';
-import {useDataService} from '../../hooks/use-service';
 import ProductsDisplay from '../products-display';
 import {createDrawerNavigator} from '@react-navigation/drawer';
-import {NavigationContainer} from '@react-navigation/native';
-import Signup from './signup';
-import {getCartByID} from '../../services/get-cart-data';
-import Cart from './cart';
 import AddProductContainer from '../../containers/screens/add-product';
 
 const WomensClothingScreen: React.FC = () => (

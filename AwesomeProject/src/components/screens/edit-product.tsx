@@ -1,6 +1,5 @@
-import React, {useEffect, useMemo, useState} from 'react';
+import React from 'react';
 import {
-  Image,
   Text,
   View,
   StyleSheet,
@@ -10,15 +9,6 @@ import {
   TouchableOpacity,
   Modal,
 } from 'react-native';
-import {useDataService} from '../../hooks/use-service';
-import {getProductByID} from '../../services/get-product-data';
-import {ParamListBase, useNavigation} from '@react-navigation/native';
-import {NativeStackNavigationProp} from '@react-navigation/native-stack';
-import {RouteProp, useRoute} from '@react-navigation/native';
-
-type RootStackParamList = {
-  EditProduct: {productId?: number};
-};
 
 interface editProductModal{
   title: string;

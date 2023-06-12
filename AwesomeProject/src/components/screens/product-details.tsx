@@ -1,6 +1,5 @@
-import React, {useEffect, useMemo} from 'react';
+import React, {useMemo} from 'react';
 import {
-  Image,
   Text,
   View,
   StyleSheet,
@@ -10,8 +9,6 @@ import {
 } from 'react-native';
 import {useDataService} from '../../hooks/use-service';
 import {getProductByID} from '../../services/get-product-data';
-import {productModal} from '../../modals/product-modal';
-import { NavigationProp } from '@react-navigation/native';
 import {ParamListBase, useNavigation} from '@react-navigation/native';
 import {NativeStackNavigationProp} from '@react-navigation/native-stack';
 import { RouteProp, useRoute } from '@react-navigation/native';

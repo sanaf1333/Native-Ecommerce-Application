@@ -1,29 +1,21 @@
 import 'react-native-gesture-handler';
 import React, {useEffect} from 'react';
-import { SafeAreaView, StyleSheet, Image } from 'react-native';
+import { StyleSheet, Image } from 'react-native';
 import { QueryClient, QueryClientProvider } from 'react-query';
-import Login from './src/components/screens/login';
-import Signup from './src/components/screens/signup';
-import CartCard from './src/components/cart-card';
-import Tryplease from './src/components/product-card';
 import ProductDetails from './src/components/screens/product-details';
-import ProductCard from './src/components/product-card';
-import ViewAllProducts from './src/components/view-all-products';
 import { getAllProducts } from './src/services/get-product-data';
-import { sortProductsAsc } from './src/services/get-product-data';
-import { sortProductsDesc } from './src/services/get-product-data';
-import FastImage from 'react-native-fast-image'
 import { NavigationContainer } from '@react-navigation/native';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import HomePage from './src/components/screens/home';
 import ProductsDisplay from './src/components/products-display';
-import EditProduct from './src/components/screens/edit-product';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import SplashScreen from 'react-native-splash-screen';
 import AddProductContainer from './src/containers/screens/add-product';
-import PhoneSignIn from './src/components/verify-phone';
 import CartContainer from './src/containers/screens/cart';
 import EditProductContainer from './src/containers/screens/edit-product';
+import LoginContainer from './src/containers/screens/login';
+import SignupContainer from './src/containers/screens/signup';
+import VerifyPhoneContainer from './src/containers/verify-phone';
 const queryClient = new QueryClient();
 const Stack = createNativeStackNavigator();
 const Tab = createBottomTabNavigator();
@@ -36,8 +28,8 @@ function App(): JSX.Element {
     <QueryClientProvider client={queryClient}>
       <NavigationContainer>
         <Stack.Navigator initialRouteName="Login">
-          <Stack.Screen name="Login" component={Login} />
-          <Stack.Screen name="Signup" component={Signup} />
+          <Stack.Screen name="Login" component={LoginContainer} />
+          <Stack.Screen name="Signup" component={SignupContainer} />
           <Stack.Screen
             name="Product Details"
             component={ProductDetails}
@@ -68,7 +60,7 @@ function App(): JSX.Element {
           />
           <Stack.Screen
           name="Verify Phone"
-          component={PhoneSignIn}
+          component={VerifyPhoneContainer}
           />
         </Stack.Navigator>
       </NavigationContainer>

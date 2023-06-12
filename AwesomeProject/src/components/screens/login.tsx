@@ -1,54 +1,28 @@
-import React, {useState} from 'react';
+import React from 'react';
 import {
   StyleSheet,
   Text,
   View,
   TextInput,
   TouchableWithoutFeedback,
-  Keyboard,
   Button,
   Image,
   ScrollView,
 } from 'react-native';
-import FastImage from 'react-native-fast-image'
-import {validatePassword} from '../../utils/password-validation';
-import {validateEmptyField} from '../../utils/empty-field-validation';
-import {showAlert} from '../../utils/show-alert';
-import {ParamListBase, useNavigation} from '@react-navigation/native';
-import {NativeStackNavigationProp} from '@react-navigation/native-stack';
-import { getAllProducts } from '../../services/get-product-data';
-import { useDataService } from '../../hooks/use-service';
-import { userLogin } from '../../services/get-user-data';
-const Login: React.FC = () => {
-  const [username, setUsername] = useState('');
-  const [password, setPassword] = useState('');
-  const [isUsernameValid, setIsUsernameValid] = useState(true);
-  const [isPasswordValid, setIsPasswordValid] = useState(true);
-  const navigation = useNavigation<NativeStackNavigationProp<ParamListBase>>();
-  const dismissKeyboard = () => {
-    Keyboard.dismiss();
-  };
-  const onSubmit = async () => {
-    setIsPasswordValid(validatePassword(password));
-    setIsUsernameValid(validateEmptyField(username));
-    if (validatePassword(password) && validateEmptyField(username)) {
-      
-        const isValidUser= await userLogin(username,password);
-        if(isValidUser){
-          navigation.navigate('HomePage', { service: getAllProducts, title: "All Products" });
-        }
-        else{
-          showAlert('', 'User not registered!');
-        }
-        
-    }
-       else {
-      showAlert('', 'Invalid username or password!');
-    }
-  };
-  const onPressCreateAccount = () => {
-    navigation.navigate('Signup');
-  };
+
+interface loginModal{
+  username: string;
+  setUsername: (text: string) => void;
+  password: string;
+  setPassword: (text: string) => void;
+  isUsernameValid: boolean;
+  isPasswordValid: boolean;
+  dismissKeyboard: () => void;
+  onSubmit: () => void;
+  onPressCreateAccount: () => void;
+}
+const Login: React.FC<loginModal> = ({username, setUsername, password, setPassword, isPasswordValid, isUsernameValid, dismissKeyboard, onSubmit, onPressCreateAccount}) => {
+ 
   return (
     <ScrollView contentContainerStyle={styles.container}>
       <TouchableWithoutFeedback onPress={dismissKeyboard}>

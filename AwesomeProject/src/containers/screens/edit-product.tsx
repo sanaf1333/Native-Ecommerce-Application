@@ -1,14 +1,8 @@
 import React, {useEffect, useMemo, useState} from 'react';
 import {
-  Image,
   Text,
-  View,
   StyleSheet,
-  TextInput,
-  ScrollView,
-  Button,
   TouchableOpacity,
-  Modal,
 } from 'react-native';
 import {useDataService} from '../../hooks/use-service';
 import {getProductByID} from '../../services/get-product-data';
@@ -123,48 +117,9 @@ const EditProductContainer: React.FC = () => {
 export default EditProductContainer;
 
 const styles = StyleSheet.create({
-  button: {
-    alignItems: 'flex-start',
-    padding: 10,
-    margin: 10,
-    borderColor: 'gray',
-    borderWidth: 1,
-  },
-  text: {
-    alignItems: 'flex-start',
-    paddingLeft: 10,
-    marginTop: 10,
-    fontWeight: 'bold',
-    fontSize: 18,
-  },
-  dropdownPlaceholder: {
-    marginTop: 10,
-    padding: 10,
-    borderColor: 'gray',
-    borderWidth: 1,
-  },
   dropdownItem: {
     padding: 10,
     borderBottomWidth: 1,
     borderBottomColor: 'gray',
-  },
-  dropdownButton: {
-    margin: 10,
-    padding: 10,
-    borderColor: 'gray',
-    borderWidth: 1,
-  },
-  dropdownContainer: {
-    flex: 1,
-    marginTop: 10,
-    backgroundColor: 'white',
-    padding: 10,
-  },
-  buttonText: {
-    color: '#ace4ea',
-    fontWeight: 'bold',
-  },
-  submitButton: {
-    padding: 10,
   },
 });

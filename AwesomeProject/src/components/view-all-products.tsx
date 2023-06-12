@@ -1,8 +1,6 @@
-import React, {useMemo, useCallback, useState, useEffect, memo} from 'react';
-import {useDataService} from '../hooks/use-service';
+import React, { memo} from 'react';
 import ProductCard from './product-card';
 import {
-  ScrollView,
   Text,
   StyleSheet,
   FlatList,

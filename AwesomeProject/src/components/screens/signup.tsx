@@ -1,85 +1,41 @@
-import React, {useState} from 'react';
+import React from 'react';
 import {
   StyleSheet,
   Text,
   View,
   TextInput,
   TouchableWithoutFeedback,
-  Keyboard,
   Button,
   Image,
   ScrollView,
 } from 'react-native';
-import {validateEmail} from '../../utils/email-validation';
-import {validatePassword} from '../../utils/password-validation';
-import {validatePhoneNumber} from '../../utils/phone-validation';
-import {validateEmptyField} from '../../utils/empty-field-validation';
-import {showAlert} from '../../utils/show-alert';
-import {ParamListBase, useNavigation} from '@react-navigation/native';
-import {NativeStackNavigationProp} from '@react-navigation/native-stack';
-import { addUser } from '../../services/add-user';
-const Signup: React.FC = () => {
-  const [email, setEmail] = useState('');
-  const [password, setPassword] = useState('');
-  const [firstName, setFirstName] = useState('');
-  const [lastName, setLastName] = useState('');
-  const [phone, setPhone] = useState('');
-  const [city, setCity] = useState('');
-  const [street, setStreet] = useState('');
-  const [house, setHouse] = useState('');
-  const [zipcode, setZipcode] = useState('');
-  const [username, setUsername] = useState('');
-  const [isEmailValid, setIsEmailValid] = useState(false);
-  const [isPasswordValid, setIsPasswordValid] = useState(false);
-  const [isPhoneValid, setIsPhoneValid] = useState(false);
-  const navigation = useNavigation<NativeStackNavigationProp<ParamListBase>>();
-  const dismissKeyboard = () => {
-    Keyboard.dismiss();
-  };
 
-  const onSubmit = async () => {
-    setIsEmailValid(validateEmail(email));
-    setIsPasswordValid(validatePassword(password));
-    setIsPhoneValid(validatePhoneNumber(phone));
-  
-    if (
-      !validateEmptyField(email) ||
-      !validateEmptyField(password) ||
-      !validateEmptyField(firstName) ||
-      !validateEmptyField(lastName) ||
-      !validateEmptyField(phone) ||
-      !validateEmptyField(city) ||
-      !validateEmptyField(street) ||
-      !validateEmptyField(house) ||
-      !validateEmptyField(zipcode) ||
-      !validateEmptyField(username)
-    ) {
-      showAlert('', 'All fields are necessary');
-    } else if (!validateEmail(email) || !validatePassword(password) || !validatePhoneNumber(phone)) {
-      showAlert('', 'Invalid email, password, or phone number');
-    } else {
-      const isValidSign = await addUser({
-        email: email,
-        username: username,
-        password: password,
-        phone: phone,
-        name: { firstName: firstName, lastName: lastName },
-        address: {
-          city: city,
-          street: street,
-          number: house,
-          zipcode: zipcode,
-          geolocation: { lat: '-37.3159', long: '81.1496' },
-        },
-      });
-  
-      if (isValidSign.id) {
-        navigation.navigate('Verify Phone');
-      } else {
-        showAlert('', 'Sign up failed');
-      }
-    }
-  };
+interface signupModal{
+  dismissKeyboard: () => void;
+  email: string;
+  setEmail: (text: string) => void;
+  password: string;
+  setPassword: (text: string) => void;
+  firstName: string;
+  setFirstName: (text: string) => void;
+  lastName: string;
+  setLastName: (text: string) => void;
+  phone: string;
+  setPhone: (text: string) => void;
+  city: string;
+  setCity: (text: string) => void;
+  street: string;
+  setStreet: (text: string)=> void;
+  house: string;
+  setHouse: (text: string) => void;
+  zipcode: string;
+  setZipcode: (text: string) => void;
+  username: string;
+  setUsername: (text: string) => void;
+  onSubmit: () => void;
+}
+
+const Signup: React.FC<signupModal> = ({dismissKeyboard, email, setEmail, password, setPassword, firstName, setFirstName, lastName, setLastName, phone, setPhone, city, setCity, street, setStreet, zipcode, setZipcode, house, setHouse, username, setUsername, onSubmit}) => {
   
   return (
     <ScrollView>
@@ -98,8 +54,7 @@ const Signup: React.FC = () => {
               <TextInput
                 style={[
                   styles.input,
-                  styles.firstBoxInput,
-                  !isEmailValid && styles.errorInput,
+                  styles.firstBoxInput
                 ]}
                 onChangeText={setEmail}
                 value={email}
@@ -110,8 +65,7 @@ const Signup: React.FC = () => {
               <TextInput
                 style={[
                   styles.input,
-                  styles.firstBoxInput,
-                  !isPasswordValid && styles.errorInput,
+                  styles.firstBoxInput
                 ]}
                 placeholder="Password"
                 placeholderTextColor="gray"
@@ -147,8 +101,7 @@ const Signup: React.FC = () => {
               <TextInput
                 style={[
                   styles.input,
-                  styles.lastBoxInput,
-                  !isPhoneValid && styles.errorInput,
+                  styles.lastBoxInput
                 ]}
                 onChangeText={setPhone}
                 value={phone}
