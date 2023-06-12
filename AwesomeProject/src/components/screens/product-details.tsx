@@ -5,33 +5,21 @@ import {
   StyleSheet,
   ScrollView,
   Button,
-  TouchableOpacity,
 } from 'react-native';
 import {useDataService} from '../../hooks/use-service';
 import {getProductByID} from '../../services/get-product-data';
 import {ParamListBase, useNavigation} from '@react-navigation/native';
 import {NativeStackNavigationProp} from '@react-navigation/native-stack';
-import { RouteProp, useRoute } from '@react-navigation/native';
-import FastImage from 'react-native-fast-image'
-// Define the type for route params
+import {RouteProp, useRoute} from '@react-navigation/native';
+import FastImage from 'react-native-fast-image';
 type RootStackParamList = {
-  ProductDetails: { productId?: number };
+  ProductDetails: {productId?: number};
 };
-// Inside the ProductDetails component
 
 export interface ProductDetailsProps {
   productId?: number;
 }
-interface CustomButtonProps {
-    title: string;
-    onPress: () => void;
-  }
-  
-  const CustomButton: React.FC<CustomButtonProps> = ({ title, onPress }) => (
-  <TouchableOpacity style={styles.button} onPress={onPress}>
-    <Text style={styles.buttonText}>{title}</Text>
-  </TouchableOpacity>
-);
+
 const ProductDetails: React.FC = () => {
   const route = useRoute<RouteProp<RootStackParamList, 'ProductDetails'>>();
   const productId = route.params?.productId;
@@ -39,63 +27,60 @@ const ProductDetails: React.FC = () => {
   const memoizedProductData = useMemo(() => productData, [productData]);
   const navigation = useNavigation<NativeStackNavigationProp<ParamListBase>>();
   if (memoizedProductData.isLoading) {
-    return ( 
-    <Text>Loading...</Text>);
+    return <Text>Loading...</Text>;
   }
 
   if (memoizedProductData.error) {
     return <Text>Error</Text>;
   }
- 
-  const onPressEdit = () =>{
+
+  const onPressEdit = () => {
     navigation.navigate('EditProduct', {productId: productId});
-  }
+  };
   return (
-    <>
-      <ScrollView style={styles.productContainer}>
-        <Text style={styles.title}>{memoizedProductData.data.title}</Text>
-        <FastImage
-          style={styles.productImage}
-          resizeMode={FastImage.resizeMode.contain}
-          source={{
-            uri: memoizedProductData.data && memoizedProductData.data.image,
-            priority: FastImage.priority.normal,
-          }}
-        />
-        <Text style={styles.detailsHeading}>Product Details</Text>
-        <View>
-          <View style={styles.textStyle}>
-            <Text style={styles.boldText}>Price: </Text>
-            <Text>{memoizedProductData.data.price}</Text>
-          </View>
-          <View style={styles.textStyle}>
-            <Text style={styles.boldText}>Rating: </Text>
-            <Text>
-              {memoizedProductData.data.rating.rate}/5 (
-              {memoizedProductData.data.rating.count})
-            </Text>
-          </View>
-          <View style={styles.textStyle}>
-            <Text style={styles.boldText}>Category: </Text>
-            <Text>{memoizedProductData.data.category}</Text>
-          </View>
-          <View style={styles.textStyle}>
-            <Text style={styles.boldText}>Description: </Text>
-            <Text style={styles.description}>
-              {memoizedProductData.data.description}
-            </Text>
-          </View>
+    <ScrollView style={styles.productContainer}>
+      <Text style={styles.title}>{memoizedProductData.data.title}</Text>
+      <FastImage
+        style={styles.productImage}
+        resizeMode={FastImage.resizeMode.contain}
+        source={{
+          uri: memoizedProductData.data && memoizedProductData.data.image,
+          priority: FastImage.priority.normal,
+        }}
+      />
+      <Text style={styles.detailsHeading}>Product Details</Text>
+      <View>
+        <View style={styles.textStyle}>
+          <Text style={styles.boldText}>Price: </Text>
+          <Text>{memoizedProductData.data.price}</Text>
         </View>
-        <View style={styles.editButton}>
+        <View style={styles.textStyle}>
+          <Text style={styles.boldText}>Rating: </Text>
+          <Text>
+            {memoizedProductData.data.rating.rate}/5 (
+            {memoizedProductData.data.rating.count})
+          </Text>
+        </View>
+        <View style={styles.textStyle}>
+          <Text style={styles.boldText}>Category: </Text>
+          <Text>{memoizedProductData.data.category}</Text>
+        </View>
+        <View style={styles.textStyle}>
+          <Text style={styles.boldText}>Description: </Text>
+          <Text style={styles.description}>
+            {memoizedProductData.data.description}
+          </Text>
+        </View>
+      </View>
+      <View style={styles.editButton}>
         <Button
-  onPress={onPressEdit}
-  title="Edit"
-  color="#ace4ea"
-  accessibilityLabel="Learn more about this purple button"
-/>
-</View>
-      </ScrollView>
-    </>
+          onPress={onPressEdit}
+          title="Edit"
+          color="#ace4ea"
+          accessibilityLabel="Learn more about this purple button"
+        />
+      </View>
+    </ScrollView>
   );
 };
 
@@ -106,7 +91,7 @@ const styles = StyleSheet.create({
     alignItems: 'flex-start',
     padding: 10,
     margin: 10,
-    width: '30%'
+    width: '30%',
   },
   buttonText: {
     color: '#ace4ea',

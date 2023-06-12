@@ -1,9 +1,5 @@
 import React, {useEffect, useMemo, useState} from 'react';
-import {
-  Text,
-  StyleSheet,
-  TouchableOpacity,
-} from 'react-native';
+import {Text, StyleSheet, TouchableOpacity} from 'react-native';
 import {useDataService} from '../../hooks/use-service';
 import {getProductByID} from '../../services/get-product-data';
 import {ParamListBase, useNavigation} from '@react-navigation/native';
@@ -13,6 +9,7 @@ import EditProduct from '../../components/screens/edit-product';
 import {updateProduct} from '../../services/add-update-product';
 import {showAlert} from '../../utils/show-alert';
 import {validateEmptyField} from '../../utils/empty-field-validation';
+
 type RootStackParamList = {
   EditProduct: {productId?: number};
 };
@@ -91,26 +88,24 @@ const EditProductContainer: React.FC = () => {
     ));
   };
   return (
-    <>
-      <EditProduct
-        title={title}
-        setTitle={setTitle}
-        price={price}
-        setPrice={setPrice}
-        description={description}
-        setDescription={setDescription}
-        isDropdownOpen={isDropdownOpen}
-        setIsDropdownOpen={setIsDropdownOpen}
-        value={value}
-        setValue={setValue}
-        items={items}
-        renderDropdownItems={renderDropdownItems}
-        handlePriceChange={handlePriceChange}
-        onPressSubmit={onPressSubmit}
-        image={image}
-        setImage={setImage}
-      />
-    </>
+    <EditProduct
+      title={title}
+      setTitle={setTitle}
+      price={price}
+      setPrice={setPrice}
+      description={description}
+      setDescription={setDescription}
+      isDropdownOpen={isDropdownOpen}
+      setIsDropdownOpen={setIsDropdownOpen}
+      value={value}
+      setValue={setValue}
+      items={items}
+      renderDropdownItems={renderDropdownItems}
+      handlePriceChange={handlePriceChange}
+      onPressSubmit={onPressSubmit}
+      image={image}
+      setImage={setImage}
+    />
   );
 };
 

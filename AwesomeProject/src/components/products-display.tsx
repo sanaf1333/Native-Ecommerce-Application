@@ -7,13 +7,13 @@ import {
 
 import {getAllProducts} from '../services/get-product-data';
 import ViewAllProductsContainer from '../containers/view-all-products';
-interface HomePageProps<T, P> {
+interface productsDisplayProps<T, P> {
   service?: (params?: P) => Promise<T>;
   params?: P;
   title?: string;
 }
 
-const ProductsDisplay: React.FC<HomePageProps<any, any>> = ({
+const ProductsDisplay: React.FC<productsDisplayProps<any, any>> = ({
   service = getAllProducts,
   params,
   title,

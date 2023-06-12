@@ -27,8 +27,6 @@ const SignupContainer: React.FC = () => {
   };
 
   const onSubmit = async () => {
-    console.log('button pressed');
-
     if (
       !validateEmptyField(email) ||
       !validateEmptyField(password) ||
@@ -73,7 +71,6 @@ const SignupContainer: React.FC = () => {
   };
 
   return (
-    <>
       <Signup
         dismissKeyboard={dismissKeyboard}
         email={email}
@@ -98,7 +95,6 @@ const SignupContainer: React.FC = () => {
         setUsername={setUsername}
         onSubmit={onSubmit}
       />
-    </>
   );
 };
 

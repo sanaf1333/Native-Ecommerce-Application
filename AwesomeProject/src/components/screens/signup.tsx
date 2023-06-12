@@ -9,31 +9,7 @@ import {
   Image,
   ScrollView,
 } from 'react-native';
-
-interface signupModal{
-  dismissKeyboard: () => void;
-  email: string;
-  setEmail: (text: string) => void;
-  password: string;
-  setPassword: (text: string) => void;
-  firstName: string;
-  setFirstName: (text: string) => void;
-  lastName: string;
-  setLastName: (text: string) => void;
-  phone: string;
-  setPhone: (text: string) => void;
-  city: string;
-  setCity: (text: string) => void;
-  street: string;
-  setStreet: (text: string)=> void;
-  house: string;
-  setHouse: (text: string) => void;
-  zipcode: string;
-  setZipcode: (text: string) => void;
-  username: string;
-  setUsername: (text: string) => void;
-  onSubmit: () => void;
-}
+import { signupModal } from '../../modals/signup-modal';
 
 const Signup: React.FC<signupModal> = ({dismissKeyboard, email, setEmail, password, setPassword, firstName, setFirstName, lastName, setLastName, phone, setPhone, city, setCity, street, setStreet, zipcode, setZipcode, house, setHouse, username, setUsername, onSubmit}) => {
   

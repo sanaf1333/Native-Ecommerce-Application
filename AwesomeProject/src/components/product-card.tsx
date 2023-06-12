@@ -1,19 +1,14 @@
-import React, { useMemo} from 'react';
-import {
-  Text,
-  View,
-  StyleSheet,
-  TouchableOpacity,
-} from 'react-native';
+import React, {useMemo} from 'react';
+import {Text, View, StyleSheet, TouchableOpacity} from 'react-native';
 import {useDataService} from '../hooks/use-service';
 import {getProductByID} from '../services/get-product-data';
 import {ParamListBase, useNavigation} from '@react-navigation/native';
 import {NativeStackNavigationProp} from '@react-navigation/native-stack';
-import FastImage from 'react-native-fast-image'
+import FastImage from 'react-native-fast-image';
 interface ProductCardProps {
   productId: string;
 }
-const ProductCard: React.FC<ProductCardProps> = ({ productId }) => {
+const ProductCard: React.FC<ProductCardProps> = ({productId}) => {
   const productData = useDataService(getProductByID, productId);
   const memoizedProductData = useMemo(() => productData, [productData]);
   const navigation = useNavigation<NativeStackNavigationProp<ParamListBase>>();
@@ -25,11 +20,11 @@ const ProductCard: React.FC<ProductCardProps> = ({ productId }) => {
     return <Text>Error</Text>;
   }
   const onPressViewProduct = (productId: number) => {
-    navigation.navigate('Product Details', { productId: productId });
+    navigation.navigate('Product Details', {productId: productId});
   };
   return (
-    <>
-      <TouchableOpacity onPress={() => onPressViewProduct(memoizedProductData.data.id)}>
+    <TouchableOpacity
+      onPress={() => onPressViewProduct(memoizedProductData.data.id)}>
       <View style={styles.productCardContainer}>
         <FastImage
           style={styles.productImage}
@@ -54,15 +49,13 @@ const ProductCard: React.FC<ProductCardProps> = ({ productId }) => {
           </View>
         </View>
       </View>
-      </TouchableOpacity>
-    </>
+    </TouchableOpacity>
   );
 };
 
 export default ProductCard;
 
 const styles = StyleSheet.create({
-  
   productCardContainer: {
     padding: 10,
     borderColor: '#b1b5b2',

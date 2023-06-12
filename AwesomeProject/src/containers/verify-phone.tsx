@@ -1,5 +1,4 @@
 import React, {useState, useEffect} from 'react';
-import {Button, TextInput, StyleSheet, View, Text} from 'react-native';
 import auth, {FirebaseAuthTypes} from '@react-native-firebase/auth';
 import {ParamListBase, useNavigation} from '@react-navigation/native';
 import {NativeStackNavigationProp} from '@react-navigation/native-stack';
@@ -35,7 +34,6 @@ const VerifyPhoneContainer: React.FC = () => {
     const testPhone = '+16505553421';
     const confirmation = await auth().signInWithPhoneNumber(testPhone);
     setConfirm(confirmation);
-    console.log(confirmation);
   }
 
   async function confirmCode() {
@@ -48,57 +46,20 @@ const VerifyPhoneContainer: React.FC = () => {
       console.log('Invalid code.');
     }
   }
-  
 
   return (
     <>
-      <VerifyPhone signInWithPhoneNumber={signInWithPhoneNumber} confirmCode={confirmCode} phone={phone} setPhone={setPhone} code={code} setCode={setCode} confirm={confirm} />
+      <VerifyPhone
+        signInWithPhoneNumber={signInWithPhoneNumber}
+        confirmCode={confirmCode}
+        phone={phone}
+        setPhone={setPhone}
+        code={code}
+        setCode={setCode}
+        confirm={confirm}
+      />
     </>
   );
 };
 
 export default VerifyPhoneContainer;
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    justifyContent: 'center',
-    alignItems: 'center',
-  },
-  textBox: {
-    borderColor: 'gray',
-    borderWidth: 1,
-    color: 'gray',
-    margin: 10,
-  },
-  textBoxOTP: {
-    borderColor: 'gray',
-    borderWidth: 1,
-    color: 'gray',
-    margin: 10,
-    padding: 10,
-    width: '90%',
-  },
-  textBoxPhone: {
-    borderColor: 'gray',
-    borderWidth: 1,
-    color: 'gray',
-    width: '80%',
-    margin: 10,
-  },
-  phoneNumber: {
-    flexDirection: 'row',
-    marginBottom: 30,
-  },
-  button: {
-    width: '100%',
-    margin: 10,
-    padding: 10,
-    alignSelf: 'center',
-  },
-  headerText: {
-    fontSize: 20,
-    fontWeight: 'bold',
-    marginBottom: 30,
-  },
-});

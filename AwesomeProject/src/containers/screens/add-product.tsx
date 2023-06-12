@@ -7,6 +7,7 @@ import {Asset, launchImageLibrary} from 'react-native-image-picker';
 import AddProduct from '../../components/screens/add-product';
 import {validateEmptyField} from '../../utils/empty-field-validation';
 import {addNewProduct} from '../../services/add-update-product';
+
 const AddProductContainer: React.FC = () => {
   const [selectedImage, setSelectedImage] = React.useState<string | null>(null);
   const [title, setTitle] = useState('');
@@ -93,7 +94,6 @@ const AddProductContainer: React.FC = () => {
     );
   };
   return (
-    <>
       <AddProduct
         title={title}
         setTitle={setTitle}
@@ -113,7 +113,6 @@ const AddProductContainer: React.FC = () => {
         handlePriceChange={handlePriceChange}
         onPressSubmit={onPressSubmit}
       />
-    </>
   );
 };
 

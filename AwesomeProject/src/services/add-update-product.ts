@@ -1,4 +1,3 @@
-
 import {productModal} from '../modals/product-modal';
 const API_URL = 'https://fakestoreapi.com';
 

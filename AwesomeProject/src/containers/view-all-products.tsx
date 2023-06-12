@@ -1,13 +1,5 @@
-import React, {useMemo, useCallback, useState, useEffect, memo} from 'react';
+import React, {useMemo, useCallback, useState, useEffect} from 'react';
 import {useDataService} from '../hooks/use-service';
-import ProductCard from '../components/product-card';
-import {
-  ScrollView,
-  Text,
-  StyleSheet,
-  FlatList,
-  ActivityIndicator,
-} from 'react-native';
 import ViewAllProducts from '../components/view-all-products';
 
 interface ViewAllProductsProps<T, P> {
@@ -63,9 +55,7 @@ const ViewAllProductsContainer: React.FC<ViewAllProductsProps<any, any>> = ({
   }, [visibleItems]);
 
   return (
-    <>
     <ViewAllProducts title={title} visibleItems={visibleItems} handleEndReached={handleEndReached} loadingMore={loadingMore} />
-    </>
   );
 };
 

@@ -9,20 +9,19 @@ import {
   Image,
   ScrollView,
 } from 'react-native';
+import {loginModal} from '../../modals/login-modal';
 
-interface loginModal{
-  username: string;
-  setUsername: (text: string) => void;
-  password: string;
-  setPassword: (text: string) => void;
-  isUsernameValid: boolean;
-  isPasswordValid: boolean;
-  dismissKeyboard: () => void;
-  onSubmit: () => void;
-  onPressCreateAccount: () => void;
-}
-const Login: React.FC<loginModal> = ({username, setUsername, password, setPassword, isPasswordValid, isUsernameValid, dismissKeyboard, onSubmit, onPressCreateAccount}) => {
- 
+const Login: React.FC<loginModal> = ({
+  username,
+  setUsername,
+  password,
+  setPassword,
+  isPasswordValid,
+  isUsernameValid,
+  dismissKeyboard,
+  onSubmit,
+  onPressCreateAccount,
+}) => {
   return (
     <ScrollView contentContainerStyle={styles.container}>
       <TouchableWithoutFeedback onPress={dismissKeyboard}>
@@ -126,7 +125,6 @@ const styles = StyleSheet.create({
     marginTop: 16,
     textAlign: 'center',
   },
-  
 });
 
 export default Login;

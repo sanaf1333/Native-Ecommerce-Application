@@ -1,4 +1,3 @@
-
 const API_URL = 'https://fakestoreapi.com';
 
 export const getAllUsers = async () => {
@@ -14,7 +13,6 @@ export const getUserByID = async (userID: string) => {
 };
 
 export const userLogin= async (username: string, password: string) => {
-  console.log(username, password)
   const response = await fetch(`${API_URL}/auth/login`, {
     method: 'POST',
     headers: {
@@ -27,7 +25,6 @@ export const userLogin= async (username: string, password: string) => {
   });
   if (response.ok) {
     const data = await response.json();
-    console.log(data);
     if (data.token) {
       return true;
     }

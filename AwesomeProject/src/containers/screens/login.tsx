@@ -39,7 +39,6 @@ const LoginContainer: React.FC = () => {
     navigation.navigate('Signup');
   };
   return (
-    <>
       <Login
         username={username}
         setUsername={setUsername}
@@ -51,7 +50,6 @@ const LoginContainer: React.FC = () => {
         isUsernameValid={isUsernameValid}
         isPasswordValid={isPasswordValid}
       />
-    </>
   );
 };
 

@@ -1,15 +1,13 @@
 import React from 'react';
 import {Text, StyleSheet, ScrollView} from 'react-native';
 import CartCard from '../cart-card';
+import {cartModal} from '../../modals/cart-modal';
 
-interface cartModal{
-  cartByIDQuery: any,
-  handleSetTotalPrice: (price: number) => void;
-  calculateTotalPrice: () => number;
-}
-
-const Cart: React.FC<cartModal> = ({cartByIDQuery, handleSetTotalPrice, calculateTotalPrice}) => {
- 
+const Cart: React.FC<cartModal> = ({
+  cartByIDQuery,
+  handleSetTotalPrice,
+  calculateTotalPrice,
+}) => {
   if (cartByIDQuery.isLoading) {
     return <Text>Loading...</Text>;
   }

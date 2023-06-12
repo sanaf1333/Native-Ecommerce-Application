@@ -1,22 +1,16 @@
-import React, {useState, useEffect} from 'react';
+import React from 'react';
 import {Button, TextInput, StyleSheet, View, Text} from 'react-native';
-import auth, {FirebaseAuthTypes} from '@react-native-firebase/auth';
-import {ParamListBase, useNavigation} from '@react-navigation/native';
-import {NativeStackNavigationProp} from '@react-navigation/native-stack';
+import {verifyPhoneModal} from '../modals/verify-phone-modal';
 
-interface verifyPhoneModal{
-  signInWithPhoneNumber: () => void;
-  confirmCode: () => void;
-  phone: string;
-  setPhone: (text: string) => void;
-  code: string;
-  setCode: (text: string) => void;
-  confirm: FirebaseAuthTypes.ConfirmationResult | null;
-}
-
-const VerifyPhone: React.FC<verifyPhoneModal> = ({signInWithPhoneNumber, confirmCode, phone, setPhone, code, setCode, confirm}) => {
- 
-
+const VerifyPhone: React.FC<verifyPhoneModal> = ({
+  signInWithPhoneNumber,
+  confirmCode,
+  phone,
+  setPhone,
+  code,
+  setCode,
+  confirm,
+}) => {
   if (!confirm) {
     return (
       <View style={styles.container}>
@@ -45,19 +39,17 @@ const VerifyPhone: React.FC<verifyPhoneModal> = ({signInWithPhoneNumber, confirm
   }
 
   return (
-    <>
-      <View style={styles.container}>
-        <Text style={styles.headerText}>Enter OTP</Text>
-        <TextInput
-          style={styles.textBoxOTP}
-          value={code}
-          onChangeText={text => setCode(text)}
-        />
-        <View style={styles.button}>
-          <Button title="Confirm Code" onPress={() => confirmCode()} />
-        </View>
+    <View style={styles.container}>
+      <Text style={styles.headerText}>Enter OTP</Text>
+      <TextInput
+        style={styles.textBoxOTP}
+        value={code}
+        onChangeText={text => setCode(text)}
+      />
+      <View style={styles.button}>
+        <Button title="Confirm Code" onPress={() => confirmCode()} />
       </View>
-    </>
+    </View>
   );
 };
 

@@ -1,4 +1,3 @@
-
 const API_URL = 'https://fakestoreapi.com';
 
 export const getAllProducts = async (params: { order: string } = { order: 'asc' }) => {

@@ -8,11 +8,7 @@ interface cartCardProps {
   quantity: number;
   handleSetTotalPrice: (price: number) => void;
 }
-const CartCard: React.FC<cartCardProps> = ({
-  productId,
-  quantity,
-  handleSetTotalPrice,
-}) => {
+const CartCard: React.FC<cartCardProps> = ({productId, quantity, handleSetTotalPrice}) => {
   const productData = useDataService(getProductByID, productId);
   useEffect(() => {
     if (productData.data) {
