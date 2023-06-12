@@ -1,6 +1,6 @@
 import 'react-native-gesture-handler';
 import React, {useEffect} from 'react';
-import { StyleSheet, Image } from 'react-native';
+import { Image } from 'react-native';
 import { QueryClient, QueryClientProvider } from 'react-query';
 import ProductDetails from './src/components/screens/product-details';
 import { getAllProducts } from './src/services/get-product-data';
@@ -90,11 +90,5 @@ function HomeTabNavigator(): JSX.Element {
     </Tab.Navigator>
   );
 }
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-  },
-});
 
 export default App;
