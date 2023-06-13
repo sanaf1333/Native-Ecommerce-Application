@@ -2,7 +2,7 @@ const API_URL = 'https://fakestoreapi.com';
 
 export const getAllUsers = async () => {
   const response = await fetch(`${API_URL}/users`);
-  const data = await response.json();
+  const data = await response.json();//sana
   return data;
 };
 
