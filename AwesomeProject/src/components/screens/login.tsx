@@ -9,7 +9,7 @@ import {
   Image,
   ScrollView,
 } from 'react-native';
-import {loginModal} from '../../modals/login-modal';
+import {loginModal} from '@modals/login-modal';
 
 const Login: React.FC<loginModal> = ({
   username,

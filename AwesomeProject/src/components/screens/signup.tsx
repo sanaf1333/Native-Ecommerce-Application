@@ -9,7 +9,7 @@ import {
   Image,
   ScrollView,
 } from 'react-native';
-import { signupModal } from '../../modals/signup-modal';
+import { signupModal } from '@modals/signup-modal';
 
 const Signup: React.FC<signupModal> = ({dismissKeyboard, email, setEmail, password, setPassword, firstName, setFirstName, lastName, setLastName, phone, setPhone, city, setCity, street, setStreet, zipcode, setZipcode, house, setHouse, username, setUsername, onSubmit}) => {
   

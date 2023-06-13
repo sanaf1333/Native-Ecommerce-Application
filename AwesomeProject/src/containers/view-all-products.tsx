@@ -1,6 +1,6 @@
 import React, {useMemo, useCallback, useState, useEffect} from 'react';
-import {useDataService} from '../hooks/use-service';
-import ViewAllProducts from '../components/view-all-products';
+import {useDataService} from '@hooks/use-service';
+import ViewAllProducts from '@components/view-all-products';
 
 interface ViewAllProductsProps<T, P> {
   service: (params?: P) => Promise<T>;

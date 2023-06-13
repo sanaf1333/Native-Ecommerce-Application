@@ -1,7 +1,7 @@
 import React from 'react';
 import {Text, StyleSheet, ScrollView} from 'react-native';
-import CartCard from '../cart-card';
-import {cartModal} from '../../modals/cart-modal';
+import CartCard from '@components/cart-card';
+import {cartModal} from '@modals/cart-modal';
 
 const Cart: React.FC<cartModal> = ({
   cartByIDQuery,

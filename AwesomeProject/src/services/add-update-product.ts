@@ -1,4 +1,4 @@
-import {productModal} from '../modals/product-modal';
+import {productModal} from '@modals/product-modal';
 const API_URL = 'https://fakestoreapi.com';
 
 export const addNewProduct = async (productDetails: productModal) => {

@@ -9,7 +9,7 @@ import {
   TouchableOpacity,
   Modal,
 } from 'react-native';
-import {editProductModal} from '../../modals/edit-product-modal';
+import {editProductModal} from '@modals/edit-product-modal';
 
 const EditProduct: React.FC<editProductModal> = ({
   title,

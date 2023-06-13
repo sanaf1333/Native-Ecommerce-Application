@@ -6,8 +6,8 @@ import {
   ScrollView,
   Button,
 } from 'react-native';
-import {useDataService} from '../../hooks/use-service';
-import {getProductByID} from '../../services/get-product-data';
+import {useDataService} from '@hooks/use-service';
+import {getProductByID} from '@services/get-product-data';
 import {ParamListBase, useNavigation} from '@react-navigation/native';
 import {NativeStackNavigationProp} from '@react-navigation/native-stack';
 import {RouteProp, useRoute} from '@react-navigation/native';

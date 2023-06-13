@@ -1,14 +1,14 @@
 import React, {useState} from 'react';
 import {Keyboard} from 'react-native';
-import {validateEmail} from '../../utils/email-validation';
-import {validatePassword} from '../../utils/password-validation';
-import {validatePhoneNumber} from '../../utils/phone-validation';
-import {validateEmptyField} from '../../utils/empty-field-validation';
-import {showAlert} from '../../utils/show-alert';
+import {validateEmail} from '@utils/email-validation';
+import {validatePassword} from '@utils/password-validation';
+import {validatePhoneNumber} from '@utils/phone-validation';
+import {validateEmptyField} from '@utils/empty-field-validation';
+import {showAlert} from '@utils/show-alert';
 import {ParamListBase, useNavigation} from '@react-navigation/native';
 import {NativeStackNavigationProp} from '@react-navigation/native-stack';
-import {addUser} from '../../services/add-user';
-import Signup from '../../components/screens/signup';
+import {addUser} from '@services/add-user';
+import Signup from '@components/screens/signup';
 
 const SignupContainer: React.FC = () => {
   const [email, setEmail] = useState('');

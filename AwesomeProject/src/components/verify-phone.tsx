@@ -1,6 +1,6 @@
 import React from 'react';
 import {Button, TextInput, StyleSheet, View, Text} from 'react-native';
-import {verifyPhoneModal} from '../modals/verify-phone-modal';
+import {verifyPhoneModal} from '@modals/verify-phone-modal';
 
 const VerifyPhone: React.FC<verifyPhoneModal> = ({
   signInWithPhoneNumber,
