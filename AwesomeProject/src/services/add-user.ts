@@ -1,6 +1,6 @@
 
 import {userModal} from '../modals/user-modal/user-modal';
-const API_URL = 'https://fakestoreapi.com';
+const API_URL = process.env.FAKESTORE_API_URL;
 
 export const addUser = async (userDetails: userModal) => {
   const {email, username, password, name, address, phone} = userDetails;

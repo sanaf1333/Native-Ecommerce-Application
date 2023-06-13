@@ -1,4 +1,4 @@
-const API_URL = 'https://fakestoreapi.com';
+const API_URL = process.env.FAKESTORE_API_URL;
 
 export const getAllProducts = async (params: { order: string } = { order: 'asc' }) => {
   const { order } = params;

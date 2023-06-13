@@ -1,5 +1,6 @@
 import 'react-native-gesture-handler';
 import React, {useEffect} from 'react';
+import { config } from 'dotenv';
 import { Image } from 'react-native';
 import { QueryClient, QueryClientProvider } from 'react-query';
 import ProductDetails from './src/components/screens/product-details';
@@ -19,7 +20,7 @@ import VerifyPhoneContainer from './src/containers/verify-phone';
 const queryClient = new QueryClient();
 const Stack = createNativeStackNavigator();
 const Tab = createBottomTabNavigator();
-
+config();
 function App(): JSX.Element {
   useEffect(() => {
     SplashScreen.hide();

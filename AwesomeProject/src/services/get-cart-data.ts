@@ -1,4 +1,4 @@
-const API_URL = 'https://fakestoreapi.com';
+const API_URL = process.env.FAKESTORE_API_URL;
 
 export const getAllCarts = async () => {
   const response = await fetch(`${API_URL}/carts`);
