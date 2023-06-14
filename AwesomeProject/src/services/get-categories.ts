@@ -1,5 +1,4 @@
-const API_URL = 'https://fakestoreapi.com';
-
+const API_URL = process.env.REACT_APP_FAKESTORE_API_URL;
 export const getAllCategories = async () => {
   const response = await fetch(`${API_URL}/products/categories`);
   const data = await response.json();

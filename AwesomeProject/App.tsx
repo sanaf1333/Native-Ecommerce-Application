@@ -16,6 +16,8 @@ import EditProductContainer from './src/containers/screens/edit-product';
 import LoginContainer from './src/containers/screens/login';
 import SignupContainer from './src/containers/screens/signup';
 import VerifyPhoneContainer from './src/containers/verify-phone';
+import Config from 'react-native-config';
+console.log(Config.REACT_APP_FAKESTORE_API_URL);
 const queryClient = new QueryClient();
 const Stack = createNativeStackNavigator();
 const Tab = createBottomTabNavigator();

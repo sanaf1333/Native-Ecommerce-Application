@@ -1,5 +1,5 @@
 import React, {useEffect, useMemo} from 'react';
-import { Text, View, StyleSheet} from 'react-native';
+import { Text, View, StyleSheet } from 'react-native';
 import FastImage from 'react-native-fast-image'
 import {useDataService} from '../hooks/use-service';
 import {getProductByID} from '../services/get-product-data';

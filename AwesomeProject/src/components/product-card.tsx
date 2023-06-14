@@ -1,5 +1,5 @@
-import React, {useMemo} from 'react';
-import {Text, View, StyleSheet, TouchableOpacity} from 'react-native';
+import React, {useMemo, useState, useEffect} from 'react';
+import {Text, View, StyleSheet, TouchableOpacity, useWindowDimensions} from 'react-native';
 import {useDataService} from '../hooks/use-service';
 import {getProductByID} from '../services/get-product-data';
 import {ParamListBase, useNavigation} from '@react-navigation/native';
@@ -12,6 +12,12 @@ const ProductCard: React.FC<ProductCardProps> = ({productId}) => {
   const productData = useDataService(getProductByID, productId);
   const memoizedProductData = useMemo(() => productData, [productData]);
   const navigation = useNavigation<NativeStackNavigationProp<ParamListBase>>();
+  const { width: windowWidth } = useWindowDimensions();
+  const [containerWidth, setContainerWidth] = useState(windowWidth > 600 ? 400 : windowWidth - 20);
+
+  useEffect(() => {
+      setContainerWidth(windowWidth > 600 ? 400 : windowWidth - 20);
+  }, [windowWidth]);
   if (memoizedProductData.isLoading) {
     return null;
   }
@@ -23,9 +29,10 @@ const ProductCard: React.FC<ProductCardProps> = ({productId}) => {
     navigation.navigate('Product Details', {productId: productId});
   };
   return (
+    <View style={styles.parentContainer}>
     <TouchableOpacity
       onPress={() => onPressViewProduct(memoizedProductData.data.id)}>
-      <View style={styles.productCardContainer}>
+      <View style={[styles.productCardContainer, { width: containerWidth}]}>
         <FastImage
           style={styles.productImage}
           resizeMode={FastImage.resizeMode.contain}
@@ -50,12 +57,18 @@ const ProductCard: React.FC<ProductCardProps> = ({productId}) => {
         </View>
       </View>
     </TouchableOpacity>
+    </View>
   );
 };
 
 export default ProductCard;
 
 const styles = StyleSheet.create({
+  parentContainer: {
+    flex: 1,
+    justifyContent: 'center',
+    alignItems: 'center',
+  },
   productCardContainer: {
     padding: 10,
     borderColor: '#b1b5b2',
