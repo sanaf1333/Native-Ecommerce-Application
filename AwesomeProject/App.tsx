@@ -1,93 +1,94 @@
-/**
- * Sample React Native App
- * https://github.com/facebook/react-native
- *
- * @format
- */
-
-import React from 'react';
-import type {PropsWithChildren} from 'react';
-import {
-  SafeAreaView,
-  ScrollView,
-  StatusBar,
-  StyleSheet,
-  Text,
-  useColorScheme,
-  View,
-} from 'react-native';
-
-import {
-  Colors,
-  DebugInstructions,
-  Header,
-  LearnMoreLinks,
-  ReloadInstructions,
-} from 'react-native/Libraries/NewAppScreen';
-
-import Login from './src/components/screens/login';
-type SectionProps = PropsWithChildren<{
-  title: string;
-}>;
-
-function Section({children, title}: SectionProps): JSX.Element {
-  const isDarkMode = useColorScheme() === 'dark';
-  return (
-    <View style={styles.sectionContainer}>
-      <Text
-        style={[
-          styles.sectionTitle,
-          {
-            color: isDarkMode ? Colors.white : Colors.black,
-          },
-        ]}>
-        {title}
-      </Text>
-      <Text
-        style={[
-          styles.sectionDescription,
-          {
-            color: isDarkMode ? Colors.light : Colors.dark,
-          },
-        ]}>
-        {children}
-      </Text>
-    </View>
-  );
-}
+import 'react-native-gesture-handler';
+import React, {useEffect} from 'react';
+import { Image } from 'react-native';
+import { QueryClient, QueryClientProvider } from 'react-query';
+import ProductDetails from './src/components/screens/product-details';
+import { getAllProducts } from './src/services/get-product-data';
+import { NavigationContainer } from '@react-navigation/native';
+import { createNativeStackNavigator } from '@react-navigation/native-stack';
+import HomePage from './src/components/screens/home';
+import ProductsDisplay from './src/components/products-display';
+import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
+import SplashScreen from 'react-native-splash-screen';
+import AddProductContainer from './src/containers/screens/add-product';
+import CartContainer from './src/containers/screens/cart';
+import EditProductContainer from './src/containers/screens/edit-product';
+import LoginContainer from './src/containers/screens/login';
+import SignupContainer from './src/containers/screens/signup';
+import VerifyPhoneContainer from './src/containers/verify-phone';
+const queryClient = new QueryClient();
+const Stack = createNativeStackNavigator();
+const Tab = createBottomTabNavigator();
 
 function App(): JSX.Element {
-  const isDarkMode = useColorScheme() === 'dark';
-
-  const backgroundStyle = {
-    backgroundColor: isDarkMode ? Colors.darker : Colors.lighter,
-  };
-
+  useEffect(() => {
+    SplashScreen.hide();
+  }, []);
   return (
-    <SafeAreaView style={backgroundStyle}>
-      <Text>sana</Text>
-      <Login />
-    </SafeAreaView>
+    <QueryClientProvider client={queryClient}>
+      <NavigationContainer>
+        <Stack.Navigator initialRouteName="Login">
+          <Stack.Screen name="Login" component={LoginContainer} />
+          <Stack.Screen name="Signup" component={SignupContainer} />
+          <Stack.Screen
+            name="Product Details"
+            component={ProductDetails}
+            initialParams={{ productId: 1 }}
+          />
+          <Stack.Screen
+            name="Cart"
+            component={CartContainer}
+            initialParams={{ productId: '2' }}
+          />
+          <Stack.Screen
+            name="HomePage"
+            component={HomeTabNavigator}
+            options={{ headerShown: false }}
+          />
+          <Stack.Screen
+            name="ProductsDisplay"
+            component={ProductsDisplay}
+            initialParams={{ service: getAllProducts, title: "All products" }}
+          />
+          <Stack.Screen
+            name="EditProduct"
+            component={EditProductContainer}
+          />
+          <Stack.Screen
+            name="AddProduct"
+            component={AddProductContainer}
+          />
+          <Stack.Screen
+          name="Verify Phone"
+          component={VerifyPhoneContainer}
+          />
+        </Stack.Navigator>
+      </NavigationContainer>
+    </QueryClientProvider>
   );
 }
 
-const styles = StyleSheet.create({
-  sectionContainer: {
-    marginTop: 32,
-    paddingHorizontal: 24,
-  },
-  sectionTitle: {
-    fontSize: 24,
-    fontWeight: '600',
-  },
-  sectionDescription: {
-    marginTop: 8,
-    fontSize: 18,
-    fontWeight: '400',
-  },
-  highlight: {
-    fontWeight: '700',
-  },
-});
+function HomeTabNavigator(): JSX.Element {
+  return (
+    <Tab.Navigator>
+      <Tab.Screen name="Home" component={HomePage} options={{
+          tabBarIcon: ({ color }) => (
+            <Image
+              source={require('./public/images/icons8-home-24.png')}
+              style={{ tintColor: color }}
+            />
+          ),
+        }} />
+      <Tab.Screen name="Cart" component={CartContainer} options={{
+          tabBarIcon: ({ color }) => (
+            <Image
+              source={require('./public/images/icons8-cart-24.png')}
+              style={{ tintColor: color }}
+            />
+          ),
+        }} />
+    </Tab.Navigator>
+  );
+}
 
 export default App;

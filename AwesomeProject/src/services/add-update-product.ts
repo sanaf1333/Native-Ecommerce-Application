@@ -1,34 +1,56 @@
-import axios from 'axios';
-import {productModal} from '../modals/product-modal';
-const API_URL = 'https://fakestoreapi.com';
+import {productModal} from 'modals/product-modal';
+const API_URL = process.env.REACT_APP_FAKESTORE_API_URL;
 
 export const addNewProduct = async (productDetails: productModal) => {
   const {title, price, description, category, image} = productDetails;
-  const response = await axios.post(`${API_URL}/products`, {
-    title: title,
-    price: price,
-    description: description,
-    image: image,
-    category: category,
+  const response = await fetch(`${API_URL}/products`, {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json',
+    },
+    body: JSON.stringify({
+      title: title,
+      price: price,
+      description: description,
+      image: image,
+      category: category,
+    }),
   });
-  return response.data;
+
+  const data = await response.json();
+  return data;
 };
 
 export const updateProduct = async (productDetails: productModal) => {
   const {id, title, price, description, category, image} = productDetails;
-  const response = await axios.post(`${API_URL}/products/${id}`, {
-    title: title,
-    price: price,
-    description: description,
-    image: image,
-    category: category,
+  const response = await fetch(`${API_URL}/products/${id}`, {
+    method: 'PUT',
+    headers: {
+      'Content-Type': 'application/json',
+    },
+    body: JSON.stringify({
+      title: title,
+      price: price,
+      description: description,
+      image: image,
+      category: category,
+    }),
   });
-  const response1 = await axios.patch(`${API_URL}/products/${id}`, {
-    title: title,
-    price: price,
-    description: description,
-    image: image,
-    category: category,
+
+  const response1 = await fetch(`${API_URL}/products/${id}`, {
+    method: 'PATCH',
+    headers: {
+      'Content-Type': 'application/json',
+    },
+    body: JSON.stringify({
+      title: title,
+      price: price,
+      description: description,
+      image: image,
+      category: category,
+    }),
   });
-  return response.data;
+
+  const data = await response1.json();
+  return data;
 };
