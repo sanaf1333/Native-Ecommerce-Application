@@ -1,5 +1,4 @@
-
-import {userModal} from '../modals/user-modal/user-modal';
+import {userModal} from 'modals/user-modal/user-modal';
 const API_URL = process.env.REACT_APP_FAKESTORE_API_URL;
 
 export const addUser = async (userDetails: userModal) => {

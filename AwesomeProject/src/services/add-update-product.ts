@@ -1,4 +1,4 @@
-import {productModal} from '../modals/product-modal';
+import {productModal} from 'modals/product-modal';
 const API_URL = process.env.REACT_APP_FAKESTORE_API_URL;
 
 export const addNewProduct = async (productDetails: productModal) => {

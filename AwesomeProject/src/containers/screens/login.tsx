@@ -1,13 +1,13 @@
 import React, {useState} from 'react';
 import {Keyboard} from 'react-native';
-import {validatePassword} from '../../utils/password-validation';
-import {validateEmptyField} from '../../utils/empty-field-validation';
-import {showAlert} from '../../utils/show-alert';
+import {validatePassword} from 'utils/password-validation';
+import {validateEmptyField} from 'utils/empty-field-validation';
+import {showAlert} from 'utils/show-alert';
 import {ParamListBase, useNavigation} from '@react-navigation/native';
 import {NativeStackNavigationProp} from '@react-navigation/native-stack';
-import {getAllProducts} from '../../services/get-product-data';
-import {userLogin} from '../../services/get-user-data';
-import Login from '../../components/screens/login';
+import {getAllProducts} from 'services/get-product-data';
+import {userLogin} from 'services/get-user-data';
+import Login from 'components/screens/login';
 
 const LoginContainer: React.FC = () => {
   const [username, setUsername] = useState('');

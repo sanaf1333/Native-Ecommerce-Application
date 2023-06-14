@@ -5,8 +5,8 @@ import {
   Button,
 } from 'react-native';
 
-import {getAllProducts} from '../services/get-product-data';
-import ViewAllProductsContainer from '../containers/view-all-products';
+import {getAllProducts} from 'services/get-product-data';
+import ViewAllProductsContainer from 'containers/view-all-products';
 interface productsDisplayProps<T, P> {
   service?: (params?: P) => Promise<T>;
   params?: P;

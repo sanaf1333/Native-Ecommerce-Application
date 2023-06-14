@@ -2,7 +2,7 @@ import React, {useState, useEffect} from 'react';
 import auth, {FirebaseAuthTypes} from '@react-native-firebase/auth';
 import {ParamListBase, useNavigation} from '@react-navigation/native';
 import {NativeStackNavigationProp} from '@react-navigation/native-stack';
-import VerifyPhone from '../components/verify-phone';
+import VerifyPhone from 'components/verify-phone';
 
 const VerifyPhoneContainer: React.FC = () => {
   // If null, no SMS has been sent

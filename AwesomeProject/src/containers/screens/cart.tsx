@@ -1,8 +1,8 @@
 import React, {useState} from 'react';
 import {Text} from 'react-native';
-import {getCartByID} from '../../services/get-cart-data';
-import {useDataService} from '../../hooks/use-service';
-import Cart from '../../components/screens/cart';
+import {getCartByID} from 'services/get-cart-data';
+import {useDataService} from 'hooks/use-service';
+import Cart from 'components/screens/cart';
 
 const CartContainer: React.FC<{cartId?: string}> = ({cartId = 1}) => {
   const [totalPrices, setTotalPrices] = useState<number[]>([]);

@@ -1,12 +1,12 @@
 import React, {useState} from 'react';
 import {Text, StyleSheet, TouchableOpacity} from 'react-native';
-import {showAlert} from '../../utils/show-alert';
+import {showAlert} from 'utils/show-alert';
 import {ParamListBase, useNavigation} from '@react-navigation/native';
 import {NativeStackNavigationProp} from '@react-navigation/native-stack';
 import {Asset, launchImageLibrary} from 'react-native-image-picker';
-import AddProduct from '../../components/screens/add-product';
-import {validateEmptyField} from '../../utils/empty-field-validation';
-import {addNewProduct} from '../../services/add-update-product';
+import AddProduct from 'components/screens/add-product';
+import {validateEmptyField} from 'utils/empty-field-validation';
+import {addNewProduct} from 'services/add-update-product';
 
 const AddProductContainer: React.FC = () => {
   const [selectedImage, setSelectedImage] = React.useState<string | null>(null);

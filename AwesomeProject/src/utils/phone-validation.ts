@@ -1,4 +1,3 @@
-import {showAlert} from './show-alert';
 export const validatePhoneNumber = (phone: string) => {
   const phoneNumberRegex = /^03\d{9}$/;
 

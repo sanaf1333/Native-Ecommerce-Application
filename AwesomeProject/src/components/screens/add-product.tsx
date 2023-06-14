@@ -10,7 +10,7 @@ import {
   TouchableOpacity,
   Modal,
 } from 'react-native';
-import {addProductModal} from '../../modals/add-product-modal';
+import {addProductModal} from 'modals/add-product-modal';
 
 const AddProduct: React.FC<addProductModal> = ({
   title,
