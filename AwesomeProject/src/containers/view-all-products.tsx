@@ -55,9 +55,13 @@ const ViewAllProductsContainer: React.FC<ViewAllProductsProps<any, any>> = ({
   }, [visibleItems]);
 
   return (
-    <ViewAllProducts title={title} visibleItems={visibleItems} handleEndReached={handleEndReached} loadingMore={loadingMore} />
+    <ViewAllProducts
+      title={title}
+      visibleItems={visibleItems}
+      handleEndReached={handleEndReached}
+      loadingMore={loadingMore}
+    />
   );
 };
 
 export default ViewAllProductsContainer;
-

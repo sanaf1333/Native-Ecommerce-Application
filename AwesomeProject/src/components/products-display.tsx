@@ -1,9 +1,5 @@
-import React, { useState} from 'react';
-import {
-  StyleSheet,
-  View,
-  Button,
-} from 'react-native';
+import React, {useState} from 'react';
+import {StyleSheet, View, Button} from 'react-native';
 
 import {getAllProducts} from 'services/get-product-data';
 import ViewAllProductsContainer from 'containers/view-all-products';

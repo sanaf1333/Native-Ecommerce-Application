@@ -1,11 +1,5 @@
 import React, {useMemo} from 'react';
-import {
-  Text,
-  View,
-  StyleSheet,
-  ScrollView,
-  Button,
-} from 'react-native';
+import {Text, View, StyleSheet, ScrollView, Button} from 'react-native';
 import {useDataService} from 'hooks/use-service';
 import {getProductByID} from 'services/get-product-data';
 import {ParamListBase, useNavigation} from '@react-navigation/native';

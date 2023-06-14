@@ -1,5 +1,11 @@
 import React, {useMemo, useState, useEffect} from 'react';
-import {Text, View, StyleSheet, TouchableOpacity, useWindowDimensions} from 'react-native';
+import {
+  Text,
+  View,
+  StyleSheet,
+  TouchableOpacity,
+  useWindowDimensions,
+} from 'react-native';
 import {useDataService} from 'hooks/use-service';
 import {getProductByID} from 'services/get-product-data';
 import {ParamListBase, useNavigation} from '@react-navigation/native';
@@ -12,11 +18,13 @@ const ProductCard: React.FC<ProductCardProps> = ({productId}) => {
   const productData = useDataService(getProductByID, productId);
   const memoizedProductData = useMemo(() => productData, [productData]);
   const navigation = useNavigation<NativeStackNavigationProp<ParamListBase>>();
-  const { width: windowWidth } = useWindowDimensions();
-  const [containerWidth, setContainerWidth] = useState(windowWidth > 600 ? 400 : windowWidth - 20);
+  const {width: windowWidth} = useWindowDimensions();
+  const [containerWidth, setContainerWidth] = useState(
+    windowWidth > 600 ? 400 : windowWidth - 20,
+  );
 
   useEffect(() => {
-      setContainerWidth(windowWidth > 600 ? 400 : windowWidth - 20);
+    setContainerWidth(windowWidth > 600 ? 400 : windowWidth - 20);
   }, [windowWidth]);
   if (memoizedProductData.isLoading) {
     return null;
@@ -30,33 +38,33 @@ const ProductCard: React.FC<ProductCardProps> = ({productId}) => {
   };
   return (
     <View style={styles.parentContainer}>
-    <TouchableOpacity
-      onPress={() => onPressViewProduct(memoizedProductData.data.id)}>
-      <View style={[styles.productCardContainer, { width: containerWidth}]}>
-        <FastImage
-          style={styles.productImage}
-          resizeMode={FastImage.resizeMode.contain}
-          source={{
-            uri: memoizedProductData.data && memoizedProductData.data.image,
-            priority: FastImage.priority.normal,
-          }}
-        />
-        <Text style={styles.title}>{memoizedProductData.data.title}</Text>
-        <View style={styles.productDetails}>
-          <View style={styles.textStyle}>
-            <Text style={styles.boldText}>Price: </Text>
-            <Text>{memoizedProductData.data.price}</Text>
-          </View>
-          <View style={styles.textStyle}>
-            <Text style={styles.boldText}>Rating: </Text>
-            <Text>
-              {memoizedProductData.data.rating.rate}/5 (
-              {memoizedProductData.data.rating.count})
-            </Text>
+      <TouchableOpacity
+        onPress={() => onPressViewProduct(memoizedProductData.data.id)}>
+        <View style={[styles.productCardContainer, {width: containerWidth}]}>
+          <FastImage
+            style={styles.productImage}
+            resizeMode={FastImage.resizeMode.contain}
+            source={{
+              uri: memoizedProductData.data && memoizedProductData.data.image,
+              priority: FastImage.priority.normal,
+            }}
+          />
+          <Text style={styles.title}>{memoizedProductData.data.title}</Text>
+          <View style={styles.productDetails}>
+            <View style={styles.textStyle}>
+              <Text style={styles.boldText}>Price: </Text>
+              <Text>{memoizedProductData.data.price}</Text>
+            </View>
+            <View style={styles.textStyle}>
+              <Text style={styles.boldText}>Rating: </Text>
+              <Text>
+                {memoizedProductData.data.rating.rate}/5 (
+                {memoizedProductData.data.rating.count})
+              </Text>
+            </View>
           </View>
         </View>
-      </View>
-    </TouchableOpacity>
+      </TouchableOpacity>
     </View>
   );
 };

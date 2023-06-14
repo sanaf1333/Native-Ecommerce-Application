@@ -71,30 +71,30 @@ const SignupContainer: React.FC = () => {
   };
 
   return (
-      <Signup
-        dismissKeyboard={dismissKeyboard}
-        email={email}
-        setEmail={setEmail}
-        password={password}
-        setPassword={setPassword}
-        phone={phone}
-        setPhone={setPhone}
-        firstName={firstName}
-        setFirstName={setFirstName}
-        lastName={lastName}
-        setLastName={setLastName}
-        city={city}
-        setCity={setCity}
-        street={street}
-        setStreet={setStreet}
-        house={house}
-        setHouse={setHouse}
-        zipcode={zipcode}
-        setZipcode={setZipcode}
-        username={username}
-        setUsername={setUsername}
-        onSubmit={onSubmit}
-      />
+    <Signup
+      dismissKeyboard={dismissKeyboard}
+      email={email}
+      setEmail={setEmail}
+      password={password}
+      setPassword={setPassword}
+      phone={phone}
+      setPhone={setPhone}
+      firstName={firstName}
+      setFirstName={setFirstName}
+      lastName={lastName}
+      setLastName={setLastName}
+      city={city}
+      setCity={setCity}
+      street={street}
+      setStreet={setStreet}
+      house={house}
+      setHouse={setHouse}
+      zipcode={zipcode}
+      setZipcode={setZipcode}
+      username={username}
+      setUsername={setUsername}
+      onSubmit={onSubmit}
+    />
   );
 };
 

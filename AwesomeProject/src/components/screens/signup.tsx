@@ -9,10 +9,32 @@ import {
   Image,
   ScrollView,
 } from 'react-native';
-import { signupModal } from 'modals/signup-modal';
+import {signupModal} from 'modals/signup-modal';
 
-const Signup: React.FC<signupModal> = ({dismissKeyboard, email, setEmail, password, setPassword, firstName, setFirstName, lastName, setLastName, phone, setPhone, city, setCity, street, setStreet, zipcode, setZipcode, house, setHouse, username, setUsername, onSubmit}) => {
-  
+const Signup: React.FC<signupModal> = ({
+  dismissKeyboard,
+  email,
+  setEmail,
+  password,
+  setPassword,
+  firstName,
+  setFirstName,
+  lastName,
+  setLastName,
+  phone,
+  setPhone,
+  city,
+  setCity,
+  street,
+  setStreet,
+  zipcode,
+  setZipcode,
+  house,
+  setHouse,
+  username,
+  setUsername,
+  onSubmit,
+}) => {
   return (
     <ScrollView>
       <TouchableWithoutFeedback onPress={dismissKeyboard}>
@@ -28,10 +50,7 @@ const Signup: React.FC<signupModal> = ({dismissKeyboard, email, setEmail, passwo
             <Text style={styles.text}>Signup</Text>
             <View style={styles.TextBoxContainer}>
               <TextInput
-                style={[
-                  styles.input,
-                  styles.firstBoxInput
-                ]}
+                style={[styles.input, styles.firstBoxInput]}
                 onChangeText={setEmail}
                 value={email}
                 placeholder="Email"
@@ -39,10 +58,7 @@ const Signup: React.FC<signupModal> = ({dismissKeyboard, email, setEmail, passwo
                 keyboardType="email-address"
               />
               <TextInput
-                style={[
-                  styles.input,
-                  styles.firstBoxInput
-                ]}
+                style={[styles.input, styles.firstBoxInput]}
                 placeholder="Password"
                 placeholderTextColor="gray"
                 onChangeText={setPassword}
@@ -75,10 +91,7 @@ const Signup: React.FC<signupModal> = ({dismissKeyboard, email, setEmail, passwo
                 placeholderTextColor="gray"
               />
               <TextInput
-                style={[
-                  styles.input,
-                  styles.lastBoxInput
-                ]}
+                style={[styles.input, styles.lastBoxInput]}
                 onChangeText={setPhone}
                 value={phone}
                 placeholder="Phone"

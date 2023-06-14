@@ -22,11 +22,11 @@ const CartContainer: React.FC<{cartId?: string}> = ({cartId = 1}) => {
   }
 
   return (
-      <Cart
-        cartByIDQuery={cartByIDQuery}
-        calculateTotalPrice={calculateTotalPrice}
-        handleSetTotalPrice={handleSetTotalPrice}
-      />
+    <Cart
+      cartByIDQuery={cartByIDQuery}
+      calculateTotalPrice={calculateTotalPrice}
+      handleSetTotalPrice={handleSetTotalPrice}
+    />
   );
 };
 

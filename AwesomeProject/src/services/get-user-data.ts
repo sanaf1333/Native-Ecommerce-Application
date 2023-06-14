@@ -12,7 +12,7 @@ export const getUserByID = async (userID: string) => {
   return data;
 };
 
-export const userLogin= async (username: string, password: string) => {
+export const userLogin = async (username: string, password: string) => {
   const response = await fetch(`${API_URL}/auth/login`, {
     method: 'POST',
     headers: {
@@ -30,7 +30,7 @@ export const userLogin= async (username: string, password: string) => {
     }
   } else {
     const errorText = await response.text();
-    console.log("Error:", errorText);
+    console.log('Error:', errorText);
   }
 
   return false;

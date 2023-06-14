@@ -39,17 +39,17 @@ const LoginContainer: React.FC = () => {
     navigation.navigate('Signup');
   };
   return (
-      <Login
-        username={username}
-        setUsername={setUsername}
-        password={password}
-        setPassword={setPassword}
-        dismissKeyboard={dismissKeyboard}
-        onSubmit={onSubmit}
-        onPressCreateAccount={onPressCreateAccount}
-        isUsernameValid={isUsernameValid}
-        isPasswordValid={isPasswordValid}
-      />
+    <Login
+      username={username}
+      setUsername={setUsername}
+      password={password}
+      setPassword={setPassword}
+      dismissKeyboard={dismissKeyboard}
+      onSubmit={onSubmit}
+      onPressCreateAccount={onPressCreateAccount}
+      isUsernameValid={isUsernameValid}
+      isPasswordValid={isPasswordValid}
+    />
   );
 };
 

@@ -1,6 +1,6 @@
 import React, {useEffect, useMemo} from 'react';
-import { Text, View, StyleSheet } from 'react-native';
-import FastImage from 'react-native-fast-image'
+import {Text, View, StyleSheet} from 'react-native';
+import FastImage from 'react-native-fast-image';
 import {useDataService} from 'hooks/use-service';
 import {getProductByID} from 'services/get-product-data';
 interface cartCardProps {
@@ -8,7 +8,11 @@ interface cartCardProps {
   quantity: number;
   handleSetTotalPrice: (price: number) => void;
 }
-const CartCard: React.FC<cartCardProps> = ({productId, quantity, handleSetTotalPrice}) => {
+const CartCard: React.FC<cartCardProps> = ({
+  productId,
+  quantity,
+  handleSetTotalPrice,
+}) => {
   const productData = useDataService(getProductByID, productId);
   useEffect(() => {
     if (productData.data) {

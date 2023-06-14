@@ -94,25 +94,25 @@ const AddProductContainer: React.FC = () => {
     );
   };
   return (
-      <AddProduct
-        title={title}
-        setTitle={setTitle}
-        price={price}
-        setPrice={setPrice}
-        description={description}
-        setDescription={setDescription}
-        isDropdownOpen={isDropdownOpen}
-        setIsDropdownOpen={setIsDropdownOpen}
-        value={value}
-        setValue={setValue}
-        selectedImage={selectedImage}
-        setSelectedImage={setSelectedImage}
-        items={items}
-        renderDropdownItems={renderDropdownItems}
-        handleImageSelect={handleImageSelect}
-        handlePriceChange={handlePriceChange}
-        onPressSubmit={onPressSubmit}
-      />
+    <AddProduct
+      title={title}
+      setTitle={setTitle}
+      price={price}
+      setPrice={setPrice}
+      description={description}
+      setDescription={setDescription}
+      isDropdownOpen={isDropdownOpen}
+      setIsDropdownOpen={setIsDropdownOpen}
+      value={value}
+      setValue={setValue}
+      selectedImage={selectedImage}
+      setSelectedImage={setSelectedImage}
+      items={items}
+      renderDropdownItems={renderDropdownItems}
+      handleImageSelect={handleImageSelect}
+      handlePriceChange={handlePriceChange}
+      onPressSubmit={onPressSubmit}
+    />
   );
 };
 
