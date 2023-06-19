@@ -1,7 +1,7 @@
 import React, {useState} from 'react';
 import {StyleSheet, View, Button} from 'react-native';
 
-import {getAllProducts} from 'services/get-product-data';
+import {getAllProducts} from 'services/product-service';
 import ViewAllProductsContainer from 'containers/view-all-products';
 interface productsDisplayProps<T, P> {
   service?: (params?: P) => Promise<T>;

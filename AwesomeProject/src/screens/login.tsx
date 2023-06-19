@@ -5,8 +5,8 @@ import {validateEmptyField} from 'utils/empty-field-validation';
 import {showAlert} from 'utils/show-alert';
 import {ParamListBase, useNavigation} from '@react-navigation/native';
 import {NativeStackNavigationProp} from '@react-navigation/native-stack';
-import {getAllProducts} from 'services/get-product-data';
-import {userLogin} from 'services/get-user-data';
+import {getAllProducts} from 'services/product-service';
+import {userLogin} from 'services/user-service';
 import Login from 'components/screens/login';
 interface loginContainerModal{
   onLogin: (loginValue: boolean) => void;

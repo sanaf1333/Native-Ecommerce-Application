@@ -1,7 +1,7 @@
 import React, {useMemo} from 'react';
 import {Text, View, StyleSheet, ScrollView, Button} from 'react-native';
 import {useDataService} from 'hooks/use-service';
-import {getProductByID} from 'services/get-product-data';
+import {getProductByID} from 'services/product-service';
 import {ParamListBase, useNavigation} from '@react-navigation/native';
 import {NativeStackNavigationProp} from '@react-navigation/native-stack';
 import {RouteProp, useRoute} from '@react-navigation/native';

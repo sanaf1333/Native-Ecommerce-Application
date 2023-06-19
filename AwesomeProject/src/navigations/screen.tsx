@@ -1,19 +1,18 @@
 
-import React, {useEffect, useState} from 'react';
+import React, {useState} from 'react';
 import ProductDetails from 'components/screens/product-details';
-import {getAllProducts} from 'services/get-product-data';
+import {getAllProducts} from 'services/product-service';
 import {NavigationContainer} from '@react-navigation/native';
 import {createNativeStackNavigator} from '@react-navigation/native-stack';
 import ProductsDisplay from 'components/products-display';
-import AddProductContainer from 'screens/add-product';
-import CartContainer from 'screens/cart';
-import EditProductContainer from 'screens/edit-product';
-import LoginContainer from 'screens/login';
-import SignupContainer from 'screens/signup';
-import VerifyPhoneContainer from 'screens/verify-phone';
+import AddProductContainer from '../../src/screens/add-product';
+import CartContainer from '../../src/screens/cart';
+import EditProductContainer from '../../src/screens/edit-product';
+import LoginContainer from '../../src/screens/login';
+import SignupContainer from '../../src/screens/signup';
+import VerifyPhoneContainer from '../../src/screens/verify-phone';
 import TabNavigator from './tabs';
 const Stack = createNativeStackNavigator();
-
 
 function StackScreen(): JSX.Element {
   const [isLoginSuccessful, setIsLoginSuccessful] = useState(false);

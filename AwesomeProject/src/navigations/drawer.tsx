@@ -1,8 +1,8 @@
 import React from 'react';
-import {getProductsByCategory} from 'services/get-categories';
+import {getProductsByCategory} from 'services/product-service';
 import ProductsDisplay from '../components/products-display';
 import {createDrawerNavigator} from '@react-navigation/drawer';
-import AddProductContainer from 'src/screens/add-product';
+import AddProductContainer from '../../src/screens/add-product';
 
 const WomensClothingScreen: React.FC = () => (
   <ProductsDisplay

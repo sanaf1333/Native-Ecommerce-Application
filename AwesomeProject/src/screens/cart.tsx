@@ -1,6 +1,6 @@
 import React, {useState} from 'react';
 import {Text} from 'react-native';
-import {getCartByID} from 'services/get-cart-data';
+import {getCartByID} from 'services/cart-service';
 import {useDataService} from 'hooks/use-service';
 import Cart from 'components/screens/cart';
 
