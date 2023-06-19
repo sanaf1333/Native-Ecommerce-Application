@@ -1,8 +1,8 @@
 import React from 'react';
 import {getProductsByCategory} from 'services/get-categories';
-import ProductsDisplay from '../products-display';
+import ProductsDisplay from '../components/products-display';
 import {createDrawerNavigator} from '@react-navigation/drawer';
-import AddProductContainer from 'containers/screens/add-product';
+import AddProductContainer from 'src/screens/add-product';
 
 const WomensClothingScreen: React.FC = () => (
   <ProductsDisplay
@@ -23,7 +23,7 @@ const ElectronicsScreen: React.FC = () => (
   <ProductsDisplay service={getProductsByCategory} params={`electronics`} />
 );
 const Drawer = createDrawerNavigator();
-const HomePage: React.FC = () => {
+const DrawerNavigation: React.FC = () => {
   return (
     <Drawer.Navigator initialRouteName="Home">
       <Drawer.Screen name="All products" component={ProductsDisplay} />
@@ -36,4 +36,4 @@ const HomePage: React.FC = () => {
   );
 };
 
-export default HomePage;
+export default DrawerNavigation;

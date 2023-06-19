@@ -8,8 +8,10 @@ import {NativeStackNavigationProp} from '@react-navigation/native-stack';
 import {getAllProducts} from 'services/get-product-data';
 import {userLogin} from 'services/get-user-data';
 import Login from 'components/screens/login';
-
-const LoginContainer: React.FC = () => {
+interface loginContainerModal{
+  onLogin: (loginValue: boolean) => void;
+}
+const LoginContainer: React.FC<loginContainerModal> = ({onLogin}) => {
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
   const [isUsernameValid, setIsUsernameValid] = useState(true);
@@ -24,15 +26,18 @@ const LoginContainer: React.FC = () => {
     if (validatePassword(password) && validateEmptyField(username)) {
       const isValidUser = await userLogin(username, password);
       if (isValidUser) {
+        onLogin(true);
         navigation.navigate('HomePage', {
           service: getAllProducts,
           title: 'All Products',
         });
       } else {
         showAlert('', 'User not registered!');
+        onLogin(false);
       }
     } else {
       showAlert('', 'Invalid username or password!');
+      onLogin(false);
     }
   };
   const onPressCreateAccount = () => {

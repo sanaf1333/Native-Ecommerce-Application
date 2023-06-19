@@ -23,6 +23,8 @@ module.exports = {
           containers: './src/containers',
           hooks: './src/hooks',
           modals: './src/modals',
+          screens: './src/screens',
+          navigations: './src/navigations',
         },
       },
     ],
