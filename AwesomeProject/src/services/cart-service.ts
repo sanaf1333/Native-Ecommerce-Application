@@ -1,4 +1,4 @@
-import { FAKESTORE_API_URL } from "../../config/config";
+import { FAKESTORE_API_URL } from "config/config";
 export const getAllCarts = async () => {
   const response = await fetch(`${FAKESTORE_API_URL}/carts`);
   const data = await response.json();

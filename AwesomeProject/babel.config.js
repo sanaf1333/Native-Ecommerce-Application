@@ -25,6 +25,7 @@ module.exports = {
           modals: './src/modals',
           screens: './src/screens',
           navigations: './src/navigations',
+          config: './src/config',
         },
       },
     ],

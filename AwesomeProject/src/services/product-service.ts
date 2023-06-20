@@ -1,5 +1,5 @@
 import {productModal} from 'modals/product-modal';
-import { FAKESTORE_API_URL } from "../../config/config";
+import { FAKESTORE_API_URL } from "config/config";
 
 export const addNewProduct = async (productDetails: productModal) => {
   const {title, price, description, category, image} = productDetails;

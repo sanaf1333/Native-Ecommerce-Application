@@ -29,6 +29,9 @@
       ],
       "navigations/*": [
         "src/navigations/*"
+      ],
+      "config/*": [
+        "src/config/*"
       ]
     }
   }

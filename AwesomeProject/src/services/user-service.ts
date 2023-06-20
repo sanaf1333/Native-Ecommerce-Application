@@ -1,5 +1,5 @@
 import {userModal} from 'modals/user-modal/user-modal';
-import { FAKESTORE_API_URL } from "../../config/config";
+import { FAKESTORE_API_URL } from "config/config";
 
 export const getAllUsers = async () => {
   const response = await fetch(`${FAKESTORE_API_URL}/users`);
