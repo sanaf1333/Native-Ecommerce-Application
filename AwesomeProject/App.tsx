@@ -3,6 +3,7 @@ import React, {useEffect} from 'react';
 import {QueryClient, QueryClientProvider} from 'react-query';
 import SplashScreen from 'react-native-splash-screen';
 import StackScreen from './src/navigations/screen';
+
 const queryClient = new QueryClient();
 
 function App(): JSX.Element {

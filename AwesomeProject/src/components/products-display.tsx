@@ -1,6 +1,5 @@
 import React, {useState} from 'react';
 import {StyleSheet, View, Button} from 'react-native';
-
 import {getAllProducts} from 'services/product-service';
 import ViewAllProductsContainer from 'containers/view-all-products';
 interface productsDisplayProps<T, P> {

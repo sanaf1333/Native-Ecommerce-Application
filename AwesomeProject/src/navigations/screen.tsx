@@ -1,31 +1,40 @@
-
-import React, {useState} from 'react';
+import React, {createContext, useContext, useState} from 'react';
 import ProductDetails from 'components/screens/product-details';
 import {getAllProducts} from 'services/product-service';
 import {NavigationContainer} from '@react-navigation/native';
 import {createNativeStackNavigator} from '@react-navigation/native-stack';
 import ProductsDisplay from 'components/products-display';
-import AddProductContainer from '../../src/screens/add-product';
-import CartContainer from '../../src/screens/cart';
-import EditProductContainer from '../../src/screens/edit-product';
-import LoginContainer from '../../src/screens/login';
-import SignupContainer from '../../src/screens/signup';
-import VerifyPhoneContainer from '../../src/screens/verify-phone';
+import AddProductContainer from 'screens/add-product';
+import CartContainer from 'screens/cart';
+import EditProductContainer from 'screens/edit-product';
+import LoginContainer from 'screens/login';
+import SignupContainer from 'screens/signup';
+import VerifyPhoneContainer from 'screens/verify-phone';
 import TabNavigator from './tabs';
 const Stack = createNativeStackNavigator();
-
+export const AuthContext = createContext<{
+  isLoginSuccessful: boolean;
+  setLoginStatus: React.Dispatch<React.SetStateAction<boolean>>;
+}>({
+  isLoginSuccessful: false,
+  setLoginStatus: () => {},
+});
 function StackScreen(): JSX.Element {
   const [isLoginSuccessful, setIsLoginSuccessful] = useState(false);
-  const handleLogin = (loginStatus: boolean) => {
-    setIsLoginSuccessful(loginStatus);
+
+  const setLoginStatus: React.Dispatch<
+    React.SetStateAction<boolean>
+  > = status => {
+    setIsLoginSuccessful(status);
   };
+
   return (
+    <AuthContext.Provider value={{isLoginSuccessful, setLoginStatus}}>
       <NavigationContainer>
-        
-          {isLoginSuccessful ? (
-            <>
+        {isLoginSuccessful ? (
+          <>
             <Stack.Navigator initialRouteName="HomePage">
-            <Stack.Screen
+              <Stack.Screen
                 name="HomePage"
                 component={TabNavigator}
                 options={{headerShown: false}}
@@ -39,7 +48,7 @@ function StackScreen(): JSX.Element {
                 name="Cart"
                 component={CartContainer}
                 initialParams={{productId: '2'}}
-              /> 
+              />
               <Stack.Screen
                 name="ProductsDisplay"
                 component={ProductsDisplay}
@@ -54,20 +63,18 @@ function StackScreen(): JSX.Element {
                 name="Verify Phone"
                 component={VerifyPhoneContainer}
               />
-              </Stack.Navigator>
-            </>
-          ) : (
-            <>
+            </Stack.Navigator>
+          </>
+        ) : (
+          <>
             <Stack.Navigator initialRouteName="Login">
-              <Stack.Screen
-                name="Login"
-                component={() => <LoginContainer onLogin={handleLogin} />}
-              />
+              <Stack.Screen name="Login" component={LoginContainer} />
               <Stack.Screen name="Signup" component={SignupContainer} />
-              </Stack.Navigator>
-            </>
-          )}
+            </Stack.Navigator>
+          </>
+        )}
       </NavigationContainer>
+    </AuthContext.Provider>
   );
 }
 

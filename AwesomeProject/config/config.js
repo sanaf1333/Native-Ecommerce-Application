@@ -1,0 +1,1 @@
+export const FAKESTORE_API_URL = process.env.REACT_APP_FAKESTORE_API_URL;

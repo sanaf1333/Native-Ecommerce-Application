@@ -1,20 +1,20 @@
 import {userModal} from 'modals/user-modal/user-modal';
-const API_URL = process.env.REACT_APP_FAKESTORE_API_URL;
+import { FAKESTORE_API_URL } from "../../config/config";
 
 export const getAllUsers = async () => {
-  const response = await fetch(`${API_URL}/users`);
+  const response = await fetch(`${FAKESTORE_API_URL}/users`);
   const data = await response.json();
   return data;
 };
 
 export const getUserByID = async (userID: string) => {
-  const response = await fetch(`${API_URL}/users/${userID}`);
+  const response = await fetch(`${FAKESTORE_API_URL}/users/${userID}`);
   const data = await response.json();
   return data;
 };
 
 export const userLogin = async (username: string, password: string) => {
-  const response = await fetch(`${API_URL}/auth/login`, {
+  const response = await fetch(`${FAKESTORE_API_URL}/auth/login`, {
     method: 'POST',
     headers: {
       'Content-Type': 'application/json',
@@ -39,7 +39,7 @@ export const userLogin = async (username: string, password: string) => {
 
 export const addUser = async (userDetails: userModal) => {
   const {email, username, password, name, address, phone} = userDetails;
-  const response = await fetch(`${API_URL}/users`, {
+  const response = await fetch(`${FAKESTORE_API_URL}/users`, {
     method: 'POST',
     headers: {
       'Content-Type': 'application/json',
