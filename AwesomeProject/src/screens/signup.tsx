@@ -7,7 +7,7 @@ import {validateEmptyField} from 'utils/empty-field-validation';
 import {showAlert} from 'utils/show-alert';
 import {ParamListBase, useNavigation} from '@react-navigation/native';
 import {NativeStackNavigationProp} from '@react-navigation/native-stack';
-import {addUser} from 'services/add-user';
+import {addUser} from 'services/user-service';
 import Signup from 'components/screens/signup';
 
 const SignupContainer: React.FC = () => {

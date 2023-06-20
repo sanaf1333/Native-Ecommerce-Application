@@ -2,7 +2,7 @@ import React, {useEffect, useMemo} from 'react';
 import {Text, View, StyleSheet} from 'react-native';
 import FastImage from 'react-native-fast-image';
 import {useDataService} from 'hooks/use-service';
-import {getProductByID} from 'services/get-product-data';
+import {getProductByID} from 'services/product-service';
 interface cartCardProps {
   productId: string;
   quantity: number;

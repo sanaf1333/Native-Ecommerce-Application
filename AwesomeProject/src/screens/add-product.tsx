@@ -6,7 +6,7 @@ import {NativeStackNavigationProp} from '@react-navigation/native-stack';
 import {Asset, launchImageLibrary} from 'react-native-image-picker';
 import AddProduct from 'components/screens/add-product';
 import {validateEmptyField} from 'utils/empty-field-validation';
-import {addNewProduct} from 'services/add-update-product';
+import {addNewProduct} from 'services/product-service';
 
 const AddProductContainer: React.FC = () => {
   const [selectedImage, setSelectedImage] = React.useState<string | null>(null);

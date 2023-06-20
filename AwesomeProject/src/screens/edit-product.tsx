@@ -1,12 +1,12 @@
 import React, {useEffect, useMemo, useState} from 'react';
 import {Text, StyleSheet, TouchableOpacity} from 'react-native';
 import {useDataService} from 'hooks/use-service';
-import {getProductByID} from 'services/get-product-data';
+import {getProductByID} from 'services/product-service';
 import {ParamListBase, useNavigation} from '@react-navigation/native';
 import {NativeStackNavigationProp} from '@react-navigation/native-stack';
 import {RouteProp, useRoute} from '@react-navigation/native';
 import EditProduct from 'components/screens/edit-product';
-import {updateProduct} from 'services/add-update-product';
+import {updateProduct} from 'services/product-service';
 import {showAlert} from 'utils/show-alert';
 import {validateEmptyField} from 'utils/empty-field-validation';
 
