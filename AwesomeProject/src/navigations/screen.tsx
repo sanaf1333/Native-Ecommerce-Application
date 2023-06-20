@@ -1,4 +1,4 @@
-import React, {createContext, useContext, useState} from 'react';
+import React, {createContext, useState} from 'react';
 import ProductDetails from 'components/screens/product-details';
 import {getAllProducts} from 'services/product-service';
 import {NavigationContainer} from '@react-navigation/native';
